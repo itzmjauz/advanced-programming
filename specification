@@ -1,0 +1,95 @@
+details of program for assignment 1 
+--------------------------------------------------
+-> input   /   output object
+
+
+Object Identifier {
+  non-empty list of alphanumeric characters 
+  begins with a letter
+  min length : 1
+}
+
+Sets {
+  Set contains list of Identifiers
+  Minimum 0 , max 20
+}
+
+Four operations ( on sets )
+--------------------------------------------------------
+
+Difference { Set1, set2 }
+  all elements onctained in Set1 but not in set2
+
+Intersection { Set1, Set2 }
+  Elements part of both sets
+
+Union { Set1, Set2 }
+  All Elements from both sets together ( no duplicates )
+
+Symmetric Difference { Set1, Set2 }
+  Ellments of both sets that are not contained in the intersection of both sets
+
+
+
+
+
+Object Specification 
+------------------------------------------------------
+Identifier 
+Set
+Operation
+
+Scanner input : ( given by Java itself )
+  Reads Identifiers word by word. 
+  These instantly get put into a Set object.
+
+(optional, could also use simple string and check for properties with scanner)
+Identifier :
+  The constructor should check for the given properties at creation.
+  The only Difference between an identifier and a string is the check for properties
+  Interface :
+    objects :
+      String ( alphanumerical )
+    methods :
+      get() ~ return the String ( the identifier ) 
+        PRE : requires the identifier to be initialized with a correct string
+        POST : needs to return a string ( so that the user doesn't get weird errors )
+
+
+Set :
+  A set contains a list of identifiers
+  Domain (size) : 0 ~ 20 objects , we check this with the size object and only identifiers
+  Relation : Size = amount of identifiers
+             Identifiers[] contains all identifiers
+  Interface :
+    Objects(Elements) :
+      Identifier[]  ( list of identifiers ) max size ~ 40 ( since we use sets for results also ) 
+      Int size ( size of the set ( amount of identifiers )
+    methods :
+      add(Identifier) ~ add an identifier to the set
+        PRE : argument has to be a correct non-empty identifier 
+        POST : The result is that set contains at least one identifier and the size increases by 1
+      get(Id) ~ get an identifier from the set ( doesn't remove it )
+        PRE : Id has to be a valid integer between 0 and the size of the set
+        POST : Returns an identifier object contained within set 
+      list() ~ list all identifiers currently in the set 
+        PRE : Requires the set to exist..
+        POST : returns the full set of identifiers ( as a string ) , empty if empty
+      remove(Id) ~ remove an identifier from the set 
+        PRE : Requires The Id to be between 0 and the size of the set.
+        POST : Set contains one less identifier and the size decreases by 1
+
+Operations :
+  Interface :
+    Objects (elements) :
+      Set result (set that will contain our operations results)
+      Set Set1
+      Set Set2  (set1 , set2 are the input sets, should be given in the constructor)
+
+    Methods :
+      Calculate() ~ does one of the four operations and puts result into result object
+        PRE : Requires two correct sets to be given at initialization (grabs set1 and set2)
+        POST : writes results into Set result.
+      result() ~ returns result object
+        PRE : no requirements ( will return nothing if calculation wasn't run )
+        POST : returns correct set, ( with identifiers ranging from 0 to 40 identifiers )
