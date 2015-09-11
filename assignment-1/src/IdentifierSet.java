@@ -2,7 +2,7 @@ package assignment1;
 
 interface Set {
   public Identifier Get();
-  public void Add(Identifier identifier);
+  public void AddIdentifier(Identifier identifier);
   public Set difference(Set set);
   public Set Union(Set set);
   public Set SymmetricDifference(Set set);
