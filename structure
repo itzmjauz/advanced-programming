@@ -1,0 +1,12 @@
+
+
+Constructor {
+  intialize objects
+}
+
+Main {
+  run the filereader 
+  run functions on read data
+  print results
+}
+

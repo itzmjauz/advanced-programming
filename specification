@@ -69,15 +69,26 @@ Set :
       add(Identifier) ~ add an identifier to the set
         PRE : argument has to be a correct non-empty identifier 
         POST : The result is that set contains at least one identifier and the size increases by 1
-      get(Id) ~ get an identifier from the set ( doesn't remove it )
-        PRE : Id has to be a valid integer between 0 and the size of the set
+      get() ~ get an identifier from the set ( doesn't remove it )
+        PRE : The set is not empty.
         POST : Returns an identifier object contained within set 
-      list() ~ list all identifiers currently in the set 
-        PRE : Requires the set to exist..
-        POST : returns the full set of identifiers ( as a string ) , empty if empty
+      //list() ~ list all identifiers currently in the set 
+      //  PRE : Requires the set to exist..
+      //  POST : returns the full set of identifiers ( as a string ) , empty if empty
       remove(Id) ~ remove an identifier from the set 
-        PRE : Requires The Id to be between 0 and the size of the set.
+        PRE : 
         POST : Set contains one less identifier and the size decreases by 1
+
+      while(!set.isEmpty()) {
+        Identifier id = set.get();
+        .
+        .
+        .
+        set.remove(id);
+        }
+    Set union(Set s) throws Exception;
+
+    ..
 
 Operations :
   Interface :

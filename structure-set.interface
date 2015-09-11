@@ -1,0 +1,9 @@
+struct {
+  // SIZE = 20 ?
+  // initialize vars
+  // and methods such as 
+  // get()
+  // add(Identifier) 
+  // difference(Set set)
+  // etc
+}
