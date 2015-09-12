@@ -31,6 +31,7 @@ public class IdentifierSet {
      *
      * Checks if the item to add is not a duplicate of items that are already in set
      * If not, stores the identifier in the set
+     * identifier can't be added if the set is full and there isn't already a duplicate of it within the set
      */
     public void addIdentifier(Identifier identifier){
 
