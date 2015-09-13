@@ -46,7 +46,6 @@ public class IdentifierSet {
 
     }
 
-
     /**
      * Calling object and argument must be a valid set
      * Returns a new IdentifierSet containing the intersecting identifiers of the calling object and the argument of the method
@@ -54,7 +53,6 @@ public class IdentifierSet {
     public IdentifierSet returnIntersection(IdentifierSet set) {
 
     }
-
 
     /**
      * Calling object and argument must be a valid set
@@ -64,7 +62,6 @@ public class IdentifierSet {
     public IdentifierSet returnUnion(IdentifierSet set) {
         //check for duplicates
     }
-
 
     /**
      * Calling object and argument must be a valid set
