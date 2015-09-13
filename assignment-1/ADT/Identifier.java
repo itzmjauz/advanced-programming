@@ -29,22 +29,22 @@ public interface Identifier {
    * @postcondition
    *	    Creates an Identifier object with a name of String type
    **/
-	public void init (String string);
+  public void init (String string);
 
-	/** Returns the name of the Identifier object
+  /** Returns the name of the Identifier object
     * @precondition
-	  *		-
-	  * @postcondition
-	  *		Returns a non-empty String containing a valid Identifier name
+    *		-
+    * @postcondition
+    *		Returns a non-empty String containing a valid Identifier name
     **/
-	public String getName();
+  public String getName();
 
-	/** Returns whether or not the name of the identifier given as argument is the same as the name of the calling identifier
+  /** Returns whether or not the name of the identifier given as argument is the same as the name of the calling identifier
     * @precondition
-	  *		-
-	  * @postcondition
-	  *		Returns true when both strings are equal, and false otherwise
+    *		-
+    * @postcondition
+    *		Returns true when both strings are equal, and false otherwise
     **/
-	public boolean equals(Identifier identifier);
+  public boolean equals(Identifier identifier);
 
 }

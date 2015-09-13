@@ -28,17 +28,17 @@ public interface IdentifierSet {
     * @postcondition
     *	    The new created IdentifierSet object is empty and can contain a maximum of 20 Identifiers
     **/
-	public void init ();
+  public void init ();
 
-	/** Returns an identifier from the set, can be iterated to return complete set
-  	* @precondition
-  	* 		Set should not be empty
-  	* @postcondition
-  	*		Returns a new identifier for every iteration until the complete set has been returned
-  	*/
-	public Identifier getIdentifier();
+  /** Returns an identifier from the set, can be iterated to return complete set
+    * @precondition
+    * 		Set should not be empty
+    * @postcondition
+    *		Returns a new identifier for every iteration until the complete set has been returned
+    */
+  public Identifier getIdentifier();
 
-	/** Adds an identifier to the set
+  /** Adds an identifier to the set
     * @precondition
     *		Set should not be full
     * @postcondition
@@ -49,7 +49,7 @@ public interface IdentifierSet {
   /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
     * @precondition
     * 		-
-	  * @postcondition
+    * @postcondition
     * 		Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
     */
   public IdentifierSet Difference(IdentifierSet set);
@@ -64,7 +64,7 @@ public interface IdentifierSet {
 
   /** Return a set with all identifiers that are in both sets
     * @precondition
-		* -
+    * -
     * @postcondition
     *		Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
     * 		Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
