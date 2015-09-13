@@ -1,29 +1,51 @@
 package assignment1;
 
-interface Identifier {
-  /** Constructor
-    * PRO :
-    * The constructor requires a valid non-empty string starting with a letter to be entered
-    *
-    * POST :
-    * local string will be initiliazed
-    **/
+/** ADT for the class Identifier
+ *
+ * @author Antoni Stevenet
+ * @author Tim Nederveen
+ * @elements
+ *	name of the type String
+ * @structure 
+ *	non linear
+ * @domain
+ *	//wat moet hier?
+ * @constructor
+ *	Identifier(String name);
+ *	    <dl>
+ *		<dt><b>PRE-condition</b><dd>The String passed as argument to the constructor should meet the following requirements:
+ *		The first character is a letter, only alphanumeric characters are allowed and the string should contain a minimum of one character.
+ *		<dt><b>POST-condition</b><dd>The new
+ *		Identifier object contains a name String with a valid identifier name
+ *	    </dl>
+ *	<br>
+ **/
+ 
+public interface Identifier {
 
-  /**
-    * PRE :
-    * No PRE
-    *
-    * POST :
-    * will return a non-empty String
+    /** Initializes the Identifier object with the string as its name 
+     * @precondition
+     *	    The given string must be a valid identifier
+     * @postcondition
+     *	    Creates an Identifier object with a name of String type
+     **/
+	public void init (String string);
+	
+	/** Returns the name of the Identifier object
+    * @precondition
+	*		-
+	* @postcondition
+	*		Returns a non-empty String containing a valid Identifier name
     **/
-  public String get();
-  /**
-    * PRE :
-    * none
-    *
-    * POST :
-    * resets the identifier to string
+	public String getName();
+	
+		/** Returns whether or not the name of the identifier given as argument is the same as the name of the calling identifier
+    * @precondition
+	*		-
+	* @postcondition
+	*		Returns true when both strings are equal, and false otherwise
     **/
-  public void init(String string);
+	public boolean equals(Identifier identifier);
+
 
 }
