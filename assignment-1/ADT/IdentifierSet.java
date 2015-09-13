@@ -54,7 +54,7 @@ public interface IdentifierSet {
     */
   public IdentifierSet Difference(IdentifierSet set);
 
-    /** Returns a set with objects that are in both sets
+  /** Returns a set with objects that are in both sets
     * @precondition
     * 		-
     * @postcondition
