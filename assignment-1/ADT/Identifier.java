@@ -5,11 +5,13 @@ package assignment1;
  * @author Antoni Stevenet
  * @author Tim Nederveen
  * @elements
- *	name of the type String
+ *	characters
  * @structure
- *	non linear
+ *	linear since order of characters matters
  * @domain
- *	//wat moet hier?
+ * at least 1 character
+ * always starts with a letter
+ * only alphanumeric characters
  * @constructor
  *	Identifier(String name);
  *	    <dl>
