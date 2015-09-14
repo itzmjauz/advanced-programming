@@ -9,7 +9,7 @@ package assignment1;
  * @structure
  *	non linear
  * @domain
- *	//wat moet hier?
+ *	may be empty, but the maximal amount of elements is 20 identifiers
  * @constructor
  *	IdentifierSet();
  *	    <dl>
@@ -32,7 +32,7 @@ public interface IdentifierSet {
 
   /** Returns an identifier from the set, can be iterated to return complete set
     * @precondition
-    * 		Set should not be empty
+    * 	Set should not be empty
     * @postcondition
     *		Returns a new identifier for every iteration until the complete set has been returned
     */
@@ -42,16 +42,35 @@ public interface IdentifierSet {
     * @precondition
     *		Set should not be full
     * @postcondition
-    * 		Checks if the item to add is not a duplicate of items that are already in set, if not it stores the identifier in the set
+    * 	Checks if the item to add is not a duplicate of items that are already in set, if not it stores the identifier in the set
     */
   public void AddIdentifier(Identifier identifier);
 
+  /** return whether the set is empty
+    * @precondition
+    *   -
+    * @postcondition
+    *   returns true if the set is empty, and false if the set is not empty
+    * 
+    **/
+  public bool isEmpty();
+  
+  /** return whether the set is full
+    * @precondition
+    *   -
+    * @postcondition
+    *   returns true if the set is full, and false if it isn't
+    * 
+    **/
+  public bool isFull();
+  
   /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
     * @precondition
     * 		-
     * @postcondition
     * 		Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
     */
+    
   public IdentifierSet Difference(IdentifierSet set);
 
   /** Returns a set with objects that are in both sets
@@ -67,16 +86,16 @@ public interface IdentifierSet {
     * -
     * @postcondition
     *		Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
-    * 		Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
+    * 	Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
     */
-  public IdentifierSet Union(IdentifierSet set);
+  public IdentifierSet Union(IdentifierSet set) throws Exception;
 
   /** Returns a set with all identifiers that are only in one of both sets
     * @precondition
     *		-
     * @postcondition
     *		Throws an exception if number of elements in resulting set exceeds maximum set size
-    * 		Returns a new IdentifierSet containing all elements that are only in one of both sets
+    * 	Returns a new IdentifierSet containing all elements that are only in one of both sets
     */
-  public IdentifierSet SymmetricDifference(IdentifierSet set);
+  public IdentifierSet SymmetricDifference(IdentifierSet set) throws Exception;
 }
