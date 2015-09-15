@@ -1,18 +1,30 @@
 package assignment1;
 
-interface Identifier {
-  /**
-    * PRO :The constructor requires a valid non-empty string starting with a letter to be entered
-    * PRE : local sstring will be initiliazed
-    *
-    * PRE : No PRE
-    * PRO : will return a non-empty String
-    **/
-  public String get();
-  /**
-    * PRE : none
-    * OOST : resets the identifier to string
-    **/
-  public void init(String string);
+/** Identifier Class for assignment 1 of Advanced Programming
+ *
+ * @author Antoni Stevenet
+ * @author Tim Nederveen
+ *
+ **/
 
+public class Identifier implements IdentifierADT {
+
+  private String name;
+
+  public void init (String string) {
+    name = string;
+  }
+
+  public Identifier (String string) {
+    name = string;
+  }
+
+  public String getName() {
+    return name;
+  }
+    
+  public boolean equals(Identifier identifier) {
+    boolean equals = name.equals(identifier);
+    return equals;
+  }
 }
