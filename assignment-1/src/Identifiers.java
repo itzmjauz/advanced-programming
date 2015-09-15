@@ -52,10 +52,16 @@ public class Identifiers {
   	out.println("Difference = " + result);
   	result = getSetString(set1.Intersection(set2));
   	out.println("Intersection = " + result);
+  	
+  	try {
   	result = getSetString(set1.Union(set2));
   	out.println("Union = " + result);
   	result = getSetString(set1.SymmetricDifference(set2));
   	out.println("Symmetric Difference = " + result);
+  	} 
+  	catch (Exception e){
+  		out.println(e);
+  	}
   }
   
   String getSetString(IdentifierSetADT set) {
