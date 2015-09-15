@@ -2,7 +2,6 @@ package assignment1;
 
 import java.util.Scanner;
 import java.io.PrintStream;
-import assignment1.*;
 
 public class Identifiers {
   //Name              : Antoni Stevenet
