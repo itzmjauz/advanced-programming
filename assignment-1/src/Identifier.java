@@ -23,7 +23,7 @@ public class Identifier implements IdentifierADT {
     return name;
   }
 
-  public boolean equals(Identifier identifier) {
+  public boolean equals(IdentifierADT identifier) {
     boolean equals = name.equals(identifier);
     return equals;
   }

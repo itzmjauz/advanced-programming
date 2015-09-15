@@ -21,6 +21,7 @@ package assignment1;
  **/
 
 public interface IdentifierSetADT {
+	public final int MAX_SIZE = 20;
 
   /** Initializes the IdentifierSet object
     * @precondition
@@ -28,7 +29,7 @@ public interface IdentifierSetADT {
     * @postcondition
     *	    The new created IdentifierSet object is empty and can contain a maximum of 20 Identifiers
     **/
-  public void init ();
+  public void init();
 
   /** Returns an identifier from the set, can be iterated to return complete set
     * @precondition
@@ -51,26 +52,26 @@ public interface IdentifierSetADT {
     *   -
     * @postcondition
     *   returns true if the set is empty, and false if the set is not empty
-    * 
+    *
     **/
-  public bool isEmpty();
-  
+  public boolean isEmpty();
+
   /** return whether the set is full
     * @precondition
     *   -
     * @postcondition
     *   returns true if the set is full, and false if it isn't
-    * 
+    *
     **/
-  public bool isFull();
-  
+  public boolean isFull();
+
   /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
     * @precondition
     * 		-
     * @postcondition
     * 		Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
     */
-    
+
   public IdentifierSetADT Difference(IdentifierSetADT set);
 
   /** Returns a set with objects that are in both sets

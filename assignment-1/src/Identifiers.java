@@ -2,7 +2,6 @@ package assignment1;
 
 import java.util.Scanner;
 import java.io.PrintStream;
-import assignment1.*;
 
 public class Identifiers {
   //Name              : Antoni Stevenet
@@ -18,9 +17,10 @@ public class Identifiers {
 
   void Start() {
     Scanner in = new Scanner(System.in);
+    out.println(in.nextLine());
   }
 
-  IdentifierSet readInput(Scanner scanner) {
+  IdentifierSetADT readInput(Scanner scanner) {
     // read identifiers from input and instantly check for correctness
     // and write them to a Set ( which the function returns )
   }

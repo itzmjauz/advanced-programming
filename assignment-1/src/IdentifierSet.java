@@ -1,42 +1,61 @@
 package assignment1;
 
-interface Set {
-  /**
-   * Set should not be empty
-   *
-   * Returns a new identifier for every iteration until the complete set has been returned, using identifierCounter
-   */
-  public Identifier Get();
+public class IdentifierSet implements IdentifierSetADT {
+	
+  private IdentifierADT[] set;
+  private int size = 0;
+  private int counter = 0;
 
-  /**
-   * Takes as argument a valid identifier that meets the idintifier conditions
-   *
-   * Checks if the item to add is not a duplicate of items that are already in set
-   * If not, stores the identifier in the set
-   * identifier can't be added if the set is full and there isn't already a duplicate of it within the set
-   */
-  public void AddIdentifier(Identifier identifier);
-  /**
-   * Calling object and argument must be a valid set
-   * Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
-   */
-  public Set Intersection(Set set);
+  public IdentifierSet() {
+    set = new IdentifierADT[MAX_SIZE];
+  }
 
+  public void init() {
+    set = new IdentifierADT[MAX_SIZE];
+  }
 
-  /**
-   * Calling object and argument must be a valid set
-   * Returns a new IdentifierSet containing the intersecting identifiers of the calling object and the argument of the method
-   * Omits duplicates
-   */
-  public Set Union(Set set);
-  /**
-   * Calling object and argument must be a valid set
-   * Returns a new IdentifierSet containing all elements that are not in both sets
-   */
-  public Set SymmetricDifference(Set set);
-  /**
-   * Calling object and argument must be a valid set
-   * Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
-   */
-  public Set Difference(Set set);
+  public int size() {
+    return size;
+  }
+
+  public IdentifierADT getIdentifier() {
+  	counter++;
+	  	
+	  if(counter == size()) counter = 0;
+	  	
+	  return set[counter];
+  }
+
+  public void AddIdentifier(IdentifierADT identifier) {
+  	set[size] = identifier;
+  	
+  	size++;
+  }
+
+  public boolean isEmpty() {
+    if(size() == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  public boolean isFull() {
+  	if(size() == MAX_SIZE) {
+  		return true;
+  	} else {
+  		return false;
+  	}
+  }
+  
+  public IdentifierSetADT Difference(IdentifierSetADT secondSet) {
+  	for(int x = 0 ; x < size()) {
+  		
+  	}
+  }
+  
+  public IdentifierSetADT Intersection(IdentifierSetADT set);
+  public IdentifierSetADT Union(IdentifierSetADT set) throws Exception;
+  public IdentifierSetADT SymmetricDifference(IdentifierSetADT set) throws Exception;
+  
 }
