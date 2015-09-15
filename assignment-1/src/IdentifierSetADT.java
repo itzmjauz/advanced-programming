@@ -73,6 +73,14 @@ public interface IdentifierSetADT {
     **/
   public boolean isFull();
 
+  /** return whether an identifier exists within the set
+   * @precondition
+   * 	-
+   * @postcondition
+   * 	return true/false depending on whether the identifier is within the set
+   */
+  public boolean Contains(IdentifierADT identifier);
+
   /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
     * @precondition
     * 		-

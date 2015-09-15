@@ -2,7 +2,6 @@ package assignment1;
 
 import java.util.Scanner;
 import java.io.PrintStream;
-import java.util.regex.Pattern;
 
 public class Identifiers {
   //Name              : Antoni Stevenet
@@ -11,13 +10,16 @@ public class Identifiers {
   //Date              : 2015-Sep09-Fri11
 
   PrintStream out;
+  private Scanner scanner;
 
   Identifiers() {
     out = new PrintStream(System.out);
   }
 
   void Start() {
-    Scanner in = new Scanner(System.in).useDelimiter("");
+    scanner = new Scanner(System.in);
+    Scanner in = scanner.useDelimiter("");
+
     out.println("Give the first set: ");
     IdentifierSetADT set1 = readSet(in);
     out.println("Give the second set: ");

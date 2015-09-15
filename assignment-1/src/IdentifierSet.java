@@ -46,25 +46,24 @@ public class IdentifierSet implements IdentifierSetADT {
     }
   }
 
+  public boolean Contains(IdentifierADT identifier) {
+    boolean contains = false;
+
+    for(int i = 0 ; i < size() ; i++ ) {
+      if(set[i].equals(identifier)) {
+        contains = true;
+      }
+    }
+
+    return contains;
+  }
+
   public IdentifierSetADT Difference(IdentifierSetADT set2) {
-    IdentifierADT identifier1, identifier2;
     IdentifierSetADT result = new IdentifierSet();
-    boolean contains;
 
     for(int x = 0 ; x < size() ; x++) {
-      identifier1 = set[x];
-      contains = false;
-
-      for(int y = 0 ; y < set2.size() ; y++) {
-        identifier2 = set2.getIdentifier();
-
-        if(identifier1.equals(identifier2)) {
-          contains = true;
-        }
-      }
-
-      if(!contains) {
-        result.AddIdentifier(identifier1);
+      if(!set2.Contains(set[x])) {
+        result.AddIdentifier(set[x]);
       }
     }
 
@@ -72,24 +71,11 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public IdentifierSetADT Intersection(IdentifierSetADT set2) {
-    IdentifierADT identifier1, identifier2;
     IdentifierSetADT result = new IdentifierSet();
-    boolean contains;
 
     for(int x = 0 ; x < size() ; x++) {
-      identifier1 = set[x];
-      contains = false;
-
-      for(int y = 0 ; y < set2.size() ; y++) {
-        identifier2 = set2.getIdentifier();
-
-        if(identifier1.equals(identifier2)) {
-          contains = true;
-        }
-      }
-
-      if(contains) {
-        result.AddIdentifier(identifier1);
+      if(set2.Contains(set[x])) {
+        result.AddIdentifier(set[x]);
       }
     }
 
@@ -97,21 +83,39 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public IdentifierSetADT Union(IdentifierSetADT set2) throws Exception {
-    IdentifierADT identifier1, identifier2;
     IdentifierSetADT result = new IdentifierSet();
 
     for(int x = 0 ; x < size() ; x++) {
-      identifier1 = set[x];
-
-      for(int y = 0 ; y < set2.size() ; y++) {
-        identifier2 = set2.getIdentifier();
-
+      if(!set2.Contains(set[x])) {
+        result.AddIdentifier(set[x]);
       }
+    }
+
+    for(int x = 0 ; x < set2.size(); x++) {
+      result.AddIdentifier(set2.getIdentifier());
     }
 
     return result;
   }
 
-  public IdentifierSetADT SymmetricDifference(IdentifierSetADT set) throws Exception;
+  public IdentifierSetADT SymmetricDifference(IdentifierSetADT set2) throws Exception {
+    IdentifierSetADT result = new IdentifierSet();
+
+    for(int x = 0 ; x < size() ; x++) {
+      if(!set2.Contains(set[x])) {
+        result.AddIdentifier(set[x]);
+      }
+    }
+
+    IdentifierADT identifier;
+    for(int x = 0 ; x < set2.size() ; x++) {
+      identifier = set2.getIdentifier();
+      if(!Contains(identifier)) {
+        result.AddIdentifier(identifier);
+      }
+    }
+
+    return result;
+  }
 
 }
