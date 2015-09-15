@@ -24,7 +24,6 @@ public class Identifier implements IdentifierADT {
   }
 
   public boolean equals(IdentifierADT identifier) {
-    boolean equals = name.equals(identifier);
-    return equals;
+    return name.equals(identifier.getName());
   }
 }
