@@ -11,18 +11,18 @@ public class Identifier implements IdentifierADT {
 
   private String name;
 
-  public void init (String string) {
+  public Identifier (String string) {
     name = string;
   }
 
-  public Identifier (String string) {
+  public void init (String string) {
     name = string;
   }
 
   public String getName() {
     return name;
   }
-    
+
   public boolean equals(Identifier identifier) {
     boolean equals = name.equals(identifier);
     return equals;
