@@ -23,7 +23,7 @@ package assignment1;
  *	<br>
  **/
 
-public interface Identifier {
+public interface IdentifierADT {
 
   /** Initializes the Identifier object with the string as its name
    * @precondition
@@ -47,6 +47,6 @@ public interface Identifier {
     * @postcondition
     *		Returns true when both strings are equal, and false otherwise
     **/
-  public boolean equals(Identifier identifier);
+  public boolean equals(IdentifierADT identifier);
 
 }
