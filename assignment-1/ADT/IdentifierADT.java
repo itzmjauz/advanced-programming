@@ -13,7 +13,7 @@ package assignment1;
  * always starts with a letter
  * only alphanumeric characters
  * @constructor
- *	Identifier(String name);
+ *	IdentifierADT(String name);
  *	    <dl>
  *		<dt><b>PRE-condition</b><dd>The String passed as argument to the constructor should meet the following requirements:
  *		The first character is a letter, only alphanumeric characters are allowed and the string should contain a minimum of one character.
