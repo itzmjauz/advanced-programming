@@ -19,7 +19,7 @@ public class Identifiers {
   void Start() {
     scanner = new Scanner(System.in);
     Scanner in = scanner.useDelimiter("");
-
+    
     out.println("Give the first set: ");
     IdentifierSetADT set1 = readSet(in);
     out.println("Give the second set: ");
@@ -44,7 +44,7 @@ public class Identifiers {
   }
 
   boolean nextStringIsIdentifier(Scanner in) {
-    return in.hasNext("^[a-zA-Z][a-zA-Z0-9]+");
+    return in.hasNext("^[a-zA-Z][a-zA-Z0-9]*");
   }
 
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {
