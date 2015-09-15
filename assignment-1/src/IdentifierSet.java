@@ -71,8 +71,47 @@ public class IdentifierSet implements IdentifierSetADT {
     return result;
   }
 
-  public IdentifierSetADT Intersection(IdentifierSetADT set);
-  public IdentifierSetADT Union(IdentifierSetADT set) throws Exception;
+  public IdentifierSetADT Intersection(IdentifierSetADT set2) {
+    IdentifierADT identifier1, identifier2;
+    IdentifierSetADT result = new IdentifierSet();
+    boolean contains;
+
+    for(int x = 0 ; x < size() ; x++) {
+      identifier1 = set[x];
+      contains = false;
+
+      for(int y = 0 ; y < set2.size() ; y++) {
+        identifier2 = set2.getIdentifier();
+
+        if(identifier1.equals(identifier2)) {
+          contains = true;
+        }
+      }
+
+      if(contains) {
+        result.AddIdentifier(identifier1);
+      }
+    }
+
+    return result;
+  }
+
+  public IdentifierSetADT Union(IdentifierSetADT set2) throws Exception {
+    IdentifierADT identifier1, identifier2;
+    IdentifierSetADT result = new IdentifierSet();
+
+    for(int x = 0 ; x < size() ; x++) {
+      identifier1 = set[x];
+
+      for(int y = 0 ; y < set2.size() ; y++) {
+        identifier2 = set2.getIdentifier();
+
+      }
+    }
+
+    return result;
+  }
+
   public IdentifierSetADT SymmetricDifference(IdentifierSetADT set) throws Exception;
 
 }
