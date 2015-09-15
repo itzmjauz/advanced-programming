@@ -22,6 +22,14 @@ package assignment1;
 
 public interface IdentifierSetADT {
 	public final int MAX_SIZE = 20;
+	
+	/** return set size
+	 * @precondition
+	 *  -
+	 * @postcondition
+	 * 	return set size
+	 */
+	public int size();
 
   /** Initializes the IdentifierSet object
     * @precondition
