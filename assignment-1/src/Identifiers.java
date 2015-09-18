@@ -17,32 +17,26 @@ public class Identifiers {
 
   void Start() {
     Scanner in = new Scanner(System.in);
-
-    out.println("Give the first set: ");
-    IdentifierSetADT set1 = readSet(in);
-
-    in.close();
-    in = new Scanner(System.in);
-    out.println("Give the second set: ");
-    IdentifierSetADT set2 = readSet(in);
-
-    in.close();
-
-    printResults(set1, set2);
-  }
-
-  IdentifierSetADT readSet(Scanner in) {
-    IdentifierSetADT set = new IdentifierSet();
+    IdentifierSetADT set1, set2;
 
     while(in.hasNextLine()) {
-      if(nextStringIsIdentifier(in) && in.hasNextLine()) {
-        System.out.println("weve added an item : " + in.next());
-        //IdentifierADT identifier = new Identifier(in.next());
-        //set.addIdentifier(identifier);
-      } else {
-        in.nextLine();
-      }
+      out.print("Give the first set : ");
+      set1 = readSet(in.nextLine());
+
+      out.print("Give the second set :");
+      set2 = readSet(in.nextLine());
+
+      printResults(set1, set2);
     }
+
+    in.close();
+    out.println("Program terminated");
+  }
+
+  IdentifierSetADT readSet(String nextLine) {
+    IdentifierSetADT set = new IdentifierSet();
+
+    out.println(nextLine);
 
     return set;
   }
