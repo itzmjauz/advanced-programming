@@ -18,7 +18,7 @@ package assignment1;
  *		<dt><b>PRE-condition</b><dd>The String passed as argument to the constructor should meet the following requirements:
  *		The first character is a letter, only alphanumeric characters are allowed and the string should contain a minimum of one character.
  *		<dt><b>POST-condition</b><dd>The new
- *		Identifier object contains a name String with a valid identifier name
+ *  	contains string representation of identifier
  *	    </dl>
  *	<br>
  **/
@@ -41,11 +41,11 @@ public interface IdentifierADT {
     **/
   public String getName();
 
-  /** Returns whether or not the name of the identifier given as argument is the same as the name of the calling identifier
+  /** Returns whether or not the identifier is equal to the passed identifier
     * @precondition
     *		-
     * @postcondition
-    *		Returns true when both strings are equal, and false otherwise
+    *		Returns true when both strings contain same sequence of characters, and false otherwise
     **/
   public boolean equals(IdentifierADT identifier);
 
