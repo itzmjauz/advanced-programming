@@ -37,14 +37,19 @@ public class Identifiers {
 
   IdentifierSetADT readSet(String nextLine) {
     IdentifierSetADT set = new IdentifierSet();
+    Scanner in = new Scanner(nextLine).useDelimiter("[\\{\\}\\s]");
+    String identifierRegex = "[a-zA-Z]([a-zA-Z0-9]+)?";
 
-    out.println(nextLine);
+    while(in.hasNext()) {
+      if(in.hasNext(identifierRegex)) {
+        IdentifierADT identifier = new Identifier(in.next(identifierRegex));
+        set.addIdentifier(identifier);
+      } else {
+        in.next();
+      }
+    }
 
     return set;
-  }
-
-  boolean nextStringIsIdentifier(Scanner in) {
-    return in.hasNext("[a-zA-Z]([a-zA-Z0-9]*)?");
   }
 
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {
@@ -69,10 +74,11 @@ public class Identifiers {
   }
 
   String getSetString(IdentifierSetADT set) {
-    String string = "{";
+    String string = "{ ";
 
     for(int i = 0 ; i < set.size() ; i++) {
       string = string + set.getIdentifier().toString() + " ";
+      set.removeIdentifier();
     }
 
     return string + "}";
