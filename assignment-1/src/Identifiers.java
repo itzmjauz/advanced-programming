@@ -19,14 +19,16 @@ public class Identifiers {
     Scanner in = new Scanner(System.in);
     IdentifierSetADT set1, set2;
 
+
+    out.print("Give the first set : ");
     while(in.hasNextLine()) {
-      out.print("Give the first set : ");
       set1 = readSet(in.nextLine());
 
       out.print("Give the second set :");
       set2 = readSet(in.nextLine());
 
       printResults(set1, set2);
+      out.print("Give the first set : ");
     }
 
     in.close();
