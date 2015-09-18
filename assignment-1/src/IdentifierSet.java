@@ -2,7 +2,7 @@ package assignment1;
 
 public class IdentifierSet implements IdentifierSetADT {
 
-  private IdentifierADT[] set;
+  public IdentifierADT[] set;
   private int size = 0;
 
   public IdentifierSet() {
@@ -11,15 +11,17 @@ public class IdentifierSet implements IdentifierSetADT {
 
   public IdentifierSet(IdentifierSetADT identifierSet) {
     init();
-    IdentifierSetADT copy = new IdentifierSet();
-    copy = identifierSet;
+    IdentifierADT identifier;
 
-    while(!copy.isEmpty()) {
-      IdentifierADT identifier = copy.getIdentifier();
-      addIdentifier(identifier);
-      copy.removeIdentifier();
+    while(!identifierSet.isEmpty()) {
+      addIdentifier(identifierSet.getIdentifier());
+      identifierSet.removeIdentifier();
     }
-  }
+
+    for(int x = 0 ; x < size() ; x++) {
+      identifierSet.addIdentifier(set[x]);
+    }
+}
 
   public void init() {
     set = new IdentifierADT[MAX_SIZE];
@@ -101,14 +103,15 @@ public class IdentifierSet implements IdentifierSetADT {
 
   public IdentifierSetADT Union(IdentifierSetADT set2) throws Exception {
     IdentifierSetADT result = new IdentifierSet();
+    IdentifierSetADT copy = new IdentifierSet(set2);
 
     for(int x = 0 ; x < size() ; x++) {
       result.addIdentifier(set[x]);
     }
 
-    for(int x = 0 ; x < set2.size(); x++) {
-      result.addIdentifier(set2.getIdentifier());
-      set2.removeIdentifier();
+    while(!copy.isEmpty()) {
+      result.addIdentifier(copy.getIdentifier());
+      copy.removeIdentifier();
     }
 
     return result;
@@ -116,8 +119,7 @@ public class IdentifierSet implements IdentifierSetADT {
 
   public IdentifierSetADT SymmetricDifference(IdentifierSetADT set2) throws Exception {
     IdentifierSetADT result = new IdentifierSet();
-    IdentifierSetADT copy = new IdentifierSet();
-    copy = set2;
+    IdentifierSetADT copy = new IdentifierSet(set2);
 
     for(int x = 0 ; x < size() ; x++) {
       if(!set2.Contains(set[x])) {

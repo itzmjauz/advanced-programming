@@ -55,14 +55,17 @@ public class Identifiers {
     // print string method not yet implemented but
     // assuming IdentifierSet.toString() prints the set in string format
     // handle exceptions later
+
     result = getSetString(set1.Difference(set2));
     out.println("Difference = " + result);
+
     result = getSetString(set1.Intersection(set2));
     out.println("Intersection = " + result);
 
     try {
       result = getSetString(set1.Union(set2));
       out.println("Union = " + result);
+
       result = getSetString(set1.SymmetricDifference(set2));
       out.println("Symmetric Difference = " + result);
     }
@@ -72,11 +75,12 @@ public class Identifiers {
   }
 
   String getSetString(IdentifierSetADT set) {
+    IdentifierSetADT copy = new IdentifierSet(set);
     String string = "{ ";
 
-    for(int i = 0 ; i < set.size() ; i++) {
-      string = string + set.getIdentifier().toString() + " ";
-      set.removeIdentifier();
+    for(int i = copy.size() ; i > 0 ; i--) {
+      string = string + copy.getIdentifier().toString() + " ";
+      copy.removeIdentifier();
     }
     return string + "}";
   }
