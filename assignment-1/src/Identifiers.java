@@ -23,7 +23,7 @@ public class Identifiers {
     while(in.hasNextLine()) {
       set1 = readSet(in.nextLine());
 
-      out.print("Give the second set :");
+      out.print("Give the second set : ");
       set2 = readSet(in.nextLine());
 
       printResults(set1, set2);
