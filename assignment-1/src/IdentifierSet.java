@@ -34,13 +34,13 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public void addIdentifier(IdentifierADT identifier) {
-    set[size] = identifier;
-
-    size++;
+    if(!Contains(identifier)) {
+      set[size] = identifier;
+      size++;
+    }
   }
 
   public void removeIdentifier() {
-    set[size - 1] = null;
     size--;
   }
 
@@ -86,11 +86,14 @@ public class IdentifierSet implements IdentifierSetADT {
 
   public IdentifierSetADT Intersection(IdentifierSetADT set2) {
     IdentifierSetADT result = new IdentifierSet();
+    IdentifierSetADT copy = new IdentifierSet(set2);
 
-    for(int x = 0 ; x < size() ; x++) {
-      if(set2.Contains(set[x])) {
-        result.addIdentifier(set[x]);
+    while(!copy.isEmpty()) {
+      IdentifierADT identifier = copy.getIdentifier();
+      if(Contains(identifier)) {
+        result.addIdentifier(identifier);
       }
+      copy.removeIdentifier();
     }
 
     return result;
@@ -100,13 +103,12 @@ public class IdentifierSet implements IdentifierSetADT {
     IdentifierSetADT result = new IdentifierSet();
 
     for(int x = 0 ; x < size() ; x++) {
-      if(!set2.Contains(set[x])) {
-        result.addIdentifier(set[x]);
-      }
+      result.addIdentifier(set[x]);
     }
 
     for(int x = 0 ; x < set2.size(); x++) {
       result.addIdentifier(set2.getIdentifier());
+      set2.removeIdentifier();
     }
 
     return result;
