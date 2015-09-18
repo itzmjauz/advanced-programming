@@ -19,9 +19,7 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public IdentifierADT getIdentifier() {
-    if(counter == size()) counter = 0;
-
-    return set[counter++];
+    return set[size - 1];
   }
 
   public void AddIdentifier(IdentifierADT identifier) {
@@ -116,6 +114,11 @@ public class IdentifierSet implements IdentifierSetADT {
     }
 
     return result;
+  }
+  
+  public void removeIdentifier() {
+	  set[size - 1] = null;
+	  size--;
   }
 
 }

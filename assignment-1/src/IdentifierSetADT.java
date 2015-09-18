@@ -109,10 +109,11 @@ public interface IdentifierSetADT {
 
   /** Return a set with all identifiers that are in both sets
     * @precondition
-    * -
+    * 		-
     * @postcondition
+    * 		Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
+    * @throws Exception
     *		Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
-    * 	Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
     */
   public IdentifierSetADT Union(IdentifierSetADT set) throws Exception;
 
@@ -120,8 +121,9 @@ public interface IdentifierSetADT {
     * @precondition
     *		-
     * @postcondition
-    *		Throws an exception if number of elements in resulting set exceeds maximum set size
-    * 	Returns a new IdentifierSet containing all elements that are only in one of both sets
+    * 		Returns a new IdentifierSet containing all elements that are only in one of both sets
+    * @throws Exception
+    * 		Throws an exception if number of elements in resulting set exceeds maximum set size
     */
   public IdentifierSetADT SymmetricDifference(IdentifierSetADT set) throws Exception;
 }

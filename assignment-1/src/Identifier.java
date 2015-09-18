@@ -14,12 +14,16 @@ public class Identifier implements IdentifierADT {
   public Identifier (String string) {
     name = string;
   }
+  
+  public Identifier (Identifier identifier) {
+	  name = identifier.toString();
+  }
 
   public void init (String string) {
     name = string;
   }
 
-  public String getName() {
+  public String toString() {
     return name;
   }
 

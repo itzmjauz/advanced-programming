@@ -41,11 +41,11 @@ public interface IdentifierADT {
     **/
   public String toString();
 
-  /** Returns whether or not the name of the identifier given as argument is the same as the name of the calling identifier
+  /** Returns whether or not the given identifiers contain the same string representation
     * @precondition
     *		-
     * @postcondition
-    *		Returns true when both strings are equal, and false otherwise
+    *		Returns true when both strings are the same sequence of characters, and false otherwise
     **/
   public boolean equals(IdentifierADT identifier);
 
