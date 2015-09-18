@@ -19,7 +19,6 @@ public class Identifiers {
     Scanner in = new Scanner(System.in);
     IdentifierSetADT set1, set2;
 
-
     out.print("Give the first set : ");
     while(in.hasNextLine()) {
       set1 = readSet(in.nextLine());
@@ -48,7 +47,6 @@ public class Identifiers {
         in.next();
       }
     }
-
     return set;
   }
 
@@ -80,7 +78,6 @@ public class Identifiers {
       string = string + set.getIdentifier().toString() + " ";
       set.removeIdentifier();
     }
-
     return string + "}";
   }
 
