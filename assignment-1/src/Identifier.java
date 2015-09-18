@@ -14,10 +14,6 @@ public class Identifier implements IdentifierADT {
   public Identifier (String string) {
     name = string;
   }
-  
-  public Identifier (Identifier identifier) {
-	  name = identifier.toString();
-  }
 
   public void init (String string) {
     name = string;
@@ -28,6 +24,6 @@ public class Identifier implements IdentifierADT {
   }
 
   public boolean equals(IdentifierADT identifier) {
-    return name.equals(identifier.getName());
+    return name.equals(identifier.toString());
   }
 }

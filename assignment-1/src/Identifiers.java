@@ -10,18 +10,19 @@ public class Identifiers {
   //Date              : 2015-Sep09-Fri11
 
   PrintStream out;
-  private Scanner scanner;
 
   Identifiers() {
     out = new PrintStream(System.out);
   }
 
   void Start() {
-    scanner = new Scanner(System.in);
-    Scanner in = scanner.useDelimiter("");
-    
+    Scanner in = new Scanner(System.in);
+
     out.println("Give the first set: ");
     IdentifierSetADT set1 = readSet(in);
+
+    in.close();
+    in = new Scanner(System.in);
     out.println("Give the second set: ");
     IdentifierSetADT set2 = readSet(in);
 
@@ -33,10 +34,13 @@ public class Identifiers {
   IdentifierSetADT readSet(Scanner in) {
     IdentifierSetADT set = new IdentifierSet();
 
-    while(in.hasNext()) {
-      if(nextStringIsIdentifier(in)) {
-        IdentifierADT identifier = new Identifier(in.next());
-        set.AddIdentifier(identifier);
+    while(in.hasNextLine()) {
+      if(nextStringIsIdentifier(in) && in.hasNextLine()) {
+        System.out.println("weve added an item : " + in.next());
+        //IdentifierADT identifier = new Identifier(in.next());
+        //set.addIdentifier(identifier);
+      } else {
+        in.nextLine();
       }
     }
 
@@ -44,7 +48,7 @@ public class Identifiers {
   }
 
   boolean nextStringIsIdentifier(Scanner in) {
-    return in.hasNext("^[a-zA-Z][a-zA-Z0-9]*");
+    return in.hasNext("[a-zA-Z]([a-zA-Z0-9]*)?");
   }
 
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {
@@ -58,10 +62,10 @@ public class Identifiers {
     out.println("Intersection = " + result);
 
     try {
-    result = getSetString(set1.Union(set2));
-    out.println("Union = " + result);
-    result = getSetString(set1.SymmetricDifference(set2));
-    out.println("Symmetric Difference = " + result);
+      result = getSetString(set1.Union(set2));
+      out.println("Union = " + result);
+      result = getSetString(set1.SymmetricDifference(set2));
+      out.println("Symmetric Difference = " + result);
     }
     catch (Exception e){
       out.println(e);
@@ -72,9 +76,13 @@ public class Identifiers {
     String string = "{";
 
     for(int i = 0 ; i < set.size() ; i++) {
-      string = string + set.getIdentifier().getName() + " ";
+      string = string + set.getIdentifier().toString() + " ";
     }
 
     return string + "}";
+  }
+
+  public static void main(String[] args) {
+    new Identifiers().Start();
   }
 }
