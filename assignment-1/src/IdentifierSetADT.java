@@ -36,22 +36,23 @@ public interface IdentifierSetADT {
     *	    -
     * @postcondition
     *	    The new created IdentifierSet object is empty and can contain a maximum of 20 Identifiers
-    **/
+    */
   public void init();
 
   /** Returns an identifier from the set, can be iterated to return complete set
     * @precondition
     * 	Set should not be empty
     * @postcondition
-    *		Returns a new identifier for every iteration until the complete set has been returned
+    *		Returns identifier
     */
   public IdentifierADT getIdentifier();
 
   /** Adds an identifier to the set
     * @precondition
     *		Set should not be full
+    *   checks if the item is duplicate and will run correctly if so
     * @postcondition
-    * 	Checks if the item to add is not a duplicate of items that are already in set, if not it stores the identifier in the set
+    * 	returns identifier
     */
   public void AddIdentifier(IdentifierADT identifier);
 
@@ -61,8 +62,16 @@ public interface IdentifierSetADT {
     * @postcondition
     *   returns true if the set is empty, and false if the set is not empty
     *
-    **/
+    */
   public boolean isEmpty();
+
+  /** remove a 'random' identifier , returns the removed identifier
+    * @precondition
+    *   set cannot be empty
+    * @postcondition
+        removes an identifier from the set
+    */
+  public void removeIdentifier();
 
   /** return whether the set is full
     * @precondition
