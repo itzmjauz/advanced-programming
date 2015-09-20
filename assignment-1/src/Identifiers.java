@@ -17,16 +17,27 @@ public class Identifiers {
 
   void Start() {
     Scanner in = new Scanner(System.in);
-    IdentifierSetADT set1, set2;
+    IdentifierSetADT set2 = new IdentifierSet();
+    IdentifierSetADT set1 = new IdentifierSet();
+
 
     out.print("Give the first set : ");
     while(in.hasNextLine()) {
-      set1 = readSet(in.nextLine());
+      while(set1.size() == 0) {
+        set1 = readSet(in.nextLine());
+        if(set1.size() ==0) {
+          out.print("Give the first set : ");
+        }
+      }
 
-      out.print("Give the second set : ");
-      set2 = readSet(in.nextLine());
+      while(set2.size() == 0) {
+        out.print("Give the second set : ");
+        set2 = readSet(in.nextLine());
+      }
 
       printResults(set1, set2);
+      set1.init();
+      set2.init();
       out.print("Give the first set : ");
     }
 
@@ -36,7 +47,7 @@ public class Identifiers {
 
   IdentifierSetADT readSet(String nextLine) {
     IdentifierSetADT set = new IdentifierSet();
-    Scanner in = new Scanner(nextLine).useDelimiter("[\\{\\}\\s]");
+    Scanner in = new Scanner(nextLine).useDelimiter("[\\{\\s\\}]");
     String identifierRegex = "[a-zA-Z]([a-zA-Z0-9]+)?";
 
     while(in.hasNext()) {
@@ -44,10 +55,19 @@ public class Identifiers {
         IdentifierADT identifier = new Identifier(in.next(identifierRegex));
         set.addIdentifier(identifier);
       } else {
-        in.next();
+        String output = in.next();
+        if(output.length() > 0) {
+          out.println("Incorrect element : " + output + " will be ignored");
+        }
       }
     }
-    return set;
+
+    if(nextLine.indexOf('{') >= 0 && nextLine.indexOf('}') >= 0) {
+      return set;
+    } else {
+      out.println("Error, list wasn't surrounded by {}, please retry");
+      return new IdentifierSet();
+    }
   }
 
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {

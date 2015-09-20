@@ -111,7 +111,7 @@ public class IdentifierSet implements IdentifierSetADT {
 
     while(!copy.isEmpty()) {
       if(result.size() == MAX_SIZE) {
-        throw new Exception("Resulting array exceeds maximum size")
+        throw new Exception("Resulting array exceeds maximum size");
       }
       result.addIdentifier(copy.getIdentifier());
       copy.removeIdentifier();
@@ -136,7 +136,7 @@ public class IdentifierSet implements IdentifierSetADT {
       identifier = copy.getIdentifier();
       if(!Contains(identifier)) {
         if(result.size() == MAX_SIZE) {
-          throw new Exception("Resulting array exceeds maximum size")
+          throw new Exception("Resulting array exceeds maximum size");
         }
         result.addIdentifier(identifier);
       }
