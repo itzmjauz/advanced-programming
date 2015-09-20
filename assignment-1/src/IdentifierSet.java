@@ -2,7 +2,7 @@ package assignment1;
 
 public class IdentifierSet implements IdentifierSetADT {
 
-  public IdentifierADT[] set;
+  private IdentifierADT[] set;
   private int size = 0;
 
   public IdentifierSet() {
@@ -110,6 +110,9 @@ public class IdentifierSet implements IdentifierSetADT {
     }
 
     while(!copy.isEmpty()) {
+      if(result.size() == MAX_SIZE) {
+        throw new Exception("Resulting array exceeds maximum size")
+      }
       result.addIdentifier(copy.getIdentifier());
       copy.removeIdentifier();
     }
@@ -132,6 +135,9 @@ public class IdentifierSet implements IdentifierSetADT {
     while(!copy.isEmpty()) {
       identifier = copy.getIdentifier();
       if(!Contains(identifier)) {
+        if(result.size() == MAX_SIZE) {
+          throw new Exception("Resulting array exceeds maximum size")
+        }
         result.addIdentifier(identifier);
       }
       copy.removeIdentifier();
