@@ -36,8 +36,8 @@ public class Identifiers {
       }
 
       printResults(set1, set2);
-      set1 = new IdentifierSet();
-      set2 = new IdentifierSet();
+      set1.init();
+      set2.init();
       out.print("Give the first set : ");
     }
 
