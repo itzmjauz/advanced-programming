@@ -20,25 +20,27 @@ public class Identifiers {
     IdentifierSetADT set2 = new IdentifierSet();
     IdentifierSetADT set1 = new IdentifierSet();
 
-
-    out.print("Give the first set : ");
+    out.print("Enter first set : ");
     while(in.hasNextLine()) {
-      while(set1.size() == 0) {
+      if(set1.size() == 0) {
         set1 = readSet(in.nextLine());
-        if(set1.size() ==0) {
-          out.print("Give the first set : ");
+        if(set1.size() == 0) {
+          out.print("Enter first set : ");
+        } else if (set1.size() > 0) {
+          out.print("Enter second set : ");
         }
       }
-
-      while(set2.size() == 0) {
-        out.print("Give the second set : ");
+      if(set2.size() == 0 && in.hasNextLine()) {
         set2 = readSet(in.nextLine());
+        if(set2.size() == 0) {
+          out.print("Enter second set : ");
+        } else if (set2.size() > 0) {
+          printResults(set1, set2);
+          set1 = new IdentifierSet();
+          set2 = new IdentifierSet();
+          out.print("Enter first set : ");
+        }
       }
-
-      printResults(set1, set2);
-      set1 = new IdentifierSet();
-      set2 = new IdentifierSet();
-      out.print("Give the first set : ");
     }
 
     in.close();
