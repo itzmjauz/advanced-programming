@@ -59,8 +59,7 @@ public class Identifiers {
       } else {
         String output = in.next();
         if(output.length() > 0) {
-          out.println("Incorrect element : " + output);
-          return new IdentifierSet();
+          out.println("Incorrect element : " + output + " will be ignored");
         }
       }
     }
@@ -95,10 +94,6 @@ public class Identifiers {
     catch (Exception e){
       out.println(e);
     }
-  }
-
-  int countChar(String string, char character) {
-    return string.length() - string.replace(character, "").length();
   }
 
   String getSetString(IdentifierSetADT set) {
