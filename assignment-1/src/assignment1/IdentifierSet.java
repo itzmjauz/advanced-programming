@@ -1,5 +1,11 @@
 package assignment1;
 
+/** IdentifierSet Class for assignment 1 of Advanced Programming
+ *
+ * @author Antoni Stevenet
+ * @author Tim Nederveen
+ *
+ **/
 public class IdentifierSet implements IdentifierSetADT {
 
   private IdentifierADT[] set;
