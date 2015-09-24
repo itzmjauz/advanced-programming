@@ -1,7 +1,7 @@
 package assignment1;
 
 import java.util.Scanner;
-import java.io.PrintStream;
+import java.io.*;
 
 public class Identifiers {
   //Name              : Antoni Stevenet
@@ -10,6 +10,7 @@ public class Identifiers {
   //Date              : 2015-Sep09-Fri11
 
   PrintStream out;
+  int state = 0;
 
   Identifiers() {
     out = new PrintStream(System.out);
@@ -22,24 +23,23 @@ public class Identifiers {
 
     out.print("Enter first set : ");
     while(in.hasNextLine()) {
-      if(set1.size() == 0) {
+      if(state == 0) {
         set1 = readSet(in.nextLine());
-        if(set1.size() == 0) {
+        if(state == 0) {
           out.print("Enter first set : ");
-        } else if (set1.size() > 0) {
+        } else if (state == 1) {
           out.print("Enter second set : ");
         }
-      }
-      if(set2.size() == 0 && in.hasNextLine()) {
+      } else if (state == 1) {
         set2 = readSet(in.nextLine());
-        if(set2.size() == 0) {
+        if(state == 1) {
           out.print("Enter second set : ");
-        } else if (set2.size() > 0) {
-          printResults(set1, set2);
-          set1 = new IdentifierSet();
-          set2 = new IdentifierSet();
-          out.print("Enter first set : ");
         }
+      } else if (state == 2) {
+        printResults(set1, set2);
+        set1 = new IdentifierSet();
+        set2 = new IdentifierSet();
+        out.print("Enter first set : ");
       }
     }
 
@@ -49,9 +49,9 @@ public class Identifiers {
 
   IdentifierSetADT readSet(String nextLine) {
     IdentifierSetADT set = new IdentifierSet();
-    Scanner in = new Scanner(nextLine).useDelimiter("[\\{\\s\\}]");
+    Scanner in = new Scanner(nextLine).useDelimiter("[\\s]");
     String identifierRegex = "[a-zA-Z]([a-zA-Z0-9]+)?";
-
+    System.out.println(in.nextLine());
     while(in.hasNext()) {
       if(in.hasNext(identifierRegex)) {
         IdentifierADT identifier = new Identifier(in.next(identifierRegex));
@@ -59,7 +59,8 @@ public class Identifiers {
       } else {
         String output = in.next();
         if(output.length() > 0) {
-          out.println("Incorrect element : " + output + " will be ignored");
+          out.println("Incorrect element : " + output);
+          return new IdentifierSet();
         }
       }
     }
@@ -68,6 +69,7 @@ public class Identifiers {
       return set;
     } else {
       out.println("Error, list wasn't surrounded by {}, please retry");
+      state = 0;
       return new IdentifierSet();
     }
   }
@@ -95,6 +97,7 @@ public class Identifiers {
       out.println(e);
     }
   }
+
 
   String getSetString(IdentifierSetADT set) {
     IdentifierSetADT copy = new IdentifierSet(set);
