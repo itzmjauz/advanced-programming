@@ -3,11 +3,13 @@ package assignment1;
 import java.util.Scanner;
 import java.io.*;
 
+/** IdentifierSet Class for assignment 1 of Advanced Programming
+ *
+ * @author Antoni Stevenet
+ * @author Tim Nederveen
+ *
+ **/
 public class Identifiers {
-  //Name              : Antoni Stevenet
-  //                  : Tim Nederveen
-  //Assignment        : 1 ~ Advanced Programming
-  //Date              : 2015-Sep09-Fri11
 
   PrintStream out;
   int state = 0;
