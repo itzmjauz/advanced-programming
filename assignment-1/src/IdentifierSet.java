@@ -1,5 +1,11 @@
 package assignment1;
 
+/** IdentifierSet Class for assignment 1 of Advanced Programming
+ *
+ * @author Antoni Stevenet
+ * @author Tim Nederveen
+ *
+ **/
 public class IdentifierSet implements IdentifierSetADT {
 
   private IdentifierADT[] set;
@@ -15,7 +21,6 @@ public class IdentifierSet implements IdentifierSetADT {
 
     while(!identifierSet.isEmpty()) {
       addIdentifier(identifierSet.getIdentifier());
-      identifierSet.removeIdentifier();
     }
 
     for(int x = 0 ; x < size() ; x++) {
@@ -31,19 +36,24 @@ public class IdentifierSet implements IdentifierSetADT {
     return size;
   }
 
-  public IdentifierADT getIdentifier() {
-    return set[size - 1];
+  public void resetSize(int size){
+    this.size = size;
   }
 
+  public IdentifierADT getIdentifier() {
+    removeIdentifier();
+    return set[size];
+  }
+  
+  public void removeIdentifier() {
+    size--;
+  }
+  
   public void addIdentifier(IdentifierADT identifier) {
     if(!Contains(identifier)) {
       set[size] = identifier;
       size++;
     }
-  }
-
-  public void removeIdentifier() {
-    size--;
   }
 
   public boolean isEmpty() {
@@ -88,60 +98,53 @@ public class IdentifierSet implements IdentifierSetADT {
 
   public IdentifierSetADT Intersection(IdentifierSetADT set2) {
     IdentifierSetADT result = new IdentifierSet();
-    IdentifierSetADT copy = new IdentifierSet(set2);
+    int set2Size = set2.size();
 
-    while(!copy.isEmpty()) {
-      IdentifierADT identifier = copy.getIdentifier();
+    while(!set2.isEmpty()) {
+      IdentifierADT identifier = set2.getIdentifier();
       if(Contains(identifier)) {
         result.addIdentifier(identifier);
       }
-      copy.removeIdentifier();
     }
-
+    set2.resetSize(set2Size);
+    
     return result;
   }
 
   public IdentifierSetADT Union(IdentifierSetADT set2) throws Exception {
     IdentifierSetADT result = new IdentifierSet();
-    IdentifierSetADT copy = new IdentifierSet(set2);
+    int set2Size = set2.size();
 
     for(int x = 0 ; x < size() ; x++) {
       result.addIdentifier(set[x]);
     }
 
-    while(!copy.isEmpty()) {
+    while(!set2.isEmpty()) {
       if(result.size() == MAX_SIZE) {
         throw new Exception("Resulting array exceeds maximum size");
       }
-      result.addIdentifier(copy.getIdentifier());
-      copy.removeIdentifier();
+      result.addIdentifier(set2.getIdentifier());
     }
-
+    set2.resetSize(set2Size);
     return result;
   }
 
   public IdentifierSetADT SymmetricDifference(IdentifierSetADT set2) throws Exception {
-    IdentifierSetADT result = new IdentifierSet();
-    IdentifierSetADT copy = new IdentifierSet(set2);
-
-    for(int x = 0 ; x < size() ; x++) {
-      if(!set2.Contains(set[x])) {
-        result.addIdentifier(set[x]);
-      }
-    }
+    IdentifierSetADT result = Difference(set2);
+    int set2Size = set2.size();
 
     IdentifierADT identifier;
 
-    while(!copy.isEmpty()) {
-      identifier = copy.getIdentifier();
+    while(!set2.isEmpty()) {
+      identifier = set2.getIdentifier();
       if(!Contains(identifier)) {
         if(result.size() == MAX_SIZE) {
           throw new Exception("Resulting array exceeds maximum size");
         }
         result.addIdentifier(identifier);
       }
-      copy.removeIdentifier();
     }
+    set2.resetSize(set2Size);
 
     return result;
   }
