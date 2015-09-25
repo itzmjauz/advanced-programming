@@ -77,6 +77,10 @@ public class Identifiers {
             entry = new Identifier(identifier);
             set.addIdentifier(entry);
             identifier = "";
+            if(set.size() > 10) {
+              out.println("Set exceeded the max size of ten!");
+              return set;
+            }
           }
         } else if (nextCharIsAlphaNum(input)) {
           if(identifier.length() == 0 && nextCharIsDigit(input)) {
@@ -98,6 +102,10 @@ public class Identifiers {
               entry = new Identifier(identifier);
               set.addIdentifier(entry);
               identifier = "";
+              if(set.size() > 10) {
+                out.println("Set exceeded the max size of ten!");
+                return set;
+              }
             }
             state++;
             return set;
@@ -111,14 +119,6 @@ public class Identifiers {
 
   boolean nextCharIs(Scanner in, char c) {
     return in.hasNext(Pattern.quote(c+""));
-  }
-
-  char nextChar (Scanner in) {
-    return in.next().charAt(0);
-  }
-
-  boolean nextCharIsLetter (Scanner in) {
-    return in.hasNext("[a-zA-Z]");
   }
 
   boolean nextCharIsAlphaNum (Scanner in) {
