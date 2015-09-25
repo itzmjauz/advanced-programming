@@ -2,6 +2,7 @@ package assignment1;
 
 import java.util.Scanner;
 import java.io.*;
+import java.util.regex.Pattern;
 
 /** IdentifierSet Class for assignment 1 of Advanced Programming
  *
@@ -12,6 +13,7 @@ import java.io.*;
 public class Identifiers {
 
   PrintStream out;
+  boolean correctSet = false;
   int state = 0;
 
   Identifiers() {
@@ -20,28 +22,31 @@ public class Identifiers {
 
   void Start() {
     Scanner in = new Scanner(System.in);
-    IdentifierSetADT set2 = new IdentifierSet();
     IdentifierSetADT set1 = new IdentifierSet();
+    IdentifierSetADT set2 = new IdentifierSet();
 
-    out.print("Enter first set : ");
+    out.print("Enter the first set : ");
     while(in.hasNextLine()) {
       if(state == 0) {
-        set1 = readSet(in.nextLine());
-        if(state == 0) {
-          out.print("Enter first set : ");
-        } else if (state == 1) {
-          out.print("Enter second set : ");
+        set1 = readSet(in);
+        if(state == 1) {
+          out.print("Enter the second set : ");
+        } else {
+          out.print("Enter the first set : ");
         }
       } else if (state == 1) {
-        set2 = readSet(in.nextLine());
+        set2 = readSet(in);
         if(state == 1) {
-          out.print("Enter second set : ");
+          out.print("Enter the second set : ");
         }
-      } else if (state == 2) {
+      }
+
+      if (state == 2) {
         printResults(set1, set2);
         set1 = new IdentifierSet();
         set2 = new IdentifierSet();
-        out.print("Enter first set : ");
+        state = 0;
+        out.print("Enther the first set : ");
       }
     }
 
@@ -49,41 +54,83 @@ public class Identifiers {
     out.println("Program terminated");
   }
 
-  IdentifierSetADT readSet(String nextLine) {
+  IdentifierSetADT readSet(Scanner in) {
     IdentifierSetADT set = new IdentifierSet();
-    Scanner in = new Scanner(nextLine).useDelimiter("[\\s]");
-    String identifierRegex = "[a-zA-Z]([a-zA-Z0-9]+)?";
+    String line = in.nextLine();
+    Scanner input = new Scanner(line).useDelimiter("");
+    input.next(); // skip the { at the start
+    String identifier = "";
+    Identifier entry;
+    correctSet = true;
 
-    System.out.println(in.nextLine());
-
-    /*while(in.hasNext()) {
-      if(in.hasNext(identifierRegex)) {
-        IdentifierADT identifier = new Identifier(in.next(identifierRegex));
-        set.addIdentifier(identifier);
-      } else {
-        String output = in.next();
-        if(output.length() > 0) {
-          out.println("Incorrect element : " + output);
-          return new IdentifierSet();
+    if(line.charAt(0) != '{') {
+      out.println("Wrong start of set, use { , please retry : ");
+      return set;
+    } else if(line.charAt(line.length() - 1) != '}') {
+      out.println("Set not closed properly, use } , please retry : ");
+      return set;
+    } else {
+      while(input.hasNext()) {
+        if(nextCharIs(input, ' ')) {
+          input.next();
+          if(identifier.length() > 0) {
+            entry = new Identifier(identifier);
+            set.addIdentifier(entry);
+            identifier = "";
+          }
+        } else if (nextCharIsAlphaNum(input)) {
+          if(identifier.length() == 0 && nextCharIsDigit(input)) {
+            out.println("Identifier didn't start with a letter. please retry : ");
+            return set;
+          } else {
+            identifier = identifier + input.next();
+          }
+        } else if (nextCharIs(input, '{')) {
+          out.println("Random { detected, please retry : ");
+          return set;
+        } else if (nextCharIs(input, '}')) {
+          input.next();
+          if(input.hasNext()) {
+            out.println("} detected , but wasn't at end of line, please retry : ");
+            return set;
+          } else {
+            if(identifier.length() > 0) {
+              entry = new Identifier(identifier);
+              set.addIdentifier(entry);
+              identifier = "";
+            }
+            state++;
+            return set;
+          }
         }
       }
     }
-
-    if(nextLine.indexOf('{') >= 0 && nextLine.indexOf('}') >= 0) {
-      return set;
-    } else {
-      out.println("Error, list wasn't surrounded by {}, please retry");
-      state = 0;
-      return new IdentifierSet();
-    }*/
+    state++;
     return set;
+  }
+
+  boolean nextCharIs(Scanner in, char c) {
+    return in.hasNext(Pattern.quote(c+""));
+  }
+
+  char nextChar (Scanner in) {
+    return in.next().charAt(0);
+  }
+
+  boolean nextCharIsLetter (Scanner in) {
+    return in.hasNext("[a-zA-Z]");
+  }
+
+  boolean nextCharIsAlphaNum (Scanner in) {
+    return in.hasNext("[a-zA-Z0-9]");
+  }
+
+  boolean nextCharIsDigit (Scanner in) {
+    return in.hasNext("[0-9]");
   }
 
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {
     String result;
-    // print string method not yet implemented but
-    // assuming IdentifierSet.toString() prints the set in string format
-    // handle exceptions later
 
     result = getSetString(set1.Difference(set2));
     out.println("Difference = " + result);
