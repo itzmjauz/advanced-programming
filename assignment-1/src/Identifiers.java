@@ -110,6 +110,9 @@ public class Identifiers {
             state++;
             return set;
           }
+        } else {
+          out.println("There was an unrecognized (not allowed) character in the string, please retry : ");
+          return set;
         }
       }
     }
@@ -132,17 +135,17 @@ public class Identifiers {
   void printResults(IdentifierSetADT set1, IdentifierSetADT set2) {
     String result;
 
-    result = getSetString(set1.Difference(set2));
+    result = getSetString(set1.difference(set2));
     out.println("Difference = " + result);
 
-    result = getSetString(set1.Intersection(set2));
+    result = getSetString(set1.intersection(set2));
     out.println("Intersection = " + result);
 
     try {
-      result = getSetString(set1.Union(set2));
+      result = getSetString(set1.union(set2));
       out.println("Union = " + result);
 
-      result = getSetString(set1.SymmetricDifference(set2));
+      result = getSetString(set1.symmetricDifference(set2));
       out.println("Symmetric Difference = " + result);
     }
     catch (Exception e){
