@@ -21,6 +21,7 @@ public class IdentifierSet implements IdentifierSetADT {
 
     while(!identifierSet.isEmpty()) {
       addIdentifier(identifierSet.getIdentifier());
+      identifierSet.removeIdentifier();
     }
 
     for(int x = 0 ; x < size() ; x++) {
@@ -37,12 +38,11 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public IdentifierADT getIdentifier() {
-    removeIdentifier();
-    return set[size];
+    return set[size - 1];
   }
 
   public void addIdentifier(IdentifierADT identifier) {
-    if(!contains(identifier)) {
+    if(!Contains(identifier)) {
       set[size] = identifier;
       size++;
     }
@@ -101,6 +101,7 @@ public class IdentifierSet implements IdentifierSetADT {
       if(contains(identifier)) {
         result.addIdentifier(identifier);
       }
+      copy.removeIdentifier();
     }
 
     return result;
@@ -119,18 +120,25 @@ public class IdentifierSet implements IdentifierSetADT {
         throw new Exception("Resulting array exceeds maximum size");
       }
       result.addIdentifier(copy.getIdentifier());
+      copy.removeIdentifier();
     }
 
     return result;
   }
 
   public IdentifierSetADT symmetricDifference(IdentifierSetADT set2) throws Exception {
+    IdentifierSetADT result = new IdentifierSet();
     IdentifierSetADT copy = new IdentifierSet(set2);
-    IdentifierSetADT result = difference(set2);         //fills result with elements in set 1 but not in 2
+
+    for(int x = 0 ; x < size() ; x++) {
+      if(!set2.contains(set[x])) {
+        result.addIdentifier(set[x]);
+      }
+    }
 
     IdentifierADT identifier;
 
-    while(!copy.isEmpty()) {                            //fills result with elements in set 2 but not in 1
+    while(!copy.isEmpty()) {
       identifier = copy.getIdentifier();
       if(!contains(identifier)) {
         if(result.size() == MAX_SIZE) {
@@ -138,6 +146,7 @@ public class IdentifierSet implements IdentifierSetADT {
         }
         result.addIdentifier(identifier);
       }
+      copy.removeIdentifier();
     }
 
     return result;
