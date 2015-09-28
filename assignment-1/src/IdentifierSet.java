@@ -42,7 +42,7 @@ public class IdentifierSet implements IdentifierSetADT {
   }
 
   public void addIdentifier(IdentifierADT identifier) {
-    if(!Contains(identifier)) {
+    if(!contains(identifier)) {
       set[size] = identifier;
       size++;
     }
