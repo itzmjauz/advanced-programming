@@ -39,14 +39,6 @@ public interface IdentifierSetADT {
     **/
   public void init();
 
-  /** Resets local size to given int
-    * @precondition
-    *   -
-    * @postcondition
-    *   sets local size to given integer
-    **/
-  public void resetSize(int size);
-
   /** Returns an identifier from the set, can be iterated to return complete set
     * @precondition
     * 	Set should not be empty
@@ -95,7 +87,7 @@ public interface IdentifierSetADT {
    * @postcondition
    * 	return true/false depending on whether the identifier is within the set
    */
-  public boolean Contains(IdentifierADT identifier);
+  public boolean contains(IdentifierADT identifier);
 
   /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
     * @precondition
@@ -104,7 +96,7 @@ public interface IdentifierSetADT {
     * 		Returns a new IdentifierSet containing the elements in the 1st but not in the 2nd set
     */
 
-  public IdentifierSetADT Difference(IdentifierSetADT set);
+  public IdentifierSetADT difference(IdentifierSetADT set);
 
   /** Returns a set with objects that are in both sets
     * @precondition
@@ -112,7 +104,7 @@ public interface IdentifierSetADT {
     * @postcondition
     * 		Returns a new IdentifierSet containing only the elements that are in both sets
     */
-  public IdentifierSetADT Intersection(IdentifierSetADT set);
+  public IdentifierSetADT intersection(IdentifierSetADT set);
 
   /** Return a set with all identifiers that are in both sets
     * @precondition
@@ -121,7 +113,7 @@ public interface IdentifierSetADT {
     *   SUCCESS: Returns a new IdentifierSet containing all elements of both sets combined, omits duplicates
     *   FAILURE: Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
     */
-  public IdentifierSetADT Union(IdentifierSetADT set) throws Exception;
+  public IdentifierSetADT union(IdentifierSetADT set) throws Exception;
 
   /** Returns a set with all identifiers that are only in one of both sets
     * @precondition
@@ -130,5 +122,5 @@ public interface IdentifierSetADT {
     *		SUCCESS: Returns a new IdentifierSet containing all elements that are only in one of both sets
     *   FAILURE: Throws an exception if number of elements in resulting set exceeds maximum set size
     */
-  public IdentifierSetADT SymmetricDifference(IdentifierSetADT set) throws Exception;
+  public IdentifierSetADT symmetricDifference(IdentifierSetADT set) throws Exception;
 }
