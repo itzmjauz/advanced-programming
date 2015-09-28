@@ -39,6 +39,14 @@ public interface IdentifierSetADT {
     **/
   public void init();
 
+  /** Resets local size to given int
+    * @precondition
+    *   -
+    * @postcondition
+    *   sets local size to given integer
+    **/
+  public void resetSize(int size);
+
   /** Returns an identifier from the set, can be iterated to return complete set
     * @precondition
     * 	Set should not be empty

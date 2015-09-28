@@ -44,11 +44,11 @@ public class IdentifierSet implements IdentifierSetADT {
     removeIdentifier();
     return set[size];
   }
-  
+
   public void removeIdentifier() {
     size--;
   }
-  
+
   public void addIdentifier(IdentifierADT identifier) {
     if(!Contains(identifier)) {
       set[size] = identifier;
@@ -107,7 +107,7 @@ public class IdentifierSet implements IdentifierSetADT {
       }
     }
     set2.resetSize(set2Size);
-    
+
     return result;
   }
 
