@@ -58,6 +58,10 @@ public class Identifiers {
     IdentifierSetADT set = new IdentifierSet();
     String line = in.nextLine();
     Scanner input = new Scanner(line).useDelimiter("");
+    if(line.equals("")) {
+      out.println("Input was empty");
+      return set;
+    }
     input.next(); // skip the { at the start
     String identifier = "";
     Identifier entry;
