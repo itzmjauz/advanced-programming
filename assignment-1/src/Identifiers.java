@@ -22,39 +22,25 @@ public class Identifiers {
 
   void Start() {
     Scanner in = new Scanner(System.in);
-    IdentifierSetADT set1 = new IdentifierSet();
-    IdentifierSetADT set2 = new IdentifierSet();
+    IdentifierSetADT set1, set2;
 
-    out.print("Enter the first set : ");
-    while(in.hasNextLine()) {
-      if(state == 0) {
-        set1 = readSet(in);
-        if(state == 1) {
-          out.print("Enter the second set : ");
-        } else {
-          out.print("Enter the first set : ");
-        }
-      } else if (state == 1) {
-        set2 = readSet(in);
-        if(state == 1) {
-          out.print("Enter the second set : ");
-        }
-      }
+    while(true) {
+      set1 = new IdentifierSet();
+      set2 = new IdentifierSet();
 
-      if (state == 2) {
-        printResults(set1, set2);
-        set1 = new IdentifierSet();
-        set2 = new IdentifierSet();
-        state = 0;
-        out.print("Enther the first set : ");
-      }
+      System.out.print("Enter the first set :");
+      if(!in.hasNextLine()) System.exit(0);
+      set1 = readSet(in);
+      
+      System.out.print("Enter the second set :");
+      if(!in.hasNextLine()) System.exit(0);
+      set2 = readSet(in);
+
+      printResults(set1, set2);
     }
-
-    in.close();
-    out.println("Program terminated");
   }
 
-  IdentifierSetADT readSet(Scanner in) {
+ IdentifierSetADT readSet(Scanner in) {
     IdentifierSetADT set = new IdentifierSet();
     String line = in.nextLine();
     Scanner input = new Scanner(line).useDelimiter("");
