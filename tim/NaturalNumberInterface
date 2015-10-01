@@ -32,7 +32,15 @@ public interface NaturalNumberInterface extends Data {
    * @postcondition
    *	  The created object contains a natural number as its value 
    **/
-  public void init (Int number);
+  public void init (int number);
+  
+    /** Sets the int as value for the NaturalNumberInterface
+   * @precondition
+   *	  The int must be non-negative
+   * @postcondition
+   *	  The object now has number as its natural number value 
+   **/
+  public void setNumber(int number);
 
   /** Returns whether or not both objects are equal, with an equal natural number
     * @precondition
