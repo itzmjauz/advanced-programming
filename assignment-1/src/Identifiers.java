@@ -25,89 +25,83 @@ public class Identifiers {
     IdentifierSetADT set1, set2;
 
     while(true) {
-      set1 = new IdentifierSet();
-      set2 = new IdentifierSet();
-
-      System.out.print("Enter the first set :");
-      if(!in.hasNextLine()) System.exit(0);
-      set1 = readSet(in);
       
-      System.out.print("Enter the second set :");
-      if(!in.hasNextLine()) System.exit(0);
-      set2 = readSet(in);
+      do {
+        set1 = new IdentifierSet();
+        System.out.print("Enter the first set :");
+        if(!in.hasNextLine()) System.exit(0);
+      } while(!readSet(in, set1)); 
+      
+      do {  
+        set2 = new IdentifierSet();
+        System.out.print("Enter the second set :");
+        if(!in.hasNextLine()) System.exit(0);
+      } while(!readSet(in, set2));
 
       printResults(set1, set2);
     }
   }
 
- IdentifierSetADT readSet(Scanner in) {
-    IdentifierSetADT set = new IdentifierSet();
+  boolean readSet(Scanner in, IdentifierSetADT set) {
     String line = in.nextLine();
     Scanner input = new Scanner(line).useDelimiter("");
-    if(line.equals("")) {
-      out.println("Input was empty");
-      return set;
+    String regex = "[a-zA-Z][a-zA-Z0-9]*";
+    
+    if(line.length() < 2) {
+      out.println("Input too short");
+      return false;
     }
-    input.next(); // skip the { at the start
-    String identifier = "";
-    Identifier entry;
-    correctSet = true;
 
-    if(line.charAt(0) != '{') {
-      out.println("Wrong start of set, use { , please retry : ");
-      return set;
-    } else if(line.charAt(line.length() - 1) != '}') {
-      out.println("Set not closed properly, use } , please retry : ");
-      return set;
-    } else {
-      while(input.hasNext()) {
-        if(nextCharIs(input, ' ')) {
-          input.next();
-          if(identifier.length() > 0) {
-            entry = new Identifier(identifier);
-            set.addIdentifier(entry);
-            identifier = "";
-            if(set.size() > 10) {
-              out.println("Set exceeded the max size of ten!");
-              return set;
-            }
-          }
-        } else if (nextCharIsAlphaNum(input)) {
-          if(identifier.length() == 0 && nextCharIsDigit(input)) {
-            out.println("Identifier didn't start with a letter. please retry : ");
-            return set;
-          } else {
-            identifier = identifier + input.next();
-          }
-        } else if (nextCharIs(input, '{')) {
-          out.println("Random { detected, please retry : ");
-          return set;
-        } else if (nextCharIs(input, '}')) {
-          input.next();
-          if(input.hasNext()) {
-            out.println("} detected , but wasn't at end of line, please retry : ");
-            return set;
-          } else {
-            if(identifier.length() > 0) {
-              entry = new Identifier(identifier);
-              set.addIdentifier(entry);
-              identifier = "";
-              if(set.size() > 10) {
-                out.println("Set exceeded the max size of ten!");
-                return set;
-              }
-            }
-            state++;
-            return set;
-          }
+    if(line.charAt(0) != '{' || line.charAt(line.length() - 1) != '}') {
+      out.println("Set not properly surrounded by { and }");
+      return false;
+    }
+
+    input.next();// skip '{'
+
+    while(input.hasNext()) {
+      if(nextCharIs(input, ' ')) { // skip whitespace
+        input.next();
+      } else if(nextCharIs(input, '}')) {
+        input.next(); 
+        if(input.hasNext()) {
+         out.println("Random } detected , or trailing whitespace");
+          return false;
         } else {
-          out.println("There was an unrecognized (not allowed) character in the string, please retry : ");
-          return set;
+          return true;
+        }
+      } else {
+        if(!readIdentifier(input, set)) {
+          return false;
+        }
+
+        if(set.size() > 10) {
+          out.println("max size exceeded");
+          return false;
         }
       }
     }
-    state++;
-    return set;
+    return true;
+  }
+
+  boolean readIdentifier(Scanner input, IdentifierSetADT set) {
+    String identifier = "";
+
+    while(input.hasNext("[\\S]") && !nextCharIs(input, '}')) {
+      if(!nextCharIsAlphaNum(input)) {
+        out.println("Incorrect character in Identifier");
+        return false;
+      } else {
+        if(identifier.length() == 0 && nextCharIsDigit(input)) {
+          out.println("Identifier is not allowed to start with a digit");
+          return false;
+        }
+        identifier += input.next();
+      }
+    }
+    
+    set.addIdentifier(new Identifier(identifier));
+    return true;
   }
 
   boolean nextCharIs(Scanner in, char c) {
