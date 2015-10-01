@@ -13,11 +13,11 @@ package assignment2;
  * always starts with a letter
  * only alphanumeric characters
  * @constructor
- *	IdentifierADT(IdentifierADT original);
+ *	IdentifierInterface(IdentifierInterface original);
  *	  <dl>
  *		  <dt><b>POST-condition</b><dd>The new Identifier object is an exaxt copy of original
  *	 </dl>
- * 	IdentifierADT();
+ * 	IdentifierInterface();
  *	  <dl>
  *		  <dt><b>POST-condition</b><dd>The new Identifier object is empty, still needs to be passed a valid identifier name
  *	  </dl>
@@ -49,6 +49,6 @@ public interface IdentifierInterface extends Data {
     *		true: The identifier is equal to the source
     *   false: The identifier is not equal to the source
     **/
-  public boolean equals(IdentifierADT source);
+  public boolean equals(IdentifierInterface source);
 
 }
