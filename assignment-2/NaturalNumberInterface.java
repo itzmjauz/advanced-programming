@@ -26,21 +26,21 @@ package assignment2;
 
 public interface NaturalNumberInterface extends Data {
 
-  /** Initializes the NaturalNumberInterface object with the int as its value
+  /** Initializes the NaturalNumberInterface object with the string as its value
    * @precondition
-   *	  The int must be non-negative
+   *	  the string must be non-empty and contain only digits
    * @postcondition
-   *	  The created object contains a natural number as its value 
+   *	  The created object contains a natural number as its value as a string
    **/
-  public void init (int number);
-  
-    /** Sets the int as value for the NaturalNumberInterface
+  public void init (String number);
+
+    /** gets the number contained in the naturalnumber object as String
    * @precondition
-   *	  The int must be non-negative
+   *	  none
    * @postcondition
-   *	  The object now has number as its natural number value 
+   *	  returns a valid string;
    **/
-  public void setNumber(int number);
+  public String number();
 
   /** Returns whether or not both objects are equal, with an equal natural number
     * @precondition
