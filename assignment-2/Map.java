@@ -1,21 +1,39 @@
 package assignment2;
 
 public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface> {
+  List<Wrapper<K,V>> keyValuePairs;
+  
+  MapInterface() {
+    keyValuePairs = new List<Wrapper<K,V>>();
+  }
+  
+  MapInterface(MapInterface<K,V> source) {
+    keyValuePairs = source.keyValuePairs      //GET methode van maken?
+  }
 
   public void addKVPair(K key, V value) {
-    Wrapper entry = new Wrapper(key, value);
+    if(!containsKey) {
+      Wrapper<K,V> newKVPair = new Wrapper<K,V>(key,value)    //moet overal met <K,V> aangeduid worden?
+      keyValuePairs.insert(newKVPair);
+    } else {
+      keyValuePairs.current.data.setValue(value);   //containsKey guarantees that current is the node with same key
+    }
   }
 
-  public boolean containsKey(K source) {
-    
+  public boolean containsKey(K key) {
+    return keyValuePairs.find(new Wrapper<K,V>(key, null);
   }
 
-  public V returnValue (K source) {
-
+  public V returnValue (K key) {
+    if(containsKey(key) {
+      return keyValuePairs.retrieve();    //correct?
+    } else {
+      return null;
+    }
   }
 
-  public void removeForKey() {
-
+  public void removeForKey() {        //is this necessary?
+      
   }
 
   priate class Wrapper <K extends Data, V extends Clonable> implements Data {
