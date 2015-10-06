@@ -2,23 +2,23 @@ package assignment2;
 
 public class Wrapper <K extends Data, V extends Clonable> implements Data{
 	K key;
-	V value;	
-	
+	V value;
+
 	Wrapper() {
 		key = null;
 		value = null;
 	}
 	
 	Wrapper(K key, V value);
-	
+
 	Wrapper(Wrapper source);
-	
+
 	setKey
 	getKey
 	setValue
 	getValue
 	compare?
-	
-	kan inner class worden, is extends niet nodig		
-			
+
+	kan inner class worden, is extends niet nodig
+
 }

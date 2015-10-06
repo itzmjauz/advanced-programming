@@ -24,7 +24,7 @@ package assignment2;
  *	<br>
  **/
 
-public interface NaturalNumberInterface extends Data {
+public interface NaturalNumberInterface extends Data<NaturalNumberInterface> {
 
   /** Initializes the NaturalNumberInterface object with the string as its value
    * @precondition

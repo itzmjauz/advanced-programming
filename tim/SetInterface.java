@@ -26,10 +26,10 @@ import assignment1.IdentifierSetADT;
 *	    </dl>
 *	<br>
 **/
-public interface SetInterface {
-	
-e extends data	
-	
+public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface> {
+
+//e extends data
+
 	  /** Initializes the Set object
 	    * @precondition
 	    *	    -
@@ -37,7 +37,7 @@ e extends data
 	    *	    The new created Set object is empty and can contain a maximum of 20 Identifiers
 	    **/
 	  void init();
-	
+
 	  /** return set size
 	   * @precondition
 	   *  -
@@ -52,7 +52,7 @@ e extends data
 	    * @postcondition
 	    *		Returns a new identifier for every iteration until the complete set has been returned
 	    */
-	  IdentifierInterface getIdentifier();
+	  E getIdentifier();
 
 	  /** Adds an identifier to the set
 	    * @precondition
@@ -60,7 +60,7 @@ e extends data
 	    * @postcondition
 	    * 	Checks if the item to add is not a duplicate of items that are already in set, if not it stores the identifier in the set
 	    */
-	  void addIdentifier(IdentifierInterface identifier);
+	  void addIdentifier(E identifier);
 
 	  /** removes an identifier from the set
 	   *  @precondition
@@ -69,7 +69,7 @@ e extends data
 	   *  	one element will be removed thus the size decreases by 1
 	   */
 
-	  void removeIdentifier();
+	  void removeIdentifier(E e);
 	  /** return whether the set is empty
 	    * @precondition
 	    *   -
@@ -79,14 +79,7 @@ e extends data
 	    **/
 	  boolean isEmpty();
 
-	  /** return whether the set is full
-	    * @precondition
-	    *   -
-	    * @postcondition
-	    *   returns true if the set is full, and false if it isn't
-	    *
-	    **/
-	  boolean isFull();
+
 
 	  /** return whether an identifier exists within the set
 	   * @precondition
@@ -94,7 +87,7 @@ e extends data
 	   * @postcondition
 	   * 	return true/false depending on whether the identifier is within the set
 	   */
-	  boolean contains(IdentifierADT identifier);
+	  boolean contains(E identifier);
 
 	  /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
 	    * @precondition
@@ -103,7 +96,7 @@ e extends data
 	    * 		Returns a new Set containing the elements in the 1st but not in the 2nd set
 	    */
 
-	  SetInterface difference(SetInterface set);
+	  SetInterface<E> difference(SetInterface<E> set);
 
 	  /** Returns a set with objects that are in both sets
 	    * @precondition
@@ -130,5 +123,5 @@ e extends data
 	    *   FAILURE: Throws an exception if number of elements in resulting set exceeds maximum set size
 	    */
 	  SetInterface symmetricDifference(SetInterface set) throws Exception;
-	
+
 }

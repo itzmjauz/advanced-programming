@@ -4,9 +4,9 @@ package assignment2;
  *
  *  @elements : objects of type E
  *	@structure : lineair
- *	@domain : 	The elements in the list are sorted monotonically increasing. 
+ *	@domain : 	The elements in the list are sorted monotonically increasing.
  *				All rows of elements of type E are valid values for a list.
- *       		For every non-empty list the reference current is pointing to an 
+ *       		For every non-empty list the reference current is pointing to an
  *				element in the list.
  *	@constructor - List();
  *	<dl>
@@ -55,14 +55,14 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	 *   					- if list-POST is not empty
 	 *     						if current-PRE was the last element of list-PRE
 	 *     							the last element of list-POST
-	 *     						else 
-	 *     							the element after current-PRE 
+	 *     						else
+	 *     							the element after current-PRE
 	 *  				list-POST has been returned.
 	 **/
 	ListInterface<E> remove();
 
 
-	/** @precondition  - 
+	/** @precondition  -
 	 *	@postcondition - TRUE:  list contains a copy of d.
 	 *	     			current-POST points to the first element in list that
 	 *	     			contains a copy of d.
@@ -78,28 +78,28 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	boolean find(E d);
 
 
-	/** @precondition  - 
+	/** @precondition  -
 	 *	@postcondition - FALSE: list is empty
 	 *    				TRUE:  current points to the first element
 	 **/
 	boolean goToFirst();
 
 
-	/**	@precondition  - 
+	/**	@precondition  -
 	 *	@postcondition - FALSE: list is empty
 	 *     				TRUE:  current points to the last element
 	 */
 	boolean goToLast();
 
 
-	/** @precondition  - 
+	/** @precondition  -
 	 *	@postcondition - FALSE: list is empty or current points to the last element
 	 *     				TRUE:  current-POST points to the next element of current-PRE
 	 */
 	boolean goToNext();
 
 
-	/** @precondition  - 
+	/** @precondition  -
 	 *	@postcondition - FALSE: list is empty of current wijst het eerste object aan
 	 *     				TRUE:  current-POST points to the prior element of current-PRE
 	 */

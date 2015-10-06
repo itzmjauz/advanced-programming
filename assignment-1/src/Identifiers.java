@@ -30,9 +30,9 @@ public class Identifiers {
         set1 = new IdentifierSet();
         System.out.print("Enter the first set :");
         if(!in.hasNextLine()) System.exit(0);
-      } while(!readSet(in, set1)); 
-      
-      do {  
+      } while(!readSet(in, set1));
+
+      do {
         set2 = new IdentifierSet();
         System.out.print("Enter the second set :");
         if(!in.hasNextLine()) System.exit(0);
@@ -46,7 +46,7 @@ public class Identifiers {
     String line = in.nextLine();
     Scanner input = new Scanner(line).useDelimiter("");
     String regex = "[a-zA-Z][a-zA-Z0-9]*";
-    
+
     if(line.length() < 2) {
       out.println("Input too short");
       return false;
@@ -63,7 +63,7 @@ public class Identifiers {
       if(nextCharIs(input, ' ')) { // skip whitespace
         input.next();
       } else if(nextCharIs(input, '}')) {
-        input.next(); 
+        input.next();
         if(input.hasNext()) {
          out.println("Random } detected , or trailing whitespace");
           return false;
@@ -99,7 +99,7 @@ public class Identifiers {
         identifier += input.next();
       }
     }
-    
+
     set.addIdentifier(new Identifier(identifier));
     return true;
   }

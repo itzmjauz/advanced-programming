@@ -16,7 +16,7 @@ public class List<E extends Data<E>> extends Clonable<ListInterface<E>> implemen
     list = new List<Node>();
     size = 0;
   }
-  
+
   List() {
     size = 0;
   }

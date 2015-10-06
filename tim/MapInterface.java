@@ -9,7 +9,7 @@ package assignment2;
 * @structure
 *	nonLinear/keyvalue storage
 * @domain
-*	All possible Wrapper objects with a unique key 
+*	All possible Wrapper objects with a unique key
 * @constructor
 *	MapInterface();
 *	    <dl>
@@ -32,7 +32,7 @@ public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends
 	 * 		the map contains the key value pair contained in a wrapper object
 	 **/
 	void addKVPair(K key, V value);
-	
+
 	/** Returns whether the map contains a wrapper object with the given key
 	 * @preconditie
 	 *		-
@@ -41,7 +41,7 @@ public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends
 	 * 		false: the map object does not contain a wrapper with given key
 	 **/
 	boolean containsKey(K source);
-	
+
 	/** Returns the value for given key if it is present
 	 * @preconditie
 	 *		-
@@ -50,6 +50,6 @@ public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends
 	 * 		if the key is not present, the value returned is null
 	 **/
 	 V returnValue (K source);
-	 
+
 	 removeForKey
 }

@@ -1,12 +1,12 @@
 package assignment2;
 
 public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface> {
-  List<Wrapper<K,V>> keyValuePairs;
-  
+  private List<Wrapper<K,V>> keyValuePairs;
+
   MapInterface() {
-    keyValuePairs = new List<Wrapper<K,V>>();
+    keyValuePairs = new List<Wrapper>();
   }
-  
+
   MapInterface(MapInterface<K,V> source) {
     keyValuePairs = source.keyValuePairs      //GET methode van maken?
   }
@@ -33,10 +33,10 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
   }
 
   public void removeForKey() {        //is this necessary?
-      
+
   }
 
-  priate class Wrapper <K extends Data, V extends Clonable> implements Data {
+  private class Wrapper implements Data<Wrapper> {
     K key;
     V value;
 
@@ -44,7 +44,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
       key = null;
       value = null;
     }
-    
+
     private void init(K key, V Value) {
       this.key = key;
       this.value = value;
@@ -54,7 +54,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
       init(key, value);
     }
 
-    Wrapper(Wrapper<K,V> source) {
+    Wrapper(Wrapper source) {
       this.key = source.getKey();
       this.value = source.getValue();
     }
@@ -70,7 +70,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
     void setValue(V value) {
       this.value = value;
     }
-    
+
     void getValue() {
       return value;
     }
@@ -78,7 +78,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
     boolean equals(V value) {
       return this.value == value; // or use .equals method ?
     }
-    
+
     public Wrapper<K,V> clone() {
       return new Wrapper<K,V>(this);
     }

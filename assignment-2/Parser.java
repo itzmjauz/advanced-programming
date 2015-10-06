@@ -8,8 +8,10 @@ import java.io.PrintStream;
 public class Parser {
 
   PrintStream out;
+  Map<IdenitfierInterface, SetInterface<NaturalNumberInterface>> map;
 
   Parser() {
+    map = new Map<>();
     out = new PrintStream(System.out);
   }
 
@@ -47,6 +49,7 @@ public class Parser {
 
       // The add funtion A + B, has to match the types A and B to something. naturalnumbers hopefully.
       // we should throw exceptions there. since one should be allowed to assign strings to variables.
+
 
 
     }
