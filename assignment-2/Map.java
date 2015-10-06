@@ -24,7 +24,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
 
     Wrapper() {
       key = null;
-      value = null
+      value = null;
     }
 
     Wrapper(K key, V value) {
