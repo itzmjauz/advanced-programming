@@ -26,15 +26,19 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
       key = null;
       value = null;
     }
-
-    Wrapper(K key, V value) {
+    
+    private void init(K key, V Value) {
       this.key = key;
       this.value = value;
     }
 
-    Wrapper(Wrapper source) {
-      key = source.key;
-      value = source.value;
+    Wrapper(K key, V value) {
+      init(key, value);
+    }
+
+    Wrapper(Wrapper<K,V> source) {
+      this.key = source.getKey();
+      this.value = source.getValue();
     }
 
     void setKey(K key) {
@@ -48,9 +52,17 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
     void setValue(V value) {
       this.value = value;
     }
+    
+    void getValue() {
+      return value;
+    }
 
     boolean equals(V value) {
       return this.value == value; // or use .equals method ?
+    }
+    
+    public Wrapper<K,V> clone() {
+      return new Wrapper<K,V>(this);
     }
   }
 }
