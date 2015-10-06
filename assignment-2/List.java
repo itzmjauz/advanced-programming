@@ -3,9 +3,9 @@ package assignment2;
 public class List<E extends Data<E>> extends Clonable<ListInterface<E>> implements ListInterface {
 
   private int size = 0;
-  private Node current = null;
-  private Node last = null;
-  private Node first = null;
+  Node current = null;      //moeten deze terug naar private?
+  Node last = null;
+  Node first = null;
 
   public boolean isEmpty() {
     return size() == 0;
