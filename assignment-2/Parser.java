@@ -32,10 +32,6 @@ public class Parser {
     Scanner in = new Scanner(nextLine).useDelimiter("");
 
     while(in.hasNext()) {
-      if(nextCharIs(in, '/')) out.println("A comment");
-      if(nextCharIs(in, '?')) out.println("A print operation, followed by the expression to be printed");
-
-
       // the structure I would follow would be that Any function would accept a full command as its input
       // and checks if it can process it, if it cant it will try to hand it to other functions.
       // for example ? (A + B)  would pass (A+B) to the ? function
@@ -50,8 +46,30 @@ public class Parser {
       // The add funtion A + B, has to match the types A and B to something. naturalnumbers hopefully.
       // we should throw exceptions there. since one should be allowed to assign strings to variables.
 
+      String statement = in.nextLine();
+      processStatement(statement);
+    }
+  }
 
+  void processStatement(String statement) {
+    if(statement.charAt(0) == '?') print_statement(statement);
+    if(statement.charAt(0) == '/') comment(statement);
+    else assignment(statement);
+  }
 
+  void print_statement(String statement) {
+    // get a result from the operations described in the text
+  }
+
+  void comment(String statement) {
+    //this shouldn't do anything at all , should it .
+  }
+
+  void assignment(String statement) {
+    Scanner splitter = new Scanner(statement).useDelimiter(" ");
+
+    while(splitter.hasNext()) {
+      out.println(splitter.next());
     }
   }
 
