@@ -19,7 +19,7 @@ package assignment2;
  *	 </dl>
  * 	NaturalNumberInterface();
  *	  <dl>
- *		  <dt><b>POST-condition</b><dd>The new NaturalNumberInterface object is empty, still needs to be passed a valid value
+ *		  <dt><b>POST-condition</b><dd>The new NaturalNumberInterface object contains a valid natural number, with no leading 0's
  *	  </dl>
  *	<br>
  **/
@@ -30,7 +30,7 @@ public interface NaturalNumberInterface extends Data<NaturalNumberInterface> {
    * @precondition
    *	  the string must be non-empty and contain only digits
    * @postcondition
-   *	  The created object contains a natural number as its value as a string
+   *	  The created object contains a natural number (with no leading 0's) as its value as a string
    **/
   public void init (String number);
 
