@@ -27,7 +27,7 @@ import assignment1.IdentifierSetADT;
 *	<br>
 **/
 public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface> {
-
+//TODO: Talk about the more general E instead of Identifier?
 //e extends data
 
 	  /** Initializes the Set object
