@@ -78,6 +78,13 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
     boolean equals(V value) {
       return this.value == value; // or use .equals method ?
     }
+    
+    int compareTo(Object source) {        //should this be another type than object?
+      if (source instanceof Wrapper) {
+        return key.compareTo(source.getKey());
+      }
+      throw new Error ("Object not a finite list")    //necessary?
+    }
 
     public Wrapper<K,V> clone() {
       return new Wrapper<K,V>(this);
