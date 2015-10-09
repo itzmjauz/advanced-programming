@@ -25,11 +25,12 @@ package assignment2;
 **/
 public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface>{
 
-	/** Adds a key-value wrapper object to the map
+	/** Adds a key-value pair to the map
 	 * @preconditie
-	 *		the key must not already be taken?
+	 * 		-
 	 * @postconditie
-	 * 		the map contains the key value pair contained in a wrapper object
+	 * 		SUCCESS: The map contains the key value pair contained in a wrapper object
+	 * 		FAILURE: Throws exception if key does not exist
 	 **/
 	void addKVPair(K key, V value);
 
