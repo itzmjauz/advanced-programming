@@ -2,7 +2,7 @@ package assignment2;
 
 public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterface {
 
-  private E[] set;
+  private NaturalNumber[] set;
   private int size = 0;
   private final int MAX_SIZE = 10000;//should be infinite
 
@@ -32,18 +32,18 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return size;
   }
 
-  public E getIdentifier() {
+  public NaturalNumber getIdentifier() {
     return set[size - 1];
   }
 
-  public void addIdentifier(E identifier) {
+  public void addIdentifier(NaturalNumber identifier) {
     if(!contains(identifier)) {
       set[size] = identifier;
       size++;
     }
   }
 
-  public void removeIdentifier(E e) {
+  public void removeIdentifier(NaturalNumber e) {
     size--;
   }
 
@@ -51,7 +51,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return size() == 0;
   }
 
-  public boolean contains(E identifier) {
+  public boolean contains(NaturalNumber identifier) {
     boolean contains = false;
 
     for(int i = 0 ; i < size() ; i++) {
@@ -64,7 +64,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   }
 
   public SetInterface<E> difference(SetInterface<E> set2) {
-    SetInterface result = new set();
+    SetInterface result = new Set();
 
     for(int i = 0 ; i < size() ; i++) {
       if(!set2.contains(set[i])) {
@@ -76,8 +76,8 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   }
 
   public SetInterface<E> intersection(SetInterface set2) {
-    SetInterface result = new set();
-    SetInterface copy = new set(set2);
+    SetInterface result = new Set();
+    SetInterface copy = new Set(set2);
 
     while(!copy.isEmpty()) {
       E identifier = copy.getIdentifier();
@@ -91,8 +91,8 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   }
 
   public SetInterface<E> union(SetInterface set2) throws Exception {
-    SetInterface result = new set();
-    SetInterface copy = new set(set2);
+    SetInterface result = new Set();
+    SetInterface copy = new Set(set2);
 
     for(int i = 0 ; i < size() ; i++) {
       result.addIdentifier(set[i]);
@@ -107,8 +107,8 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   }
 
   public SetInterface<E> symmetricDifference(SetInterface set2) throws Exception {
-    SetInterface result = new set();
-    SetInterface copy = new set(set2);
+    SetInterface result = new Set();
+    SetInterface copy = new Set(set2);
 
     for(int i = 0 ; i < size() ; i++) {
       if(!set2.contains(set[i])) {
