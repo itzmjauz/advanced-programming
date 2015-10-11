@@ -134,8 +134,25 @@ public class Parser {
     return factor;
   }
 
-  SetInterface readFactor(Scanner parser) {
+  SetInterface readFactor(Scanner parser) throws APException{
+    skipSpaces(parser); //redundant but just in case
+    SetInterface set;
 
+    if(nextCharIsLetter(parser)) {
+      E identifier = readIdentifier(parser);
+      skipSpaces(parser);
+      //TODO retrieve identifier from key storage
+      set = map.returnValue(identifier);
+    } else if (nextCharIs(parser, '{')) {
+      set = readSet(parser);
+    } else if (nextCharIs(parser, '(')) {
+      set = readComplexFactor(parser);
+    } else {
+      APException e = new APException("Incorrect Factor Detected");
+      throw e;
+    }
+
+    return set;
   }
 
   E readIdentifier(Scanner parser) {
