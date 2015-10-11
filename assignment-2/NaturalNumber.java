@@ -27,4 +27,12 @@ public class NaturalNumber implements NaturalNumberInterface {
       return false;
     }
   }
+
+  public NaturalNumberInterface clone() {
+    return new NaturalNumber(number);
+  }
+
+  public int compareTo(NaturalNumberInterface source) {
+    return number.compareTo(source.number());
+  }
 }
