@@ -30,21 +30,6 @@ public class Parser {
     Scanner in = new Scanner(nextLine).useDelimiter("");
 
     while(in.hasNext()) {
-      // the structure I would follow would be that Any function would accept a full command as its input
-      // and checks if it can process it, if it cant it will try to hand it to other functions.
-      // for example ? (A + B)  would pass (A+B) to the ? function
-
-      // the ? functino detects that A+B should be calculated and hands A,B to the + function.
-
-      // parsing this would be easiest by putting it into some sort of stack, from which we get a tree
-      // of operations based on the priority of the operators .
-      // for assignments we simply have a left and rightside,
-      // the left side is the key, the right side the data. the right side can be calculated before
-      // put into the data storage, but this isn't necessary.
-
-      // The add funtion A + B, has to match the types A and B to something. naturalnumbers hopefully.
-      // we should throw exceptions there. since one should be allowed to assign strings to variables.
-
       String statement = in.nextLine();
       processLine(statement);
     }
