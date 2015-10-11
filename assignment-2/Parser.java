@@ -18,13 +18,11 @@ public class Parser {
   void Start() {
     Scanner in = new Scanner(System.in);
 
-    while(true) {
-      do {
-        System.out.println("$ :");
-        if(!in.hasNextLine()) System.exit(0);
-        parse(in.nextLine());
-      }
-    }
+    do {
+      System.out.println("$ :");
+      if(!in.hasNextLine()) System.exit(0);
+      parse(in.nextLine());
+    } while(true);
   }
 
   void parse(String nextLine) {
@@ -52,7 +50,7 @@ public class Parser {
     }
   }
 
-  Set processLine(statement) {
+  Set processLine(String statement) {
     Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
