@@ -4,6 +4,14 @@ public class Identifier<E extends Data<E>> implements IdentifierInterface<E> {
 
   private String identifier = "";
 
+  public Identifier(Identifier source) {
+    identifier = source.toString();
+  }
+
+  public Identifier(String identifier) {
+    this.identifier = identifier;
+  }
+
   public void init(String string) {
     identifier = string;
   }
