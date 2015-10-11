@@ -44,7 +44,7 @@ public class List<E extends Data<E>> extends Clonable<ListInterface<E>> implemen
     return current.data;
   }
 
-  public ListInterFace<E> remove() {
+  public ListInterface<E> remove() {
     current.prior = new Node(current.prior.data, current.prior.prior, current.next);
     current.next = new Node(current.next.data, current.prior, current.next.next);
 
