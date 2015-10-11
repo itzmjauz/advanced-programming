@@ -71,8 +71,28 @@ public class Parser {
     }
   }
 
+  void processAssignment(Scanner parser) {
+    E identifier = readIdentifier(parser);
+
+    while(parser.hasNext()) {
+      
+    }
+  }
+
   Set processExpression(Scanner parser) {
 
+  }
+
+  E readIdentifier(Scanner parser) {
+    String identifier = parser.next();
+
+    while(parser.hasNext()) {
+      if(nextCharIsAlphaNum(parser)) {
+        identifier += parser.next();
+      }
+    }
+
+    return new Identifier(identifier);
   }
 
   String setToString(SetInterface set) {
