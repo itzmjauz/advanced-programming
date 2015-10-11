@@ -12,7 +12,7 @@ import assignment1.IdentifierSetADT;
 * @structure
 *	non-Linear
 * @domain
-*	may be empty, but the maximal amount of elements is 20 identifiers
+*	may be empty
 * @constructor
 *	SetInterface();
 *	    <dl>
