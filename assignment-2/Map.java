@@ -13,7 +13,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
 
   public void addKVPair(K key, V value) {
     if(!containsKey) {
-      Wrapper<K,V> newKVPair = new Wrapper<K,V>(key,value)    //moet overal met <K,V> aangeduid worden?
+      Wrapper newKVPair = new Wrapper(key,value)    //moet overal met <K,V> aangeduid worden?
       keyValuePairs.insert(newKVPair);
     } else {
       keyValuePairs.current.data.setValue(value);   //containsKey guarantees that current is the node with same key
@@ -77,6 +77,13 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
 
     boolean equals(V value) {
       return this.value == value; // or use .equals method ?
+    }
+    
+    int compareTo(Object source) {        //should this be another type than object?
+      if (source instanceof Wrapper) {
+        return key.compareTo(source.getKey());
+      }
+      throw new Error ("Object not a finite list")    //necessary?
     }
 
     public Wrapper<K,V> clone() {
