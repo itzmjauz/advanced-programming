@@ -1,8 +1,5 @@
 package assignment2;
 
-import assignment1.IdentifierADT;
-import assignment1.IdentifierSetADT;
-
 /** Interface for the class Set
 *
 * @author Antoni Stevenet

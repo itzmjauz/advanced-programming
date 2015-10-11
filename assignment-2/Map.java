@@ -1,7 +1,7 @@
 package assignment2;
 
-public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface> implements MapInterface {
-  private List<Wrapper<K,V>> keyValuePairs;
+public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<MapInterface>, MapInterface {
+  private List<Wrapper> keyValuePairs;
 
   Map() {
     keyValuePairs = new List<Wrapper>();
@@ -21,7 +21,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
   }
 
   public boolean containsKey(K key) {
-    return keyValuePairs.find(new Wrapper<K,V>(key, null));
+    return keyValuePairs.find(new Wrapper(key, null));
   }
 
   public V returnValue (K key) {
@@ -82,8 +82,8 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
       throw new Error ("Object not a finite list");   //necessary?
     }
 
-    public Wrapper<K,V> clone() {
-      return new Wrapper<K,V>(this);
+    public Wrapper clone() {
+      return new Wrapper(this);
     }
   }
 }
