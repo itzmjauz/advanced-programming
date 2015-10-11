@@ -7,7 +7,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   private final int MAX_SIZE = 10000;//should be infinite
 
   public Set() {
-    set= new NaturalNumber[MAX_SIZE];
+    set = new NaturalNumber[MAX_SIZE];
   }
 
   public Set(SetInterface set) {
