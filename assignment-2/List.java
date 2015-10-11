@@ -1,6 +1,6 @@
 package assignment2;
 
-public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, ListInterface {
+public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, ListInterface<E> {
 
   private int size;         //size now only set in init and constructor
   Node current = null;      //moeten deze terug naar private?
@@ -12,8 +12,8 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
   }
 
   public ListInterface<E> init() {
-    return this;
     size = 0;
+    return this;
   }
 
   List() {
@@ -27,7 +27,7 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
   public ListInterface<E> insert(E d) {
     Node node = new Node(d, last, null);
     last = new Node(last.data, last.prior, node);
-    Node node = new Node(d, last, null);
+    node = new Node(d, last, null);
 
     if(size() == 0) {
       first = node;
@@ -50,9 +50,9 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
     if(current == last) last = current.prior;
     if(current == first) first = current.next;
 
-    if(!isEmpty) current = null;
-    if(!current.next == null) current = current.next;
-    if(!current.prior == null) current = last;
+    if(!isEmpty()) current = null;
+    if(!(current.next == null)) current = current.next;
+    if(!(current.prior == null)) current = last;
 
     return this;
   }
@@ -60,7 +60,7 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
   public boolean find(E d) {
     Node tmp = new Node(current.data, current.prior, current.next);
 
-    while(!current.next != null) {
+    while(!(current.next != null)) {
       if(current.data == d) {
         current = tmp;
         return true;
@@ -68,7 +68,7 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
       current = current.next;
     }
 
-    while(!current.prior != null) {
+    while(!(current.prior != null)) {
       if(current.data == d) {
         current = tmp;
         return true;
@@ -89,12 +89,13 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
 
   public boolean goToLast() {
     current = last;
-    if(isEmpty) return false;
+    if(isEmpty()) return false;
+    else return true;
   }
 
   public boolean goToNext() {
     if(current == last) return false;
-    if(isEmpty) return false;
+    if(isEmpty()) return false;
 
     current = current.next;
     return true;
@@ -102,7 +103,7 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
 
   public boolean goToPrevious() {
     if(current == first) return false;
-    if(isEmpty) return false;
+    if(isEmpty()) return false;
 
     current = current.prior;
     return true;
@@ -110,6 +111,7 @@ public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, List
 
   public ListInterface<E> clone() {
     //todo
+    return new List();
   }
 
   // Inner class for the implementation of the List class.
