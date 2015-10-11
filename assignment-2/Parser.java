@@ -183,8 +183,22 @@ public class Parser {
     return set;
   }
 
-  SetInterface readComplexFactor(Scanner parser) {
+  SetInterface readComplexFactor(Scanner parser) throws APException {
+    // '(' [expression] ')'
+    // we read the expression and pass a new scanner with the expression as its string to processExpression
+    String expression = "";
 
+    parser.next(); //skip past the '('
+    while(!nextCharIs(parser, ')')) {
+      if(!parser.hasNext()) {
+        APException e = new APException("Complex factor not ending with a )");
+        throw e;
+      }
+      expression += parser.next();
+    }
+
+    Scanner subParser = new Scanner(expression).useDelimiter("");
+    return processExpression(subParser);
   }
 
   E readIdentifier(Scanner parser) {
