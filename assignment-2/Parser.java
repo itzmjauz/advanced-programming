@@ -8,7 +8,7 @@ import java.io.PrintStream;
 public class Parser {
 
   PrintStream out;
-  Map<IdenitfierInterface, SetInterface<NaturalNumberInterface>> map;
+  Map<IdentifierInterface, SetInterface<NaturalNumberInterface>> map;
 
   Parser() {
     map = new Map<>();
