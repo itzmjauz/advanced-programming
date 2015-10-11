@@ -1,13 +1,13 @@
 package assignment2;
 
-public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface> {
+public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface> implements MapInterface {
   private List<Wrapper<K,V>> keyValuePairs;
 
-  MapInterface() {
+  Map() {
     keyValuePairs = new List<Wrapper>();
   }
 
-  MapInterface(MapInterface<K,V> source) {
+  Map(MapInterface<K,V> source) {
     keyValuePairs = source.keyValuePairs      //GET methode van maken?
   }
 
@@ -78,7 +78,7 @@ public class MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clo
     boolean equals(V value) {
       return this.value == value; // or use .equals method ?
     }
-    
+
     int compareTo(Object source) {        //should this be another type than object?
       if (source instanceof Wrapper) {
         return key.compareTo(source.getKey());
