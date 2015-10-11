@@ -135,7 +135,7 @@ public class Parser {
   }
 
   SetInterface readFactor(Scanner parser) {
-    
+
   }
 
   E readIdentifier(Scanner parser) {
@@ -167,23 +167,23 @@ public class Parser {
     return in.hasNext(Pattern.quote(c+""));
   }
 
-  boolean nextCharIsAlphaNum (Scanner in) {
+  boolean nextCharIsAlphaNum(Scanner in) {
     return in.hasNext("[a-zA-Z0-9]");
   }
 
-  boolean nextCharIsDigit (Scanner in) {
+  boolean nextCharIsDigit(Scanner in) {
     return in.hasNext("[0-9]");
   }
 
-  boolean nextCharIsLetter (Scanner in) {
+  boolean nextCharIsLetter(Scanner in) {
     return in.hasNext("[a-zA-Z]");
   }
 
-  boolean nextCharIsAditiveOperator (Scanner in) {
+  boolean nextCharIsAditiveOperator(Scanner in) {
     return in.hasNext("[\\+\\-\\|]");
   }
 
-  boolean nextCharIsMultOperator (Scanner in) {
+  boolean nextCharIsMultOperator(Scanner in) {
     return in.hasNext("[\\*]");
   }
 
