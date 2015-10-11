@@ -53,9 +53,12 @@ public class Parser {
   }
 
   Set processLine(statement) {
+    Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
-
+    while(parser.hasNext()) {
+      out.println(parser.next());
+    }
   }
 
   boolean nextCharIs(Scanner in, char c) {
