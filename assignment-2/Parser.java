@@ -73,7 +73,7 @@ public class Parser {
   }
 
   void processAssignment(Scanner parser) {
-    E identifier = readIdentifier(parser);
+    Identifier identifier = readIdentifier(parser);
 
     while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
       if(!nextCharIs(parser, ' ')) {
@@ -88,6 +88,8 @@ public class Parser {
     skipSpaces(parser);
 
     SetInterface set = processExpression(parser);
+
+    map.addKVPair(identifier, set);
   }
 
 
@@ -139,7 +141,7 @@ public class Parser {
     SetInterface set;
 
     if(nextCharIsLetter(parser)) {
-      E identifier = readIdentifier(parser);
+      Identifier identifier = readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
       set = map.returnValue(identifier);
@@ -201,7 +203,7 @@ public class Parser {
     return processExpression(subParser);
   }
 
-  E readIdentifier(Scanner parser) {
+  IdentifierInterface readIdentifier(Scanner parser) {
     String identifier = parser.next();
 
     while(nextCharIsAlphaNum(parser)) {
