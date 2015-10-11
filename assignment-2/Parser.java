@@ -134,7 +134,7 @@ public class Parser {
     return factor;
   }
 
-  SetInterface readFactor(Scanner parser) throws APException{
+  SetInterface readFactor(Scanner parser) throws APException {
     skipSpaces(parser); //redundant but just in case
     SetInterface set;
 
@@ -153,6 +153,38 @@ public class Parser {
     }
 
     return set;
+  }
+
+  SetInterface readSet(Scanner parser) throws APException {
+    parser.next(); // the { character
+    String number = "";
+    SetInferface set = new Set();
+    NaturalNumberInterface naturalNumber = new NaturalNumber();
+
+    while(!nextCharIs(parser, '}')) {
+      if(nextCharIsDigit(parser)) {
+        number += parser.next();
+      } else if (nextCharIs(parser, ',')) {
+        if(number.equals("")) {
+          APException e = new APException("Set has a missing number (two comma's)");
+          throw e;
+        } else {
+          naturalNumber.init(number);
+          set.addIdentifier(naturalNumber);
+        }
+      } else {
+        APEexception e = new APEexception("Character not fit for a set detected, [0-9] and commas");
+        throw e;
+      }
+    }
+
+    parser.next(); // skip the ending }
+    skipSpaces(parser); // skip spaces so that the next method will have no problems
+    return set;
+  }
+
+  SetInterface readComplexFactor(Scanner parser) {
+
   }
 
   E readIdentifier(Scanner parser) {
