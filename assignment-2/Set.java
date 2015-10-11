@@ -1,10 +1,10 @@
 package assignment2;
 
-public class Set<E extends Data<E>> extends Clonable<SetInterface> implements SetInterface {
+public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterface {
 
   private E[] set;
   private int size = 0;
-  private final int MAX_SIZE = 10000;//should be infinite 
+  private final int MAX_SIZE = 10000;//should be infinite
 
   public Set() {
     set= new NaturalNumber[MAX_SIZE];
