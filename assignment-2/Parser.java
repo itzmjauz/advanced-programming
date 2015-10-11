@@ -54,9 +54,10 @@ public class Parser {
     Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
+    skipSpaces(parser);
+
     while(parser.hasNext()) {
-      if(nextCharIs(parser, ' ')) parser.next(); //ignore presceding spaces too
-      else if(nextCharIsLetter(parser)) { //assignment
+      if(nextCharIsLetter(parser)) { //assignment
         processAssignment(parser);
       } else if(nextCharIs(parser, '?')) { // print job
         parser.next(); // skip the first ? character
@@ -84,16 +85,50 @@ public class Parser {
     }
 
     parser.next(); // we skip past the '='
-    while(nextCharIs(parser, ' ')) {
-      parser.next(); // skip any spaces now.
-    }
+    skipSpaces(parser);
 
     SetInterface set = processExpression(parser);
   }
 
 
-  Set processExpression(Scanner parser) {
+  SetInterface processExpression(Scanner parser) {
+    //expression :
+    // term { additive-operator term }
+    // so a term, with zero or more additive operators, followed by a term.
 
+    SetInterface term = readTerm(parser);
+
+    while(nextCharIs(parser, ' ')) parser.next();// skip spaces for certainty
+    while(nextCharIsAditiveOperator(parser)) {
+      while(nextCharIs(parser, ' ')) parser.next();// skip spaces
+
+      String operator = parser.next();
+
+      SetInterface term2 = readTerm(parser);
+      if(operator.equals("+")) {
+        term = term.union(term2);
+      } else if(operator.equals("-")) {
+        term = term.difference(term2);
+      } else if(operator.equals("|")) {
+        term = term.symmetricDifference(term2);
+      }
+    }
+
+    return term;
+  }
+
+  SetInterface readTerm(Scanner parser) {
+    SetInterface factor = readFactor(parser);
+    skipSpaces(parser);
+
+    while(nextCharIsMultOperator(parser)) {
+
+      String operator = parser.next();// for consistency, this should always be *
+      skipSpaces(parser);
+      SetInterface factor2 = readFactor(parser);
+
+
+    }
   }
 
   E readIdentifier(Scanner parser) {
@@ -117,6 +152,10 @@ public class Parser {
     return string + "}";
   }
 
+  void skipSpaces(Scanner in) {
+    while(nextCharIs(in, ' ')) in.next();
+  }
+
   boolean nextCharIs(Scanner in, char c) {
     return in.hasNext(Pattern.quote(c+""));
   }
@@ -131,6 +170,14 @@ public class Parser {
 
   boolean nextCharIsLetter (Scanner in) {
     return in.hasNext("[a-zA-Z]");
+  }
+
+  boolean nextCharIsAditiveOperator (Scanner in) {
+    return in.hasNext("[\\+\\-\\|]");
+  }
+
+  boolean nextCharIsMultOperator (Scanner in) {
+    return in.hasNext("[\\*]");
   }
 
   public static void main(String[] args) {
