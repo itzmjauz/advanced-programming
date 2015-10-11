@@ -3,7 +3,7 @@ package assignment2;
 
 import java.util.Scanner;
 import java.io.PrintStream;
-
+import java.util.regex.Pattern;
 
 public class Parser {
 
@@ -58,7 +58,7 @@ public class Parser {
   }
 
   void processAssignment(Scanner parser) {
-    Identifier identifier = readIdentifier(parser);
+    IdentifierInterface identifier = readIdentifier(parser);
 
     while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
       if(!nextCharIs(parser, ' ')) {
@@ -126,7 +126,7 @@ public class Parser {
     SetInterface set;
 
     if(nextCharIsLetter(parser)) {
-      Identifier identifier = readIdentifier(parser);
+      IdentifierInterface identifier = readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
       set = map.returnValue(identifier);
@@ -135,7 +135,7 @@ public class Parser {
     } else if (nextCharIs(parser, '(')) {
       set = readComplexFactor(parser);
     } else {
-      APException e = new APException("Incorrect Factor Detected");
+      Exception e = new APException("Incorrect Factor Detected");
       throw e;
     }
 
@@ -145,22 +145,22 @@ public class Parser {
   SetInterface readSet(Scanner parser) throws APException {
     parser.next(); // the { character
     String number = "";
-    SetInferface set = new Set();
-    NaturalNumberInterface naturalNumber = new NaturalNumber();
+    SetInterface set = new Set();
+    NaturalNumberInterface naturalNumber;
 
     while(!nextCharIs(parser, '}')) {
       if(nextCharIsDigit(parser)) {
         number += parser.next();
       } else if (nextCharIs(parser, ',')) {
         if(number.equals("")) {
-          APException e = new APException("Set has a missing number (two comma's)");
+          Exception e = new APException("Set has a missing number (two comma's)");
           throw e;
         } else {
           naturalNumber.init(number);
           set.addIdentifier(naturalNumber);
         }
       } else {
-        APEexception e = new APEexception("Character not fit for a set detected, [0-9] and commas");
+        Exception e = new APException("Character not fit for a set detected, [0-9] and commas");
         throw e;
       }
     }
@@ -178,7 +178,7 @@ public class Parser {
     parser.next(); //skip past the '('
     while(!nextCharIs(parser, ')')) {
       if(!parser.hasNext()) {
-        APException e = new APException("Complex factor not ending with a )");
+        Exception e = new APException("Complex factor not ending with a )");
         throw e;
       }
       expression += parser.next();
