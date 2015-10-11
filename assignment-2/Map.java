@@ -13,7 +13,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
 
   public void addKVPair(K key, V value) {
     if(!containsKey) {
-      Wrapper newKVPair = new Wrapper(key,value)    //moet overal met <K,V> aangeduid worden?
+      Wrapper newKVPair = new Wrapper(key,value);    //moet overal met <K,V> aangeduid worden?
       keyValuePairs.insert(newKVPair);
     } else {
       keyValuePairs.current.data.setValue(value);   //containsKey guarantees that current is the node with same key
@@ -21,11 +21,11 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
   }
 
   public boolean containsKey(K key) {
-    return keyValuePairs.find(new Wrapper<K,V>(key, null);
+    return keyValuePairs.find(new Wrapper<K,V>(key, null));
   }
 
   public V returnValue (K key) {
-    if(containsKey(key) {
+    if(containsKey(key)) {
       return keyValuePairs.retrieve();    //correct?
     } else {
       return null;
@@ -79,7 +79,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
       if (source instanceof Wrapper) {
         return key.compareTo(source.getKey());
       }
-      throw new Error ("Object not a finite list")    //necessary?
+      throw new Error ("Object not a finite list");   //necessary?
     }
 
     public Wrapper<K,V> clone() {
