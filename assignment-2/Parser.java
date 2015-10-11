@@ -50,13 +50,40 @@ public class Parser {
     }
   }
 
-  Set processLine(String statement) {
+  void processLine(String statement) {
     Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
     while(parser.hasNext()) {
-      out.println(parser.next());
+      if(nextCharIs(parser, ' ')) parser.next(); //ignore presceding spaces too
+      else if(nextCharIsLetter(parser)) { //assignment
+        processAssignment(parser);
+      } else if(nextCharIs(parser, '?')) { // print job
+        parser.next(); // skip the first ? character
+        out.println(setToString(processExpression(parser)));
+      } else if(nextCharIs(parser, '/')) {
+        //a comment. meaning we don't have to do anything with the following input.so
+        break;
+      } else {
+        out.println("Invalid input detected, please retry");
+        break;
+      }
     }
+  }
+
+  Set processExpression(Scanner parser) {
+
+  }
+
+  String setToString(SetInterface set) {
+    SetInterface copy = new Set(set);
+    String string = "{ ";
+
+    for(int i = copy.size() ; i > 0 ; i--) {
+      string = string + copy.getIdentifier().toString() + " ";
+      copy.removeIdentifier();
+    }
+    return string + "}";
   }
 
   boolean nextCharIs(Scanner in, char c) {
@@ -69,6 +96,10 @@ public class Parser {
 
   boolean nextCharIsDigit (Scanner in) {
     return in.hasNext("[0-9]");
+  }
+
+  boolean nextCharIsLetter (Scanner in) {
+    return in.hasNext("[a-zA-Z]");
   }
 
   public static void main(String[] args) {
