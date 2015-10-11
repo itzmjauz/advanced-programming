@@ -8,7 +8,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
   }
 
   Map(MapInterface<K,V> source) {
-    keyValuePairs = source.keyValuePairs      //GET methode van maken?
+    keyValuePairs = source.keyValuePairs;     //GET methode van maken?
   }
 
   public void addKVPair(K key, V value) {
@@ -30,10 +30,6 @@ public class Map <K extends Data<K>, V extends Clonable<V>> extends Clonable<Map
     } else {
       return null;
     }
-  }
-
-  public void removeForKey() {        //is this necessary?
-
   }
 
   private class Wrapper implements Data<Wrapper> {

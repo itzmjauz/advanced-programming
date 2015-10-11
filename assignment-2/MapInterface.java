@@ -51,6 +51,4 @@ public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends
 	 * 		if the key is not present, the value returned is null
 	 **/
 	 V returnValue (K source);
-
-	 removeForKey
 }
