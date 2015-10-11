@@ -1,6 +1,6 @@
 package assignment2;
 
-public class Identifier extends Data implements IdentifierInterface {
+public class Identifier<E extends Data<E>> implements IdentifierInterface {
 
   private String identifier = "";
 
