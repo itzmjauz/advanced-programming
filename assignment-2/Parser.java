@@ -74,10 +74,23 @@ public class Parser {
   void processAssignment(Scanner parser) {
     E identifier = readIdentifier(parser);
 
-    while(parser.hasNext()) {
-      
+    while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
+      if(!nextCharIs(parser, ' ')) {
+        out.println("Incorrect notation : [identifier] = [expression], please retry");
+        return;
+      } else {
+        parser.next();
+      }
     }
+
+    parser.next(); // we skip past the '='
+    while(nextCharIs(parser, ' ')) {
+      parser.next(); // skip any spaces now.
+    }
+
+    SetInterface set = processExpression(parser);
   }
+
 
   Set processExpression(Scanner parser) {
 
@@ -86,10 +99,8 @@ public class Parser {
   E readIdentifier(Scanner parser) {
     String identifier = parser.next();
 
-    while(parser.hasNext()) {
-      if(nextCharIsAlphaNum(parser)) {
-        identifier += parser.next();
-      }
+    while(nextCharIsAlphaNum(parser)) {
+      identifier += parser.next();
     }
 
     return new Identifier(identifier);
