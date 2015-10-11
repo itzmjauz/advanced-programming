@@ -35,6 +35,7 @@ public class Parser {
       // the structure I would follow would be that Any function would accept a full command as its input
       // and checks if it can process it, if it cant it will try to hand it to other functions.
       // for example ? (A + B)  would pass (A+B) to the ? function
+
       // the ? functino detects that A+B should be calculated and hands A,B to the + function.
 
       // parsing this would be easiest by putting it into some sort of stack, from which we get a tree
@@ -47,30 +48,14 @@ public class Parser {
       // we should throw exceptions there. since one should be allowed to assign strings to variables.
 
       String statement = in.nextLine();
-      processStatement(statement);
+      processLine(statement);
     }
   }
 
-  void processStatement(String statement) {
-    if(statement.charAt(0) == '?') print_statement(statement);
-    if(statement.charAt(0) == '/') comment(statement);
-    else assignment(statement);
-  }
+  Set processLine(statement) {
+    //we check whether the input is an assignment, print statement or comment
+    // every function we run returns its output so that the print statement always has something to print.
 
-  void print_statement(String statement) {
-    // get a result from the operations described in the text
-  }
-
-  void comment(String statement) {
-    //this shouldn't do anything at all , should it .
-  }
-
-  void assignment(String statement) {
-    Scanner splitter = new Scanner(statement).useDelimiter(" ");
-
-    while(splitter.hasNext()) {
-      out.println(splitter.next());
-    }
   }
 
   boolean nextCharIs(Scanner in, char c) {
