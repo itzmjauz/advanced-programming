@@ -1,3 +1,5 @@
+package assignment2;
+
 public interface Data<E> extends Clonable<E>, Comparable<E> {
 
     /*
