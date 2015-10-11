@@ -1,22 +1,23 @@
 package assignment2;
 
-public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<MapInterface>, MapInterface {
-  private List<Wrapper> keyValuePairs;
+public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<MapInterface>, MapInterface<K, V> {
+  public List<Wrapper> keyValuePairs;
 
   Map() {
     keyValuePairs = new List<Wrapper>();
   }
 
-  Map(MapInterface<K,V> source) {
-    keyValuePairs = source.keyValuePairs;     //GET methode van maken?
+  Map(Map source) {
+    this.keyValuePairs = source.keyValuePairs;     //GET methode van maken?
   }
 
   public void addKVPair(K key, V value) {
-    if(!containsKey) {
+    if(!containsKey(key)) {
       Wrapper newKVPair = new Wrapper(key,value);    //moet overal met <K,V> aangeduid worden?
       keyValuePairs.insert(newKVPair);
     } else {
-      keyValuePairs.current.data.setValue(value);   //containsKey guarantees that current is the node with same key
+      //keyValuePairs.current.data.setValue(value);
+      // find a correct way to do this, we can't access a private class so this ain't possibe
     }
   }
 
@@ -26,13 +27,18 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<
 
   public V returnValue (K key) {
     if(containsKey(key)) {
-      return keyValuePairs.retrieve();    //correct?
+      //return keyValuePairs.retrieve();    //correct?
+      return null;
     } else {
       return null;
     }
   }
 
-  private class Wrapper implements Data<Wrapper> {
+  public Map<K, V> clone() {
+    return new Map();
+  }
+
+  private class Wrapper implements Data<Wrapper>, Comparable<Wrapper> {
     K key;
     V value;
 
@@ -67,7 +73,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<
       this.value = value;
     }
 
-    void getValue() {
+    V getValue() {
       return value;
     }
 
@@ -75,11 +81,8 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<
       return this.value == value; // or use .equals method ?
     }
 
-    int compareTo(Object source) {        //should this be another type than object?
-      if (source instanceof Wrapper) {
-        return key.compareTo(source.getKey());
-      }
-      throw new Error ("Object not a finite list");   //necessary?
+    public int compareTo(Wrapper source) {
+      return source.getKey().compareTo(getKey());
     }
 
     public Wrapper clone() {
