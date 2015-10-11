@@ -2,7 +2,7 @@ package assignment2;
 
 public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterface {
 
-  private NaturalNumber[] set;
+  private Data[] set;
   private int size = 0;
   private final int MAX_SIZE = 10000;//should be infinite
 
@@ -12,7 +12,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
 
   public Set(SetInterface set) {
     init();
-    IdentifierInterface identifier;
+    E identifier;
 
     while(!set.isEmpty()) {
       addIdentifier(set.getIdentifier());
@@ -25,25 +25,25 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
   }
 
   public void init() {
-    set = new NaturalNumber[MAX_SIZE];
+    set = new Data[MAX_SIZE];
   }
 
   public int size() {
     return size;
   }
 
-  public NaturalNumber getIdentifier() {
+  public E getIdentifier() {
     return set[size - 1];
   }
 
-  public void addIdentifier(NaturalNumber identifier) {
+  public void addIdentifier(E identifier) {
     if(!contains(identifier)) {
       set[size] = identifier;
       size++;
     }
   }
 
-  public void removeIdentifier(NaturalNumber e) {
+  public void removeIdentifier(E e) {
     size--;
   }
 
@@ -51,7 +51,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return size() == 0;
   }
 
-  public boolean contains(NaturalNumber identifier) {
+  public boolean contains(E identifier) {
     boolean contains = false;
 
     for(int i = 0 ; i < size() ; i++) {
@@ -75,7 +75,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return result;
   }
 
-  public SetInterface<E> intersection(SetInterface set2) {
+  public SetInterface<E> intersection(SetInterface<E> set2) {
     SetInterface result = new Set();
     SetInterface copy = new Set(set2);
 
@@ -90,7 +90,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return result;
   }
 
-  public SetInterface<E> union(SetInterface set2) throws Exception {
+  public SetInterface<E> union(SetInterface<E> set2) throws Exception {
     SetInterface result = new Set();
     SetInterface copy = new Set(set2);
 
@@ -106,7 +106,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
     return result;
   }
 
-  public SetInterface<E> symmetricDifference(SetInterface set2) throws Exception {
+  public SetInterface<E> symmetricDifference(SetInterface<E> set2) throws Exception {
     SetInterface result = new Set();
     SetInterface copy = new Set(set2);
 
@@ -120,7 +120,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface>, SetInterf
 
     while(!copy.isEmpty()) {
       identifier = copy.getIdentifier();
-      if(!contains(idenfitier)) {
+      if(!contains(identifier)) {
         result.addIdentifier(identifier);
       }
       copy.removeIdentifier();
