@@ -122,13 +122,20 @@ public class Parser {
     skipSpaces(parser);
 
     while(nextCharIsMultOperator(parser)) {
-
       String operator = parser.next();// for consistency, this should always be *
+
       skipSpaces(parser);
       SetInterface factor2 = readFactor(parser);
+      skipSpaces(parser);
 
-
+      if(operator.equals("*")) factor = factor.intersection(factor2); //consistency
     }
+
+    return factor;
+  }
+
+  SetInterface readFactor(Scanner parser) {
+    
   }
 
   E readIdentifier(Scanner parser) {
