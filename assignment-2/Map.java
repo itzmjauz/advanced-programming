@@ -35,7 +35,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<
   }
 
   public Map<K, V> clone() {
-    return new Map();
+    return this;
   }
 
   private class Wrapper implements Data<Wrapper>, Comparable<Wrapper> {
