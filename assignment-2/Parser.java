@@ -149,6 +149,7 @@ public class Parser {
     NaturalNumberInterface naturalNumber = null;
 
     while(!nextCharIs(parser, '}')) {
+      skipSpaces(parser);
       if(nextCharIsDigit(parser)) {
         number += parser.next();
       } else if (nextCharIs(parser, ',')) {
@@ -194,6 +195,8 @@ public class Parser {
     while(nextCharIsAlphaNum(parser)) {
       identifier += parser.next();
     }
+
+    out.println(identifier);
 
     return new Identifier(identifier);
   }
