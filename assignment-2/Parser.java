@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
 public class Parser {
 
   PrintStream out;
-  Map map;
+  Map<IdentifierInterface, SetInterface<NaturalNumberInterface>> map;
 
   Parser() {
     map = new Map();
     out = new PrintStream(System.out);
   }
 
-  void Start() throws Exception {
+  void Start() {
     Scanner in = new Scanner(System.in);
 
     do {
@@ -25,60 +25,65 @@ public class Parser {
     } while(true);
   }
 
-  void parse(String nextLine) throws Exception {
+  void parse(String nextLine) throws APException {
     // the input should be split in relevant elements/pieces
     Scanner in = new Scanner(nextLine).useDelimiter("");
 
-    while(in.hasNext()) {
+    while(in.hasNextLine()) {
       String statement = in.nextLine();
-      processLine(statement);
+      try {
+        processLine(statement);
+      } catch (APException e) {
+        out.println(e.getMessage());
+      }
     }
   }
 
-  void processLine(String statement) throws Exception {
+  void processLine(String statement) throws APException {
     Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
     skipSpaces(parser);
 
-    while(parser.hasNext()) {
-      if(nextCharIsLetter(parser)) { //assignment
-        processAssignment(parser);
-      } else if(nextCharIs(parser, '?')) { // print job
-        parser.next(); // skip the first ? character
-        out.println(setToString(processExpression(parser)));
-      } else if(nextCharIs(parser, '/')) {
-        //a comment. meaning we don't have to do anything with the following input.so
-        break;
-      } else {
-        out.println("Invalid input detected, please retry");
-        break;
-      }
+
+    if(nextCharIsLetter(parser)) { //assignment
+      processAssignment(parser);
+    } else if(nextCharIs(parser, '?')) { // print job
+      parser.next(); // skip the first ? character
+      out.println(setToString(processExpression(parser)));
+    } else if(nextCharIs(parser, '/')) {
+      //a comment. meaning we don't have to do anything with the following input.so
+      break;
+    } else {
+      out.println("Invalid input detected, please retry");
+      break;
     }
+
   }
 
-  void processAssignment(Scanner parser) throws Exception {
+  void processAssignment(Scanner parser) throws APException {
     IdentifierInterface identifier = readIdentifier(parser);
 
-    while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
+    //while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
       if(!nextCharIs(parser, ' ')) {
         out.println("Incorrect notation : [identifier] = [expression], please retry");
         return;
       } else {
         parser.next();
       }
-    }
+  //  }
 
     parser.next(); // we skip past the '='
     skipSpaces(parser);
 
     SetInterface<NaturalNumberInterface> set = processExpression(parser);
+    // eol
 
-    map.addKVPair((Data) identifier, set);
+    map.addKVPair(identifier, set);
   }
 
 
-  SetInterface<NaturalNumberInterface> processExpression(Scanner parser) throws Exception {
+  SetInterface<NaturalNumberInterface> processExpression(Scanner parser) throws APException {
     //expression :
     // term { additive-operator term }
     // so a term, with zero or more additive operators, followed by a term.
@@ -104,7 +109,7 @@ public class Parser {
     return term;
   }
 
-  SetInterface<NaturalNumberInterface> readTerm(Scanner parser) throws Exception {
+  SetInterface<NaturalNumberInterface> readTerm(Scanner parser) throws APException {
     SetInterface<NaturalNumberInterface> factor = readFactor(parser);
     skipSpaces(parser);
 
@@ -121,22 +126,21 @@ public class Parser {
     return factor;
   }
 
-  SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws Exception {
+  SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws APException {
     skipSpaces(parser); //redundant but just in case
     SetInterface<NaturalNumberInterface> set;
 
     if(nextCharIsLetter(parser)) {
-      Data<IdentifierInterface> identifier = (Data<IdentifierInterface>) readIdentifier(parser);
+      IdentifierInterface identifier = readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
-      set = (SetInterface<NaturalNumberInterface>) map.returnValue(identifier);
+      set = map.returnValue(identifier);
     } else if (nextCharIs(parser, '{')) {
       set = readSet(parser);
     } else if (nextCharIs(parser, '(')) {
       set = readComplexFactor(parser);
     } else {
-      APException e = new APException("Incorrect Factor Detected");
-      throw e;
+      throw new APException("Incorrect Factor Detected");
     }
 
     return set;
@@ -171,7 +175,7 @@ public class Parser {
     return set;
   }
 
-  SetInterface<NaturalNumberInterface> readComplexFactor(Scanner parser) throws Exception {
+  SetInterface<NaturalNumberInterface> readComplexFactor(Scanner parser) throws APException {
     // '(' [expression] ')'
     // we read the expression and pass a new scanner with the expression as its string to processExpression
     String expression = "";
@@ -179,8 +183,7 @@ public class Parser {
     parser.next(); //skip past the '('
     while(!nextCharIs(parser, ')')) {
       if(!parser.hasNext()) {
-        APException e = new APException("Complex factor not ending with a )");
-        throw e;
+        throw new APException("Complex factor not ending with a )");
       }
       expression += parser.next();
     }
@@ -240,7 +243,7 @@ public class Parser {
     return in.hasNext("[\\*]");
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     new Parser().Start();
   }
 }

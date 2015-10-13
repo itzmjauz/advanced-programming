@@ -110,7 +110,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    *   SUCCESS: Returns a new Set containing all elements of both sets combined, omits duplicates
 	    *   FAILURE: Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
 	    */
-	  SetInterface<E> union(SetInterface<E> set) throws Exception;
+	  SetInterface<E> union(SetInterface<E> set);
 
 	  /** Returns a set with all identifiers that are only in one of both sets
 	    * @precondition
@@ -119,6 +119,6 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    *		SUCCESS: Returns a new Set containing all elements that are only in one of both sets
 	    *   FAILURE: Throws an exception if number of elements in resulting set exceeds maximum set size
 	    */
-	  SetInterface<E> symmetricDifference(SetInterface<E> set) throws Exception;
+	  SetInterface<E> symmetricDifference(SetInterface<E> set);
 
 }

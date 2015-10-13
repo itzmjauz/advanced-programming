@@ -1,6 +1,6 @@
 package assignment2;
 
-public class Map <K extends Data<K>, V extends Clonable<V>> implements Clonable<MapInterface>, MapInterface<K, V> {
+public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterface<K, V> {
   public List<Wrapper> keyValuePairs;
 
   Map() {

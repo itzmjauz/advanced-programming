@@ -1,6 +1,6 @@
 package assignment2;
 
-public class List<E extends Data<E>> implements Clonable<ListInterface<E>>, ListInterface<E> {
+public class List<E extends Data<E>> implements ListInterface<E> {
 
   private int size;         //size now only set in init and constructor
   Node current = null;      //moeten deze terug naar private?

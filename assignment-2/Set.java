@@ -1,13 +1,13 @@
 package assignment2;
 
-public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInterface<E> {
+public class Set<E extends Data<E>> implements SetInterface<E> {
 
-  private E[] set;
+  private List<E> set;
   private int size = 0;
   private final int MAX_SIZE = 10000;//should be infinite
 
   public Set() {
-    set = (E[]) new Data[MAX_SIZE];
+    //TOdO
   }
 
   public Set(SetInterface<E> set) {
@@ -25,7 +25,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
   }
 
   public void init() {
-    set = (E[]) new Data[MAX_SIZE];
+    //TODO
   }
 
   public int size() {
@@ -94,7 +94,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
     return result;
   }
 
-  public SetInterface<E> union(SetInterface<E> set2) throws Exception {
+  public SetInterface<E> union(SetInterface<E> set2) {
     SetInterface<E> result = new Set();
     SetInterface<E> copy = new Set(set2);
 
@@ -110,7 +110,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
     return result;
   }
 
-  public SetInterface<E> symmetricDifference(SetInterface<E> set2) throws Exception {
+  public SetInterface<E> symmetricDifference(SetInterface<E> set2) {
     SetInterface<E> result = new Set();
     SetInterface<E> copy = new Set(set2);
 

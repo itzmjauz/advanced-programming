@@ -1,6 +1,6 @@
 package assignment2;
 
-public class Identifier<E extends Data<E>> implements IdentifierInterface<E> {
+public class Identifier implements IdentifierInterface {
 
   private String identifier = "";
 
@@ -20,11 +20,15 @@ public class Identifier<E extends Data<E>> implements IdentifierInterface<E> {
     return identifier;
   }
 
-  public boolean equals(IdentifierInterface<E> source) {
+  public boolean equals(IdentifierInterface source) {
     return identifier.equals(source.toString());
   }
 
-  public int compareTo(IdentifierInterface<E> source) {
+  public int compareTo(IdentifierInterface source) {
     return toString().compareTo(source.toString());
+  }
+
+  public IdentifierInterface clone() {
+    return this;
   }
 }
