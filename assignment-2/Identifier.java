@@ -20,11 +20,11 @@ public class Identifier<E extends Data<E>> implements IdentifierInterface<E> {
     return identifier;
   }
 
-  public boolean equals(E source) {
+  public boolean equals(IdentifierInterface<E> source) {
     return identifier.equals(source.toString());
   }
 
-  public int compareTo(E source) {
+  public int compareTo(IdentifierInterface<E> source) {
     return toString().compareTo(source.toString());
   }
 }

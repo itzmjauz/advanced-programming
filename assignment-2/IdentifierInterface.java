@@ -24,7 +24,7 @@ package assignment2;
  *	<br>
  **/
 
-public interface IdentifierInterface<E extends Data<E>> {
+public interface IdentifierInterface<E extends Data<E>> extends Comparable<IdentifierInterface<E>> {
 
   /** Initializes the Identifier object with the string as its name
    * @precondition
@@ -49,6 +49,6 @@ public interface IdentifierInterface<E extends Data<E>> {
     *		true: The identifier is equal to the source
     *   false: The identifier is not equal to the source
     **/
-  public boolean equals(E source);
+  public boolean equals(IdentifierInterface<E> source);
 
 }
