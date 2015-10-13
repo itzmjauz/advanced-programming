@@ -63,6 +63,10 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
     return contains;
   }
 
+  public SetInterface<E> clone() {
+    return this;
+  }
+
   public SetInterface<E> difference(SetInterface<E> set2) {
     SetInterface<E> result = new Set();
 
