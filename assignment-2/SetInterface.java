@@ -23,7 +23,7 @@ package assignment2;
 *	    </dl>
 *	<br>
 **/
-public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface> {
+public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E>> {
 //TODO: Talk about the more general E instead of Identifier?
 //e extends data
 
@@ -66,7 +66,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface> 
 	   *  	one element will be removed thus the size decreases by 1
 	   */
 
-	  void removeIdentifier(E e);
+	  void removeIdentifier();
 	  /** return whether the set is empty
 	    * @precondition
 	    *   -

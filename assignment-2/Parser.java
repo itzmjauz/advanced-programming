@@ -238,6 +238,6 @@ public class Parser {
   }
 
   public static void main(String[] args) {
-    new Identifiers().Start();
+    new Parser().Start();
   }
 }
