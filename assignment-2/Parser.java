@@ -15,7 +15,7 @@ public class Parser {
     out = new PrintStream(System.out);
   }
 
-  void Start() {
+  void Start() throws Exception {
     Scanner in = new Scanner(System.in);
 
     do {
@@ -25,7 +25,7 @@ public class Parser {
     } while(true);
   }
 
-  void parse(String nextLine) {
+  void parse(String nextLine) throws Exception {
     // the input should be split in relevant elements/pieces
     Scanner in = new Scanner(nextLine).useDelimiter("");
 
@@ -35,7 +35,7 @@ public class Parser {
     }
   }
 
-  void processLine(String statement) {
+  void processLine(String statement) throws Exception {
     Scanner parser = new Scanner(statement).useDelimiter("");
     //we check whether the input is an assignment, print statement or comment
     // every function we run returns its output so that the print statement always has something to print.
@@ -57,7 +57,7 @@ public class Parser {
     }
   }
 
-  void processAssignment(Scanner parser) {
+  void processAssignment(Scanner parser) throws Exception {
     IdentifierInterface identifier = readIdentifier(parser);
 
     while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
@@ -74,11 +74,11 @@ public class Parser {
 
     SetInterface<NaturalNumberInterface> set = processExpression(parser);
 
-    map.addKVPair(identifier, set);
+    map.addKVPair((Data) identifier, set);
   }
 
 
-  SetInterface<NaturalNumberInterface> processExpression(Scanner parser) {
+  SetInterface<NaturalNumberInterface> processExpression(Scanner parser) throws Exception {
     //expression :
     // term { additive-operator term }
     // so a term, with zero or more additive operators, followed by a term.
@@ -104,7 +104,7 @@ public class Parser {
     return term;
   }
 
-  SetInterface<NaturalNumberInterface> readTerm(Scanner parser) {
+  SetInterface<NaturalNumberInterface> readTerm(Scanner parser) throws Exception {
     SetInterface<NaturalNumberInterface> factor = readFactor(parser);
     skipSpaces(parser);
 
@@ -121,21 +121,21 @@ public class Parser {
     return factor;
   }
 
-  SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws APException {
+  SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws Exception {
     skipSpaces(parser); //redundant but just in case
     SetInterface<NaturalNumberInterface> set;
 
     if(nextCharIsLetter(parser)) {
-      IdentifierInterface identifier = readIdentifier(parser);
+      Data<IdentifierInterface> identifier = (Data<IdentifierInterface>) readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
-      set = map.returnValue(identifier);
+      set = (SetInterface<NaturalNumberInterface>) map.returnValue(identifier);
     } else if (nextCharIs(parser, '{')) {
       set = readSet(parser);
     } else if (nextCharIs(parser, '(')) {
       set = readComplexFactor(parser);
     } else {
-      Exception e = new APException("Incorrect Factor Detected");
+      APException e = new APException("Incorrect Factor Detected");
       throw e;
     }
 
@@ -146,21 +146,21 @@ public class Parser {
     parser.next(); // the { character
     String number = "";
     SetInterface<NaturalNumberInterface> set = new Set();
-    NaturalNumberInterface naturalNumber;
+    NaturalNumberInterface naturalNumber = null;
 
     while(!nextCharIs(parser, '}')) {
       if(nextCharIsDigit(parser)) {
         number += parser.next();
       } else if (nextCharIs(parser, ',')) {
         if(number.equals("")) {
-          Exception e = new APException("Set has a missing number (two comma's)");
+          APException e = new APException("Set has a missing number (two comma's)");
           throw e;
         } else {
           naturalNumber.init(number);
           set.addIdentifier(naturalNumber);
         }
       } else {
-        Exception e = new APException("Character not fit for a set detected, [0-9] and commas");
+        APException e = new APException("Character not fit for a set detected, [0-9] and commas");
         throw e;
       }
     }
@@ -170,7 +170,7 @@ public class Parser {
     return set;
   }
 
-  SetInterface<NaturalNumberInterface> readComplexFactor(Scanner parser) throws APException {
+  SetInterface<NaturalNumberInterface> readComplexFactor(Scanner parser) throws Exception {
     // '(' [expression] ')'
     // we read the expression and pass a new scanner with the expression as its string to processExpression
     String expression = "";
@@ -178,7 +178,7 @@ public class Parser {
     parser.next(); //skip past the '('
     while(!nextCharIs(parser, ')')) {
       if(!parser.hasNext()) {
-        Exception e = new APException("Complex factor not ending with a )");
+        APException e = new APException("Complex factor not ending with a )");
         throw e;
       }
       expression += parser.next();
@@ -237,7 +237,7 @@ public class Parser {
     return in.hasNext("[\\*]");
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     new Parser().Start();
   }
 }

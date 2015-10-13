@@ -7,7 +7,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
   private final int MAX_SIZE = 10000;//should be infinite
 
   public Set() {
-    set = new E[MAX_SIZE];
+    set = (E[]) new Data[MAX_SIZE];
   }
 
   public Set(SetInterface<E> set) {
@@ -25,7 +25,7 @@ public class Set<E extends Data<E>> implements Clonable<SetInterface<E>>, SetInt
   }
 
   public void init() {
-    set = new E[MAX_SIZE];
+    set = (E[]) new Data[MAX_SIZE];
   }
 
   public int size() {
