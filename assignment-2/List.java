@@ -2,39 +2,30 @@ package assignment2;
 
 public class List<E extends Data<E>> implements ListInterface<E> {
 
-  private int size;         //size now only set in init and constructor
-  Node current = null;      //moeten deze terug naar private?
-  Node last = null;
-  Node first = null;
+  private Node current, last, first;
+
+  public List() {
+    current = new Node(null);
+  }
+
+  public int size(Node node) {
+    if(node == null) return 0;
+
+    return 1 + size(node.next);
+  }
 
   public boolean isEmpty() {
-    return size() == 0;
+    return current == null;
   }
 
   public ListInterface<E> init() {
-    size = 0;
+    current = null;
     return this;
   }
 
-  List() {
-    size = 0;
-  }
-
-  public int size() {
-    return size;
-  }
-
   public ListInterface<E> insert(E d) {
-    Node node = new Node(d, last, null);
-    last = new Node(last.data, last.prior, node);
-    node = new Node(d, last, null);
-
-    if(size() == 0) {
-      first = node;
-      last = first;
-    }
-
-    current = node;
+    Node node = new Node(d, current, current.next);
+    current.next = current.next.prior = node;
 
     return this;
   }
@@ -44,67 +35,53 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public ListInterface<E> remove() {
-    current.prior = new Node(current.prior.data, current.prior.prior, current.next);
-    current.next = new Node(current.next.data, current.prior, current.next.next);
-
-    if(current == last) last = current.prior;
-    if(current == first) first = current.next;
-
-    if(!isEmpty()) current = null;
-    if(!(current.next == null)) current = current.next;
-    if(!(current.prior == null)) current = last;
+    current.next.prior = current.prior;
+    current.prior.next = current.next;
+    if(current.next == null) current = current.prior;
+    else current = current.next;
 
     return this;
   }
 
   public boolean find(E d) {
-    Node tmp = new Node(current.data, current.prior, current.next);
+    goToFirst();
 
-    while(!(current.next != null)) {
-      if(current.data == d) {
-        current = tmp;
-        return true;
-      }
-      current = current.next;
-    }
+    do {
+      if(current.data.equals(d)) return true;
+    } while(goToNext());
 
-    while(!(current.prior != null)) {
-      if(current.data == d) {
-        current = tmp;
-        return true;
-      }
-      current = current.prior;
-    }
-
-    current = tmp;
+    goToFirst();
     return false;
   }
 
   public boolean goToFirst() {
-    if(!isEmpty()) {
-      current = first;
-      return true;
-    } else return false;
+    if(current == null) return false;
+
+    while(current.prior != null) {
+      current = current.prior;
+    }
+
+    return true;
   }
 
   public boolean goToLast() {
-    current = last;
-    if(isEmpty()) return false;
-    else return true;
+    if(current == null) return false;
+
+    while(current.next != null) {
+      current = current.next;
+    }
+
+    return true;
   }
 
   public boolean goToNext() {
-    if(current == last) return false;
-    if(isEmpty()) return false;
-
+    if(current.next == null) return false;
     current = current.next;
     return true;
   }
 
   public boolean goToPrevious() {
-    if(current == first) return false;
-    if(isEmpty()) return false;
-
+    if(current.prior == null) return false;
     current = current.prior;
     return true;
   }
