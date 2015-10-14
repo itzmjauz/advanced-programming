@@ -49,7 +49,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    * @postcondition
 	    *		Returns a new identifier for every iteration until the complete set has been returned
 	    */
-	  E getIdentifier();
+	  E get();
 
 	  /** Adds an identifier to the set
 	    * @precondition
@@ -57,7 +57,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    * @postcondition
 	    * 	Checks if the item to add is not a duplicate of items that are already in set, if not it stores the identifier in the set
 	    */
-	  void addIdentifier(E identifier);
+	  void add(E d);
 
 	  /** removes an identifier from the set
 	   *  @precondition
@@ -66,7 +66,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	   *  	one element will be removed thus the size decreases by 1
 	   */
 
-	  void removeIdentifier();
+	  void remove();
 	  /** return whether the set is empty
 	    * @precondition
 	    *   -
@@ -84,7 +84,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	   * @postcondition
 	   * 	return true/false depending on whether the identifier is within the set
 	   */
-	  boolean contains(E identifier);
+	  boolean contains(E d);
 
 	  /** Returns a set with all identifiers which are in the 1st but not in the 2nd set
 	    * @precondition

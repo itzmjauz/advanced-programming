@@ -3,64 +3,51 @@ package assignment2;
 public class Set<E extends Data<E>> implements SetInterface<E> {
 
   private List<E> set;
-  private int size = 0;
-  private final int MAX_SIZE = 10000;//should be infinite
 
   public Set() {
-    //TOdO
+    set = new List<E>();
   }
 
-  public Set(SetInterface<E> set) {
+  public Set(SetInterface<E> set2) {
     init();
-    E identifier;
 
-    while(!set.isEmpty()) {
-      addIdentifier(set.getIdentifier());
-      set.removeIdentifier();
-    }
-
-    for(int i = 0 ; i < size() ; i++) {
-      set.addIdentifier(this.set[i]);
+    while(set2.size() > 0) {
+      add(set2.get());
+      set2.remove();
     }
   }
 
   public void init() {
-    //TODO
+    set = new List<E>();
   }
 
   public int size() {
-    return size;
+    return set.size();
   }
 
-  public E getIdentifier() {
-    return set[size - 1];
+  public E get() {
+    E d = set.retrieve();
+    set.goToPrevious();
+    return d;
   }
 
-  public void addIdentifier(E identifier) {
-    if(!contains(identifier)) {
-      set[size] = identifier;
-      size++;
+  public void add(E d) {
+    if(!contains(d)) {
+      set.insert(d);
     }
+    set.goToLast();
   }
 
-  public void removeIdentifier() {
-    size--;
+  public void remove() {
+    set.remove();
   }
 
   public boolean isEmpty() {
-    return size() == 0;
+    return set.size() == 0;
   }
 
-  public boolean contains(E identifier) {
-    boolean contains = false;
-
-    for(int i = 0 ; i < size() ; i++) {
-      if(set[i].equals(identifier)) {
-        contains = true;
-      }
-    }
-
-    return contains;
+  public boolean contains(E d) {
+    return set.find(d);
   }
 
   public SetInterface<E> clone() {
@@ -70,9 +57,11 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
   public SetInterface<E> difference(SetInterface<E> set2) {
     SetInterface<E> result = new Set();
 
+    set.goToLast();
     for(int i = 0 ; i < size() ; i++) {
-      if(!set2.contains(set[i])) {
-        result.addIdentifier(set[i]);
+      E item = set.retrieve();
+      if(!set2.contains(item)) {
+        result.add(item);
       }
     }
 
