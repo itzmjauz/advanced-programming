@@ -25,7 +25,7 @@ public class Parser {
     } while(true);
   }
 
-  void parse(String nextLine) throws APException {
+  void parse(String nextLine) {
     // the input should be split in relevant elements/pieces
     Scanner in = new Scanner(nextLine).useDelimiter("");
 
@@ -53,10 +53,8 @@ public class Parser {
       out.println(setToString(processExpression(parser)));
     } else if(nextCharIs(parser, '/')) {
       //a comment. meaning we don't have to do anything with the following input.so
-      break;
     } else {
       out.println("Invalid input detected, please retry");
-      break;
     }
 
   }
