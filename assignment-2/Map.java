@@ -23,10 +23,14 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
 
   public boolean containsKey(K key) {
     Wrapper pair;
-    if(keyValuePairs.goToFirst()) {
-      pair = new Wrapper(keyValuePairs.retrieve());
+    String keyLeft = key.toString();
+    String keyRight;
 
-      if(key.equals(pair.getKey())) return true;
+    if(keyValuePairs.goToFirst()) {
+      do {
+        keyRight = keyValuePairs.retrieve().getKey().toString();
+        if(keyLeft.equals(keyRight)) return true;
+      } while(keyValuePairs.goToNext());
     }
 
     return false;

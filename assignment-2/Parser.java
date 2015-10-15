@@ -159,6 +159,7 @@ public class Parser {
 
       if(nextCharIs(parser, ',')) {
         if(number.equals("")) throw new APException("Comma without preceding number");
+        out.println("trying to add : " + number);
         set.add(new NaturalNumber(number));
         number = "";
         parser.next();//skip past the comma
@@ -166,6 +167,7 @@ public class Parser {
     }
 
     if(!number.equals("")) {
+      out.println("trying to add : " + number);
       set.add(new NaturalNumber(number));
     }
 
@@ -198,7 +200,7 @@ public class Parser {
       identifier += parser.next();
     }
 
-    out.println(identifier);
+    out.println("identfier : " + identifier);
 
     return new Identifier(identifier);
   }
@@ -209,7 +211,11 @@ public class Parser {
     NaturalNumberInterface number;
 
     while(!copy.isEmpty()) {
-      //2string = string + number.number() + " ";
+      if(!(copy.get() == null)) {
+        out.println(copy.get().number());
+        //string = string + number.number() + " ";
+        copy.remove();
+      }
       copy.remove();
     }
 

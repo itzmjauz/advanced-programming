@@ -2,10 +2,10 @@ package assignment2;
 
 public class List<E extends Data<E>> implements ListInterface<E> {
 
-  private Node current, last, first;
+  private Node current, last, first = null;
 
   public List() {
-    current = new Node(null);
+    current = null;
   }
 
   public int size() {
@@ -19,6 +19,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
       tmp = tmp.next;
     }
 
+    System.out.println(size);
     return size;
   }
 
@@ -32,13 +33,22 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public ListInterface<E> insert(E d) {
+    Node y = new Node(d);
+
     if(current != null) {
-      if(current.next != null) {
-        Node node = new Node(d, current, current.next);
-        current = node;
-        current.next = current.next.prior = node;
+      Node x = current.prior;
+      Node z = current;
+      if(current.prior != null) {
+        x.next = y;
+        y.next = z;
       }
-    } else current = new Node(d, current, null);
+      if(current != null) {
+        z.prior = y;
+        y.prior = x;
+      }
+    }
+    current = y;
+    System.out.println("current :" + current.data);
 
     return this;
   }
@@ -48,10 +58,21 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public ListInterface<E> remove() {
-    if(current.next != null) current.next.prior = current.prior;
-    if(current.prior != null) current.prior.next = current.next;
-    if(current.next == null) current = current.prior;
-    else current = current.next;
+    if(current != null) {
+      Node x = current.prior;
+      Node y = current.next;
+
+      if(y != null) {
+        y.prior = x;
+        current = y;
+      }
+      if(x != null) {
+        x.next = y;
+        current = x;
+      }
+    } else {
+      current = null;
+    }
 
     return this;
   }
@@ -59,28 +80,26 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   public boolean find(E d) {
     if(goToFirst()) {
       do {
-        if(current.data == d) return true;
+        System.out.println("find , current: " + current);
+        //if(current.data == d) return true;
       } while(goToNext());
     }
-
     return false;
   }
 
   public boolean goToFirst() {
-    if(current == null) return false;
-
-    while(current.prior != null) {
-      current = current.prior;
+    if(isEmpty()) return false;
+    while(goToPrevious()) {
+      //tada
     }
 
     return true;
   }
 
   public boolean goToLast() {
-    if(current == null) return false;
-
-    while(current.next != null) {
-      current = current.next;
+    if(isEmpty()) return false;
+    while(goToNext()) {
+      //ezpz
     }
 
     return true;
@@ -88,12 +107,14 @@ public class List<E extends Data<E>> implements ListInterface<E> {
 
   public boolean goToNext() {
     if(current.next == null) return false;
+    System.out.println("current : " + current.data + " next : " + current.prior.data);
     current = current.next;
     return true;
   }
 
   public boolean goToPrevious() {
     if(current.prior == null) return false;
+    System.out.println("current : " + current.data + " previous : " + current.prior.data);
     current = current.prior;
     return true;
   }
@@ -108,7 +129,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   private class Node {
 
       E data;
-      Node prior,
+      public Node prior,
            next;
 
       public Node(E d) {
