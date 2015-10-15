@@ -29,17 +29,17 @@ public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends
 	 * @preconditie
 	 * 		-
 	 * @postconditie
-	 * 		SUCCESS: The map contains the key value pair contained in a wrapper object
+	 * 		SUCCESS: The map contains the key value pair
 	 * 		FAILURE: Throws exception if key does not exist
 	 **/
 	void addKVPair(K key, V value);
 
-	/** Returns whether the map contains a wrapper object with the given key
+	/** Returns whether the map contains a key-value pair with the given key
 	 * @preconditie
 	 *		-
 	 * @postconditie
-	 * 		true: the map object contains a wrapper with given key
-	 * 		false: the map object does not contain a wrapper with given key
+	 * 		true: the map object contains a key-value pair with given key
+	 * 		false: the map object does not contain a key-value pair with given key
 	 **/
 	boolean containsKey(K source);
 
