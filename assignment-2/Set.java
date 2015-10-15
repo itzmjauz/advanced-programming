@@ -16,7 +16,11 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
       source.remove();
     }
 
-    source = clone();
+    if(set.goToFirst()) {
+      do {
+        source.add(set.retrieve());
+      } while (set.goToNext());
+    }
   }
 
   public void init() {

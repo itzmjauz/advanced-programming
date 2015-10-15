@@ -206,9 +206,10 @@ public class Parser {
   String setToString(SetInterface<NaturalNumberInterface> source) {
     SetInterface<NaturalNumberInterface> copy = new Set<>(source);
     String string = "{ ";
+    NaturalNumberInterface number;
 
     while(!copy.isEmpty()) {
-      string = string + copy.get().number() + " ";
+      //2string = string + number.number() + " ";
       copy.remove();
     }
 

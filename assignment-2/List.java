@@ -32,9 +32,13 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public ListInterface<E> insert(E d) {
-    Node node = new Node(d, current, current.next);
-    if(current == null) current = node;
-    if(current.next != null) current.next = current.next.prior = node;
+    if(current != null) {
+      if(current.next != null) {
+        Node node = new Node(d, current, current.next);
+        current = node;
+        current.next = current.next.prior = node;
+      }
+    } else current = new Node(d, current, null);
 
     return this;
   }
