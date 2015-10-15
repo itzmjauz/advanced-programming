@@ -44,8 +44,8 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public ListInterface<E> remove() {
-    current.next.prior = current.prior;
-    current.prior.next = current.next;
+    if(current.next != null) current.next.prior = current.prior;
+    if(current.prior != null) current.prior.next = current.next;
     if(current.next == null) current = current.prior;
     else current = current.next;
 

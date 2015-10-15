@@ -70,6 +70,7 @@ public class Parser {
     parser.next(); // skip past the '='
     skipSpaces(parser);
     SetInterface<NaturalNumberInterface> set = processExpression(parser);
+    out.println(setToString(set));
     // eol
 
     map.addKVPair(identifier, set);
@@ -202,14 +203,15 @@ public class Parser {
     return new Identifier(identifier);
   }
 
-  String setToString(SetInterface<NaturalNumberInterface> set) {
-    SetInterface<NaturalNumberInterface> copy = new Set<>(set);
+  String setToString(SetInterface<NaturalNumberInterface> source) {
+    SetInterface<NaturalNumberInterface> copy = new Set<>(source);
     String string = "{ ";
 
-    for(int i = copy.size() ; i > 0 ; i--) {
-      string = string + copy.get().toString() + " ";
+    while(!copy.isEmpty()) {
+      string = string + copy.get().number() + " ";
       copy.remove();
     }
+
     return string + "}";
   }
 

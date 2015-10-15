@@ -7,12 +7,12 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
     keyValuePairs = new List<Wrapper>();
   }
 
-  Map(Map source) {
+  Map(Map<K, V> source) {
     this.keyValuePairs = source.keyValuePairs;     //GET methode van maken?
   }
 
   public void addKVPair(K key, V value) {
-    if(!containsKey(key)) {
+    if(!containsKey(key) && key != null) {
       Wrapper newKVPair = new Wrapper(key,value);    //moet overal met <K,V> aangeduid worden?
       keyValuePairs.insert(newKVPair);
     } else {
@@ -22,12 +22,19 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
   }
 
   public boolean containsKey(K key) {
-    return keyValuePairs.find(new Wrapper(key, null));
+    Wrapper pair;
+    if(keyValuePairs.goToFirst()) {
+      pair = keyValuePairs.retrieve();
+
+      pair.getKey();
+    }
+
+    return false;
   }
 
   public V returnValue (K key) {
     if(containsKey(key)) {
-      Wrapper pair = keyValuePairs.retrieve(); //correct?
+      Wrapper pair = keyValuePairs.retrieve();
       return pair.getValue();
     } else {
       return null;
@@ -65,7 +72,7 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
       this.key = key;
     }
 
-    K getKey() {
+    public K getKey() {
       return key;
     }
 
