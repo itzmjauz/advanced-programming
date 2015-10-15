@@ -24,8 +24,6 @@ package assignment2;
 *	<br>
 **/
 public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E>> {
-//TODO: Talk about the more general E instead of Identifier?
-//e extends data
 
 	  /** Initializes the Set object
 	    * @precondition
@@ -35,7 +33,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    **/
 	  void init();
 
-	  /** return set size
+	  /** Returns set size
 	   * @precondition
 	   *  -
 	   * @postcondition
@@ -59,15 +57,15 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    */
 	  void add(E d);
 
-	  /** removes an identifier from the set
+	  /** Removes an identifier from the set
 	   *  @precondition
 	   *  	set can't be empty
 	   *  @postcondition
 	   *  	one element will be removed thus the size decreases by 1
 	   */
-
 	  void remove();
-	  /** return whether the set is empty
+	  
+	  /** Returns whether the set is empty
 	    * @precondition
 	    *   -
 	    * @postcondition
@@ -76,9 +74,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    **/
 	  boolean isEmpty();
 
-
-
-	  /** return whether an identifier exists within the set
+	  /** Returns whether an identifier exists within the set
 	   * @precondition
 	   * 	-
 	   * @postcondition
@@ -92,7 +88,6 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    * @postcondition
 	    * 		Returns a new Set containing the elements in the 1st but not in the 2nd set
 	    */
-
 	  SetInterface<E> difference(SetInterface<E> set);
 
 	  /** Returns a set with objects that are in both sets

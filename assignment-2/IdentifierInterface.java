@@ -24,7 +24,7 @@ package assignment2;
  *	<br>
  **/
 
-public interface IdentifierInterface extends Data<IdentifierInterface> {// extends Comparable<IdentifierInterface<E>> {
+public interface IdentifierInterface extends Data<IdentifierInterface> {
 
   /** Initializes the Identifier object with the string as its name
    * @precondition
