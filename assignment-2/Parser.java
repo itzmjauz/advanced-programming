@@ -11,7 +11,7 @@ public class Parser {
   Map<IdentifierInterface, SetInterface<NaturalNumberInterface>> map;
 
   Parser() {
-    map = new Map();
+    map = new Map<>();
     out = new PrintStream(System.out);
   }
 
@@ -45,7 +45,6 @@ public class Parser {
     // every function we run returns its output so that the print statement always has something to print.
     skipSpaces(parser);
 
-
     if(nextCharIsLetter(parser)) { //assignment
       processAssignment(parser);
     } else if(nextCharIs(parser, '?')) { // print job
@@ -63,17 +62,13 @@ public class Parser {
     IdentifierInterface identifier = readIdentifier(parser);
 
     //while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
-      if(!nextCharIs(parser, ' ')) {
-        out.println("Incorrect notation : [identifier] = [expression], please retry");
-        return;
-      } else {
-        parser.next();
-      }
-  //  }
-
-    parser.next(); // we skip past the '='
     skipSpaces(parser);
+    if(!nextCharIs(parser, '=')) {
+      throw new APException("Incorrect notation : [identifier] = [expression], please retry");
+    }
 
+    parser.next(); // skip past the '='
+    skipSpaces(parser);
     SetInterface<NaturalNumberInterface> set = processExpression(parser);
     // eol
 
@@ -132,7 +127,11 @@ public class Parser {
       IdentifierInterface identifier = readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
-      set = map.returnValue(identifier);
+      if(map.containsKey(identifier)) {
+        set = map.returnValue(identifier);
+      } else {
+        throw new APException("Key/identifier : "+ identifier.toString() +" not in storage");
+      }
     } else if (nextCharIs(parser, '{')) {
       set = readSet(parser);
     } else if (nextCharIs(parser, '(')) {
@@ -147,25 +146,26 @@ public class Parser {
   SetInterface<NaturalNumberInterface> readSet(Scanner parser) throws APException {
     parser.next(); // the { character
     String number = "";
-    SetInterface<NaturalNumberInterface> set = new Set();
-    NaturalNumberInterface naturalNumber = null;
+    SetInterface<NaturalNumberInterface> set = new Set<>();
 
+    skipSpaces(parser);
     while(!nextCharIs(parser, '}')) {
-      skipSpaces(parser);
+      if(!parser.hasNext()) throw new APException("List not properly closed by a '}'");
+      if(nextCharIs(parser, ' ')) parser.next();
       if(nextCharIsDigit(parser)) {
-        number += parser.next();
-      } else if (nextCharIs(parser, ',')) {
-        if(number.equals("")) {
-          APException e = new APException("Set has a missing number (two comma's)");
-          throw e;
-        } else {
-          naturalNumber.init(number);
-          set.addIdentifier(naturalNumber);
-        }
-      } else {
-        APException e = new APException("Character not fit for a set detected, [0-9] and commas");
-        throw e;
+        number = "" + number + parser.next();
       }
+
+      if(nextCharIs(parser, ',')) {
+        if(number.equals("")) throw new APException("Comma without preceding number");
+        set.add(new NaturalNumber(number));
+        number = "";
+        parser.next();//skip past the comma
+      }
+    }
+
+    if(!number.equals("")) {
+      set.add(new NaturalNumber(number));
     }
 
     parser.next(); // skip the ending }
@@ -203,12 +203,12 @@ public class Parser {
   }
 
   String setToString(SetInterface<NaturalNumberInterface> set) {
-    SetInterface<NaturalNumberInterface> copy = new Set(set);
+    SetInterface<NaturalNumberInterface> copy = new Set<>(set);
     String string = "{ ";
 
     for(int i = copy.size() ; i > 0 ; i--) {
-      string = string + copy.getIdentifier().toString() + " ";
-      copy.removeIdentifier();
+      string = string + copy.get().toString() + " ";
+      copy.remove();
     }
     return string + "}";
   }

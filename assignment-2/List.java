@@ -33,7 +33,8 @@ public class List<E extends Data<E>> implements ListInterface<E> {
 
   public ListInterface<E> insert(E d) {
     Node node = new Node(d, current, current.next);
-    current.next = current.next.prior = node;
+    if(current == null) current = node;
+    if(current.next != null) current.next = current.next.prior = node;
 
     return this;
   }
@@ -52,13 +53,12 @@ public class List<E extends Data<E>> implements ListInterface<E> {
   }
 
   public boolean find(E d) {
-    goToFirst();
+    if(goToFirst()) {
+      do {
+        if(current.data == d) return true;
+      } while(goToNext());
+    }
 
-    do {
-      if(current.data.equals(d)) return true;
-    } while(goToNext());
-
-    goToFirst();
     return false;
   }
 

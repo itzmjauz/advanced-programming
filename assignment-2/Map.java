@@ -27,8 +27,8 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
 
   public V returnValue (K key) {
     if(containsKey(key)) {
-      //return keyValuePairs.retrieve();    //correct?
-      return null;
+      Wrapper pair = keyValuePairs.retrieve(); //correct?
+      return pair.getValue();
     } else {
       return null;
     }
