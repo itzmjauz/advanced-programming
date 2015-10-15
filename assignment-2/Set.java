@@ -67,59 +67,62 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return result;
   }
 
-  public SetInterface<E> intersection(SetInterface<E> set2) {
-    SetInterface<E> result = new Set();
-    SetInterface<E> copy = new Set(set2);
+  public SetInterface<E> intersection(SetInterface<E> source) {
+    SetInterface<E> result = new Set<E>();
+    SetInterface<E> copy = new Set<E>(source);
 
     while(!copy.isEmpty()) {
-      E identifier = copy.getIdentifier();
-      if(contains(identifier)) {
-        result.addIdentifier(identifier);
+      E d = copy.get();
+      if(contains(d)) {
+        result.add(d);
       }
-      copy.removeIdentifier();
+      copy.remove();
     }
 
     return result;
   }
 
-  public SetInterface<E> union(SetInterface<E> set2) {
-    SetInterface<E> result = new Set();
-    SetInterface<E> copy = new Set(set2);
+  public SetInterface<E> union(SetInterface<E> source) {
+    SetInterface<E> result = new Set<E>();
+    SetInterface<E> copy = new Set<E>(source);
 
-    for(int i = 0 ; i < size() ; i++) {
-      result.addIdentifier(set[i]);
+    if(set.goToFirst()) {
+      do {
+        result.add(set.retrieve());
+      } while(set.goToNext());
     }
 
+
     while(!copy.isEmpty()) {
-      result.addIdentifier(copy.getIdentifier());
-      copy.removeIdentifier();
+      result.add(copy.get());
+      copy.remove();
     }
 
     return result;
   }
 
-  public SetInterface<E> symmetricDifference(SetInterface<E> set2) {
+  public SetInterface<E> symmetricDifference(SetInterface<E> source) {
     SetInterface<E> result = new Set();
-    SetInterface<E> copy = new Set(set2);
+    SetInterface<E> copy = new Set(source);
 
-    for(int i = 0 ; i < size() ; i++) {
-      if(!set2.contains(set[i])) {
-        result.addIdentifier(set[i]);
-      }
+    if(set.goToFirst()) {
+      do {
+        if(!source.contains(set.retrieve())) {
+          result.add(set.retrieve());
+        }
+      } while(set.goToNext());
     }
 
-    E identifier;
+    E d;
 
     while(!copy.isEmpty()) {
-      identifier = copy.getIdentifier();
-      if(!contains(identifier)) {
-        result.addIdentifier(identifier);
+      d = copy.get();
+      if(!contains(d)) {
+        result.add(d);
       }
-      copy.removeIdentifier();
+      copy.remove();
     }
 
     return result;
   }
-
-
 }
