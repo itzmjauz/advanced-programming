@@ -8,10 +8,18 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     current = new Node(null);
   }
 
-  public int size(Node node) {
-    if(node == null) return 0;
+  public int size() {
+    if(isEmpty()) return 0;
 
-    return 1 + size(node.next);
+    Node tmp = current;
+    int size = 1;
+    goToFirst();
+    while(tmp.next != null) {
+      size += 1;
+      tmp = tmp.next;
+    }
+
+    return size;
   }
 
   public boolean isEmpty() {
