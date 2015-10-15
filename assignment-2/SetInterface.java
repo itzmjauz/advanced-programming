@@ -43,11 +43,11 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	   */
 	  int size();
 
-	  /** Returns an identifier from the set, can be iterated to return complete set
+	  /** Returns an identifier from the set
 	    * @precondition
 	    * 	Set should not be empty
 	    * @postcondition
-	    *		Returns a new identifier for every iteration until the complete set has been returned
+	    *		Returns an identifier
 	    */
 	  E get();
 

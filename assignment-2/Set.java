@@ -5,16 +5,18 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
   private List<E> set;
 
   public Set() {
-    set = new List<E>();
+    init();
   }
 
-  public Set(SetInterface<E> set2) {
+  public Set(SetInterface<E> source) {
     init();
 
-    while(set2.size() > 0) {
-      add(set2.get());
-      set2.remove();
+    while(!source.isEmpty()) {
+      add(source.get());
+      source.remove();
     }
+
+    source = clone();
   }
 
   public void init() {
@@ -26,16 +28,13 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
   }
 
   public E get() {
-    E d = set.retrieve();
-    set.goToPrevious();
-    return d;
+    return set.retrieve();
   }
 
   public void add(E d) {
     if(!contains(d)) {
       set.insert(d);
     }
-    set.goToLast();
   }
 
   public void remove() {
@@ -54,15 +53,15 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return this;
   }
 
-  public SetInterface<E> difference(SetInterface<E> set2) {
-    SetInterface<E> result = new Set();
+  public SetInterface<E> difference(SetInterface<E> source) {
+    SetInterface<E> result = new Set<E>();
 
-    set.goToLast();
-    for(int i = 0 ; i < size() ; i++) {
-      E item = set.retrieve();
-      if(!set2.contains(item)) {
-        result.add(item);
-      }
+    if(set.goToLast()) {
+      do {
+        if(!source.contains(set.retrieve())) {
+          result.add(set.retrieve());
+        }
+      } while(set.goToPrevious());
     }
 
     return result;
