@@ -5,11 +5,11 @@ package assignment2;
 * @author Antoni Stevenet
 * @author Tim Nederveen
 * @elements
-*   Key-value Wrapper objects
+*       Key-Value pairs
 * @structure
 *	nonLinear/keyvalue storage
 * @domain
-*	All possible Wrapper objects with a unique key
+*	All possible Key-Value pairs with a unique key
 * @constructor
 *	MapInterface();
 *	    <dl>
