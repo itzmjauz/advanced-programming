@@ -48,7 +48,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
       }
     }
     current = y;
-    System.out.println("current :" + current.data);
+    System.out.println("inserted :" + current.data);
 
     return this;
   }
@@ -81,7 +81,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     if(goToFirst()) {
       do {
         System.out.println("find , current: " + current);
-        //if(current.data == d) return true;
+        if(current.data.equals(d)) return true;
       } while(goToNext());
     }
     return false;

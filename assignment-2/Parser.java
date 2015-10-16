@@ -19,7 +19,7 @@ public class Parser {
     Scanner in = new Scanner(System.in);
 
     do {
-      System.out.println("$ :");
+      System.out.print("$ :");
       if(!in.hasNextLine()) System.exit(0);
       parse(in.nextLine());
     } while(true);
@@ -72,7 +72,6 @@ public class Parser {
     SetInterface<NaturalNumberInterface> set = processExpression(parser);
     out.println(setToString(set));
     // eol
-
     map.addKVPair(identifier, set);
   }
 
@@ -200,13 +199,14 @@ public class Parser {
       identifier += parser.next();
     }
 
-    out.println("identfier : " + identifier);
-
     return new Identifier(identifier);
   }
 
   String setToString(SetInterface<NaturalNumberInterface> source) {
-    if(source == null) System.out.println("source = null");
+    if(source == null) {
+      return "{ }";
+    }
+
     SetInterface<NaturalNumberInterface> copy = source.clone();
 
     String string = "{ ";
@@ -215,7 +215,7 @@ public class Parser {
     while(!copy.isEmpty()) {
       if(!(copy.get() == null)) {
         out.println(copy.get().number());
-        //string = string + number.number() + " ";
+        string = string + copy.get().number() + " ";
         copy.remove();
       }
       copy.remove();

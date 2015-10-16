@@ -37,12 +37,17 @@ public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterf
   }
 
   public V returnValue (K key) {
-    if(containsKey(key)) {
-      Wrapper pair = keyValuePairs.retrieve();
-      return pair.getValue();
-    } else {
-      return null;
+    String keyLeft = key.toString();
+    String keyRight;
+
+    if(keyValuePairs.goToFirst()) {
+      do {
+        keyRight = keyValuePairs.retrieve().getKey().toString();
+        if(keyLeft.equals(keyRight)) return keyValuePairs.retrieve().getValue();
+      } while(keyValuePairs.goToNext());
     }
+
+    return null;
   }
 
   public Map<K, V> clone() {
