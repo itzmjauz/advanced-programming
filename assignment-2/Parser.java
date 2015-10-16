@@ -122,7 +122,7 @@ public class Parser {
 
   SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws APException {
     skipSpaces(parser); //redundant but just in case
-    SetInterface<NaturalNumberInterface> set;
+    SetInterface<NaturalNumberInterface> set = new Set<NaturalNumberInterface>();
 
     if(nextCharIsLetter(parser)) {
       IdentifierInterface identifier = readIdentifier(parser);
@@ -206,7 +206,9 @@ public class Parser {
   }
 
   String setToString(SetInterface<NaturalNumberInterface> source) {
+    if(source == null) System.out.println("source = null");
     SetInterface<NaturalNumberInterface> copy = source.clone();
+
     String string = "{ ";
     NaturalNumberInterface number;
 
