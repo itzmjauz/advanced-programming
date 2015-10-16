@@ -151,7 +151,7 @@ public class Parser {
 
     skipSpaces(parser);
     while(!nextCharIs(parser, '}')) {
-      if(!parser.hasNext()) throw new APException("List not properly closed by a '}'");
+      if(!parser.hasNext()) throw new APException("List not properly closed by a }");
       if(nextCharIs(parser, ' ')) parser.next();
       if(nextCharIsDigit(parser)) {
         number = "" + number + parser.next();
@@ -206,7 +206,7 @@ public class Parser {
   }
 
   String setToString(SetInterface<NaturalNumberInterface> source) {
-    SetInterface<NaturalNumberInterface> copy = new Set<>(source);
+    SetInterface<NaturalNumberInterface> copy = source.clone();
     String string = "{ ";
     NaturalNumberInterface number;
 

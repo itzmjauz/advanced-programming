@@ -4,14 +4,11 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
 
   private List<E> set;
 
-  public Set() {
-    init();
-  }
-
   public Set(SetInterface<E> source) {
     init();
 
-    while(!source.isEmpty()) {
+    source = (Set<E>) source;
+    while(source.size() > 0) {
       add(source.get());
       source.remove();
     }
@@ -22,6 +19,11 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
       } while (set.goToNext());
     }
   }
+
+  public Set() {
+    init();
+  }
+
 
   public void init() {
     set = new List<E>();
@@ -55,7 +57,23 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
   }
 
   public SetInterface<E> clone() {
-    return this;
+    SetInterface<E> newSet = new Set<E>();
+    SetInterface<E> tempSet = new Set<E>();
+
+    while(!isEmpty()) {
+      E d = get();
+      remove();
+      newSet.add(d);
+      tempSet.add(d);
+    }
+
+    while(!tempSet.isEmpty()) {
+      E d = tempSet.get();
+      tempSet.remove();
+      add(d);
+    }
+
+    return newSet;
   }
 
   public SetInterface<E> difference(SetInterface<E> source) {
@@ -107,8 +125,8 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
   }
 
   public SetInterface<E> symmetricDifference(SetInterface<E> source) {
-    SetInterface<E> result = new Set();
-    SetInterface<E> copy = new Set(source);
+    SetInterface<E> result = new Set<E>();
+    SetInterface<E> copy = new Set<E>(source);
 
     if(set.goToFirst()) {
       do {
