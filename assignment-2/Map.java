@@ -14,7 +14,7 @@ public class Map <K extends Data, V extends Clonable> implements MapInterface<K,
 
   public void addKVPair(K key, V value) {
     if(containsKey(key)) {
-      keyValuePairs.current.data.setValue(value);
+      keyValuePairs.retrieve().setValue(value);
     } else {
       keyValuePairs.insert(new Wrapper<K,V>(key, value));
     }

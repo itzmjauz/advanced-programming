@@ -50,7 +50,7 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public E retrieve() {
-    return current.data;
+    return current.clone().data;
   }
 
   public List<E> remove() {

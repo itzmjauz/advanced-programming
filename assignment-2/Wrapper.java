@@ -35,7 +35,7 @@ public class Wrapper<K extends Data, V extends Clonable> implements Data {
     return value;
   }
 
-  public void SetValue(V value) {
+  public void setValue(V value) {
     this.value = value;
   }
 
