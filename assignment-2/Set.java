@@ -21,7 +21,6 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public E get() {
-    System.out.println("get () : " + set.retrieve() + size());
     return set.retrieve();
   }
 
