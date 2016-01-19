@@ -1,6 +1,6 @@
 package assignment2;
 
-public interface Data<E> extends Clonable<E>, Comparable<E> {
+public interface Data extends Clonable, Comparable<Object> {
 
     /*
        This interface defines a type on which an ordening has been defined

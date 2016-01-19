@@ -1,6 +1,6 @@
 package assignment2;
 
-public class List<E extends Data<E>> implements ListInterface<E> {
+public class List<E extends Data> implements ListInterface<E> {
 
   Node<E> current, last, first = null;
   private int size;
@@ -118,7 +118,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     
     if(goToFirst()) {
       do {
-        newList.insert(current.data.clone());
+        newList.insert((E) current.data.clone());
       } while (goToNext());
     }
 

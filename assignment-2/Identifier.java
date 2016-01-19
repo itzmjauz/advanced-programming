@@ -20,15 +20,16 @@ public class Identifier implements IdentifierInterface {
     return identifier;
   }
 
-  public boolean equals(IdentifierInterface source) {
+  public boolean equals(Identifier source) {
     return identifier.equals(source.toString());
   }
 
-  public int compareTo(IdentifierInterface source) {
+  public int compareTo(Object source) {
+    Identifier source2 = (Identifier) source;
     return toString().compareTo(source.toString());
   }
 
-  public IdentifierInterface clone() {
-    return this;
+  public Identifier clone() {
+    return new Identifier(this);
   }
 }

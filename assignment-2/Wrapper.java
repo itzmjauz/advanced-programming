@@ -51,5 +51,4 @@ public class Wrapper<K extends Data, V extends Clonable> implements Data {
   public Wrapper<K, V> clone() {
     return new Wrapper(this);
   }
-
 }

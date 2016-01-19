@@ -15,7 +15,7 @@ package assignment2;
  * </dl>
  **/
 
-public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface<E>> {
+public interface ListInterface<E extends Data> extends Clonable {
 
 	/**	@precondition -
 	 *  @postcondition - FALSE: list is not empty.
@@ -108,7 +108,7 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	/** @precondition  -
 	 *	@postcondition - A deep-copy of list has been returned.
 	 **/
-	public ListInterface<E> clone();
+	public List<E> clone();
 
 
 }

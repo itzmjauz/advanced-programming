@@ -23,7 +23,7 @@ package assignment2;
 *	    </dl>
 *	<br>
 **/
-public interface MapInterface <K extends Data<K>, V extends Clonable<V>> extends Clonable<MapInterface>{
+public interface MapInterface <K extends Data, V extends Clonable> extends Clonable {
 
 	/** Adds a key-value pair to the map
 	 * @preconditie
