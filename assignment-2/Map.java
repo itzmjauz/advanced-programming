@@ -1,108 +1,33 @@
 package assignment2;
 
-public class Map <K extends Data<K>, V extends Clonable<V>> implements MapInterface<K, V> {
-  public List<Wrapper> keyValuePairs;
+public class Map <K extends Data, V extends Clonable> implements MapInterface<K, V> {
+  private List<Wrapper<K,V>> keyValuePairs;
 
   Map() {
-    keyValuePairs = new List<Wrapper>();
+    keyValuePairs = new List<Wrapper<K,V>>();
   }
 
   Map(Map<K, V> source) {
-    this.keyValuePairs = source.keyValuePairs;     //GET methode van maken?
+    this.keyValuePairs = source.keyValuePairs.clone();
   }
 
-  public void addKVPair(K key, V value) {
-    if(!containsKey(key) && key != null) {
-      Wrapper newKVPair = new Wrapper(key,value);    //moet overal met <K,V> aangeduid worden?
-      keyValuePairs.insert(newKVPair);
-    } else {
-      //keyValuePairs.current.data.setValue(value);
-      // find a correct way to do this, we can't access a private class so this ain't possibe
+  public void add(K key, V value) {
+    if(contains(key)) keyValuePairs.current.data.set(value);
+    else {
+      keyValuePairs.insert(new Wrapper<K,V>(key, value));
     }
   }
 
-  public boolean containsKey(K key) {
-    Wrapper pair;
-    String keyLeft = key.toString();
-    String keyRight;
-
-    if(keyValuePairs.goToFirst()) {
-      do {
-        keyRight = keyValuePairs.retrieve().getKey().toString();
-        if(keyLeft.equals(keyRight)) return true;
-      } while(keyValuePairs.goToNext());
-    }
-
-    return false;
-  }
-
-  public V returnValue (K key) {
-    String keyLeft = key.toString();
-    String keyRight;
-
-    if(keyValuePairs.goToFirst()) {
-      do {
-        keyRight = keyValuePairs.retrieve().getKey().toString();
-        if(keyLeft.equals(keyRight)) return keyValuePairs.retrieve().getValue();
-      } while(keyValuePairs.goToNext());
-    }
-
-    return null;
+  public boolean contains(K key) {
+    return keyValuePairs.find(new Wrapper<K, V>(key, null));
   }
 
   public Map<K, V> clone() {
-    return this;
+    return new Map<K, V>(this);
   }
 
-  private class Wrapper implements Data<Wrapper>, Comparable<Wrapper> {
-    K key;
-    V value;
-
-    Wrapper() {
-      key = null;
-      value = null;
-    }
-
-    private void init(K key, V Value) {
-      this.key = key;
-      this.value = value;
-    }
-
-    Wrapper(K key, V value) {
-      init(key, value);
-    }
-
-    Wrapper(Wrapper source) {
-      this.key = source.getKey();
-      this.value = source.getValue();
-    }
-
-    void setKey(K key) {
-      this.key = key;
-    }
-
-    public K getKey() {
-      return key;
-    }
-
-    void setValue(V value) {
-      this.value = value;
-    }
-
-    V getValue() {
-      return value;
-    }
-
-    boolean equals(V value) {
-      return this.value == value; // or use .equals method ?
-    }
-
-    public int compareTo(Wrapper source) {
-      return source.getKey().compareTo(getKey());
-    }
-
-    public Wrapper clone() {
-      return new Wrapper(this);
-    }
+  public V returnValue(K key) {
+    if(contains(key)) return keyValuePairs.retrieve().getValue();
+    else return null;
   }
 }
