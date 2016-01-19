@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
   PrintStream out;
-  Map<IdentifierInterface, SetInterface<NaturalNumberInterface>> map;
+  Map<Identifier, Set<NaturalNumber>> map;
 
   Parser() {
     map = new Map<>();
@@ -59,7 +59,7 @@ public class Parser {
   }
 
   void processAssignment(Scanner parser) throws APException {
-    IdentifierInterface identifier = readIdentifier(parser);
+    Identifier identifier = readIdentifier(parser);
 
     //while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
     skipSpaces(parser);
@@ -69,19 +69,19 @@ public class Parser {
 
     parser.next(); // skip past the '='
     skipSpaces(parser);
-    SetInterface<NaturalNumberInterface> set = processExpression(parser);
+    Set<NaturalNumber> set = processExpression(parser);
     out.println(setToString(set));
     // eol
     map.addKVPair(identifier, set);
   }
 
 
-  SetInterface<NaturalNumberInterface> processExpression(Scanner parser) throws APException {
+  Set<NaturalNumber> processExpression(Scanner parser) throws APException {
     //expression :
     // term { additive-operator term }
     // so a term, with zero or more additive operators, followed by a term.
 
-    SetInterface<NaturalNumberInterface> term = readTerm(parser);
+    Set<NaturalNumber> term = readTerm(parser);
 
     while(nextCharIs(parser, ' ')) parser.next();// skip spaces for certainty
     while(nextCharIsAditiveOperator(parser)) {
@@ -89,7 +89,7 @@ public class Parser {
 
       String operator = parser.next();
 
-      SetInterface<NaturalNumberInterface> term2 = readTerm(parser);
+      Set<NaturalNumber> term2 = readTerm(parser);
       if(operator.equals("+")) {
         term = term.union(term2);
       } else if(operator.equals("-")) {
@@ -102,15 +102,15 @@ public class Parser {
     return term;
   }
 
-  SetInterface<NaturalNumberInterface> readTerm(Scanner parser) throws APException {
-    SetInterface<NaturalNumberInterface> factor = readFactor(parser);
+  Set<NaturalNumber> readTerm(Scanner parser) throws APException {
+    Set<NaturalNumber> factor = readFactor(parser);
     skipSpaces(parser);
 
     while(nextCharIsMultOperator(parser)) {
       String operator = parser.next();// for consistency, this should always be *
 
       skipSpaces(parser);
-      SetInterface<NaturalNumberInterface> factor2 = readFactor(parser);
+      Set<NaturalNumber> factor2 = readFactor(parser);
       skipSpaces(parser);
 
       if(operator.equals("*")) factor = factor.intersection(factor2); //consistency
@@ -119,12 +119,12 @@ public class Parser {
     return factor;
   }
 
-  SetInterface<NaturalNumberInterface> readFactor(Scanner parser) throws APException {
+  Set<NaturalNumber> readFactor(Scanner parser) throws APException {
     skipSpaces(parser); //redundant but just in case
-    SetInterface<NaturalNumberInterface> set = new Set<NaturalNumberInterface>();
+    Set<NaturalNumber> set = new Set<NaturalNumber>();
 
     if(nextCharIsLetter(parser)) {
-      IdentifierInterface identifier = readIdentifier(parser);
+      Identifier identifier = readIdentifier(parser);
       skipSpaces(parser);
       //TODO retrieve identifier from key storage
       if(map.containsKey(identifier)) {
@@ -143,10 +143,10 @@ public class Parser {
     return set;
   }
 
-  SetInterface<NaturalNumberInterface> readSet(Scanner parser) throws APException {
+  Set<NaturalNumber> readSet(Scanner parser) throws APException {
     parser.next(); // the { character
     String number = "";
-    SetInterface<NaturalNumberInterface> set = new Set<>();
+    Set<NaturalNumber> set = new Set<>();
 
     skipSpaces(parser);
     while(!nextCharIs(parser, '}')) {
@@ -175,7 +175,7 @@ public class Parser {
     return set;
   }
 
-  SetInterface<NaturalNumberInterface> readComplexFactor(Scanner parser) throws APException {
+  Set<NaturalNumber> readComplexFactor(Scanner parser) throws APException {
     // '(' [expression] ')'
     // we read the expression and pass a new scanner with the expression as its string to processExpression
     String expression = "";
@@ -192,7 +192,7 @@ public class Parser {
     return processExpression(subParser);
   }
 
-  IdentifierInterface readIdentifier(Scanner parser) {
+  Identifier readIdentifier(Scanner parser) {
     String identifier = parser.next();
 
     while(nextCharIsAlphaNum(parser)) {
@@ -202,15 +202,15 @@ public class Parser {
     return new Identifier(identifier);
   }
 
-  String setToString(SetInterface<NaturalNumberInterface> source) {
+  String setToString(Set<NaturalNumber> source) {
     if(source == null) {
       return "{ }";
     }
 
-    SetInterface<NaturalNumberInterface> copy = source.clone();
+    Set<NaturalNumber> copy = source.clone();
 
     String string = "{ ";
-    NaturalNumberInterface number;
+    NaturalNumber number;
 
     while(!copy.isEmpty()) {
       if(!(copy.get() == null)) {
