@@ -3,7 +3,7 @@ package assignment2;
 public class List<E extends Data<E>> implements ListInterface<E> {
 
   private Node<E> current, last, first = null;
-  int size;
+  private int size;
 
   public List() {
     current = null;
@@ -42,7 +42,8 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     current = y;
     if(last == current.prior) last = current;
     if(size() == 0) first = current;
-
+    
+    size++;
     System.out.println("inserted :" + current.data);
 
     return this;
@@ -68,6 +69,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
         if(current == last) last = x;
         current = x;
       }
+      size--;
     } else {
       current = null;
     }
