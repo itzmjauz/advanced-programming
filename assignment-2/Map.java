@@ -11,14 +11,14 @@ public class Map <K extends Data, V extends Clonable> implements MapInterface<K,
     this.keyValuePairs = source.keyValuePairs.clone();
   }
 
-  public void add(K key, V value) {
-    if(contains(key)) keyValuePairs.current.data.set(value);
+  public void addKVPair(K key, V value) {
+    if(containsKey(key)) keyValuePairs.current.data.set(value);
     else {
       keyValuePairs.insert(new Wrapper<K,V>(key, value));
     }
   }
 
-  public boolean contains(K key) {
+  public boolean containsKey(K key) {
     return keyValuePairs.find(new Wrapper<K, V>(key, null));
   }
 
@@ -27,7 +27,7 @@ public class Map <K extends Data, V extends Clonable> implements MapInterface<K,
   }
 
   public V returnValue(K key) {
-    if(contains(key)) return keyValuePairs.retrieve().getValue();
+    if(containsKey(key)) return keyValuePairs.retrieve().getValue();
     else return null;
   }
 }

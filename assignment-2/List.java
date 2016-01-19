@@ -2,7 +2,7 @@ package assignment2;
 
 public class List<E extends Data<E>> implements ListInterface<E> {
 
-  private Node<E> current, last, first = null;
+  Node<E> current, last, first = null;
   private int size;
 
   public List() {
@@ -18,13 +18,13 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     return size ==0;
   }
 
-  public ListInterface<E> init() {
+  public List<E> init() {
     current = null;
     size = 0;
     return this;
   }
 
-  public ListInterface<E> insert(E d) {
+  public List<E> insert(E d) {
     Node<E> y = new Node(d);
 
     if(current != null) {
@@ -53,7 +53,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     return current.data;
   }
 
-  public ListInterface<E> remove() {
+  public List<E> remove() {
     if(current != null) {
       Node x = current.prior;
       Node y = current.next;
@@ -113,7 +113,7 @@ public class List<E extends Data<E>> implements ListInterface<E> {
     return true;
   }
 
-  public ListInterface<E> clone() {
+  public List<E> clone() {
     List<E> newList = new List<E>();
     
     if(goToFirst()) {

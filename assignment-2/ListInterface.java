@@ -26,7 +26,7 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	/** @precondition  -
 	 *	@postcondition - list-POST is empty and has been returned.
 	 **/
-	ListInterface<E> init();
+	List<E> init();
 
 	/**	@precondition  -
 	 *	@postcondition - The number of elements has been returned.
@@ -38,7 +38,7 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	 *    				current points to the newly added element.
 	 *   				list-POST has been returned.
 	 **/
-	ListInterface<E> insert(E d);
+	List<E> insert(E d);
 
 
 	/** @precondition  - The list is not empty.
@@ -59,7 +59,7 @@ public interface ListInterface<E extends Data<E>> extends Clonable<ListInterface
 	 *     							the element after current-PRE
 	 *  				list-POST has been returned.
 	 **/
-	ListInterface<E> remove();
+	List<E> remove();
 
 
 	/** @precondition  -
