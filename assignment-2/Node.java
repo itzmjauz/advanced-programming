@@ -1,9 +1,9 @@
 package assignment2;
 
-class Node<E extends Data> implements Clonable {
+public class Node<E extends Data> implements Clonable {
   E data;
-  Node prior;
-  Node next;
+  Node<E> prior;
+  Node<E> next;
 
   public Node(E d){
     this(d, null, null);

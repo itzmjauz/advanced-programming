@@ -24,7 +24,7 @@ package assignment2;
  *	<br>
  **/
 
-public interface NaturalNumberInterface extends Data<NaturalNumberInterface> {
+public interface NaturalNumberInterface extends Data  {
 
   /** Initializes the NaturalNumberInterface object with the string as its value
    * @precondition
@@ -49,6 +49,6 @@ public interface NaturalNumberInterface extends Data<NaturalNumberInterface> {
     *		true: The natural number is equal to that of the source
     *   false: The natural number is not equal to that of the source
     **/
-  public boolean equals(NaturalNumberInterface source);
+  public boolean equals(NaturalNumber source);
 
 }

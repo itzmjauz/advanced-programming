@@ -8,7 +8,7 @@ public class NaturalNumber implements NaturalNumberInterface {
     this.number = number;
   }
 
-  NaturalNumber (NaturalNumberInterface source) {
+  NaturalNumber (NaturalNumber source) {
     this.number = source.number();
   }
 
@@ -20,7 +20,7 @@ public class NaturalNumber implements NaturalNumberInterface {
     return number;
   }
 
-  public boolean equals(NaturalNumberInterface source) {
+  public boolean equals(NaturalNumber source) {
     if(number.equals(source.number())) {
       return true;
     } else {
@@ -28,11 +28,12 @@ public class NaturalNumber implements NaturalNumberInterface {
     }
   }
 
-  public NaturalNumberInterface clone() {
+  public NaturalNumber clone() {
     return new NaturalNumber(number);
   }
 
-  public int compareTo(NaturalNumberInterface source) {
-    return number.compareTo(source.number());
+  public int compareTo(Object source) {
+    NaturalNumber source2 = (NaturalNumber) source;
+    return number.compareTo(source2.number());
   }
 }

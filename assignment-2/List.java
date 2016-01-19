@@ -2,7 +2,7 @@ package assignment2;
 
 public class List<E extends Data> implements ListInterface<E> {
 
-  Node<E> current, last, first = null;
+  public Node<E> current, last, first = null;
   private int size;
 
   public List() {

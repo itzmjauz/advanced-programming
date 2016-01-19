@@ -23,7 +23,7 @@ package assignment2;
 *	    </dl>
 *	<br>
 **/
-public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E>> {
+public interface SetInterface<E extends Data> extends Clonable {
 
 	  /** Initializes the Set object
 	    * @precondition
@@ -88,7 +88,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    * @postcondition
 	    * 		Returns a new Set containing the elements in the 1st but not in the 2nd set
 	    */
-	  SetInterface<E> difference(SetInterface<E> set);
+	  Set<E> difference(Set<E> set);
 
 	  /** Returns a set with objects that are in both sets
 	    * @precondition
@@ -96,7 +96,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    * @postcondition
 	    * 		Returns a new Set containing only the elements that are in both sets
 	    */
-	  SetInterface<E> intersection(SetInterface<E> set);
+	  Set<E> intersection(Set<E> set);
 
 	  /** Return a set with all identifiers that are in both sets
 	    * @precondition
@@ -105,7 +105,7 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    *   SUCCESS: Returns a new Set containing all elements of both sets combined, omits duplicates
 	    *   FAILURE: Throws an exception if number of elements in both sets combined(not taking duplicates into account) are bigger than maximum numbers of elements in set
 	    */
-	  SetInterface<E> union(SetInterface<E> set);
+	  Set<E> union(Set<E> set);
 
 	  /** Returns a set with all identifiers that are only in one of both sets
 	    * @precondition
@@ -114,6 +114,6 @@ public interface SetInterface<E extends Data<E>> extends Clonable<SetInterface<E
 	    *		SUCCESS: Returns a new Set containing all elements that are only in one of both sets
 	    *   FAILURE: Throws an exception if number of elements in resulting set exceeds maximum set size
 	    */
-	  SetInterface<E> symmetricDifference(SetInterface<E> set);
+	  Set<E> symmetricDifference(Set<E> set);
 
 }

@@ -1,29 +1,16 @@
 package assignment2;
 
-public class Set<E extends Data<E>> implements SetInterface<E> {
+public class Set<E extends Data > implements SetInterface<E> {
 
-  private List<E> set;
+  public List<E> set;
 
-  public Set(SetInterface<E> source) {
-    init();
-
-    source = (Set<E>) source;
-    while(source.size() > 0) {
-      add(source.get());
-      source.remove();
-    }
-
-    if(set.goToFirst()) {
-      do {
-        source.add(set.retrieve());
-      } while (set.goToNext());
-    }
+  public Set(Set<E> source) {
+    set = source.set.clone();
   }
 
   public Set() {
     init();
   }
-
 
   public void init() {
     set = new List<E>();
@@ -56,28 +43,12 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return set.find(d);
   }
 
-  public SetInterface<E> clone() {
-    SetInterface<E> newSet = new Set<E>();
-    SetInterface<E> tempSet = new Set<E>();
-
-    while(!isEmpty()) {
-      E d = get();
-      remove();
-      newSet.add(d);
-      tempSet.add(d);
-    }
-
-    while(!tempSet.isEmpty()) {
-      E d = tempSet.get();
-      tempSet.remove();
-      add(d);
-    }
-
-    return newSet;
+  public Set<E> clone() {
+    return new Set<E>(this);
   }
 
-  public SetInterface<E> difference(SetInterface<E> source) {
-    SetInterface<E> result = new Set<E>();
+  public Set<E> difference(Set<E> source) {
+    Set<E> result = new Set<E>();
 
     if(set.goToLast()) {
       do {
@@ -90,9 +61,9 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return result;
   }
 
-  public SetInterface<E> intersection(SetInterface<E> source) {
-    SetInterface<E> result = new Set<E>();
-    SetInterface<E> copy = new Set<E>(source);
+  public Set<E> intersection(Set<E> source) {
+    Set<E> result = new Set<E>();
+    Set<E> copy = new Set<E>(source);
 
     while(!copy.isEmpty()) {
       E d = copy.get();
@@ -105,9 +76,9 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return result;
   }
 
-  public SetInterface<E> union(SetInterface<E> source) {
-    SetInterface<E> result = new Set<E>();
-    SetInterface<E> copy = new Set<E>(source);
+  public Set<E> union(Set<E> source) {
+    Set<E> result = new Set<E>();
+    Set<E> copy = new Set<E>(source);
 
     if(set.goToFirst()) {
       do {
@@ -124,9 +95,9 @@ public class Set<E extends Data<E>> implements SetInterface<E> {
     return result;
   }
 
-  public SetInterface<E> symmetricDifference(SetInterface<E> source) {
-    SetInterface<E> result = new Set<E>();
-    SetInterface<E> copy = new Set<E>(source);
+  public Set<E> symmetricDifference(Set<E> source) {
+    Set<E> result = new Set<E>();
+    Set<E> copy = new Set<E>(source);
 
     if(set.goToFirst()) {
       do {

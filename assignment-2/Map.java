@@ -1,7 +1,8 @@
 package assignment2;
 
 public class Map <K extends Data, V extends Clonable> implements MapInterface<K, V> {
-  private List<Wrapper<K,V>> keyValuePairs;
+
+  public List<Wrapper<K,V>> keyValuePairs;
 
   Map() {
     keyValuePairs = new List<Wrapper<K,V>>();
@@ -12,8 +13,9 @@ public class Map <K extends Data, V extends Clonable> implements MapInterface<K,
   }
 
   public void addKVPair(K key, V value) {
-    if(containsKey(key)) keyValuePairs.current.data.set(value);
-    else {
+    if(containsKey(key)) {
+      keyValuePairs.current.data.setValue(value);
+    } else {
       keyValuePairs.insert(new Wrapper<K,V>(key, value));
     }
   }
