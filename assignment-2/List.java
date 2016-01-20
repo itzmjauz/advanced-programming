@@ -40,7 +40,7 @@ public class List<E extends Data> implements ListInterface<E> {
     if (!find(d)) {
       Node<E> node = new Node<E>(d);
 
-      if (!setFirst()) {
+      if (!goToFirst()) {
         first = last = node;
       } else {
         if (d.compareTo(last.data) < 0) {
@@ -73,10 +73,10 @@ public class List<E extends Data> implements ListInterface<E> {
   public List<E> remove() {
     if (size() == 1) {
       last = first = current = null;
-    } else if (current = first) {
+    } else if (current == first) {
       first = current = current.next;
       current.prior = null;
-    } else if (current = last) {
+    } else if (current == last) {
       last = current = current.prior;
       current.next = null;
     } else {
