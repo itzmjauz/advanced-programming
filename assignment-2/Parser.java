@@ -19,13 +19,18 @@ public class Parser {
 
   void Start() {
     in.useDelimiter("");
+    out.print("$:");
 
     while(in.hasNextLine()) {
       try {
         parse();
+        out.print("$:");
         in.nextLine();
+        out.print("$:");
       } catch (APException e) {
-        out.println("e.getMessage\n");
+        out.println(e.getMessage());
+        out.print("$:");
+        in.nextLine();
       }
     }
   }
