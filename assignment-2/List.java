@@ -15,37 +15,54 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public boolean isEmpty() {
-    return size ==0;
+    return size == 0;
   }
 
   public List<E> init() {
-    current = null;
+    current = first = last = null;
     size = 0;
     return this;
   }
 
-  public List<E> insert(E d) {
-    Node<E> y = new Node(d);
+  public boolean find(E d) {
+    if (goToFirst()) {
+      while (current != null && (d.compareTo(current.data) > 0)) {
+        goToNext();     
+      }
 
-    if(current != null) {
-      Node x = current.prior;
-      Node z = current;
-      if(current.prior != null) {
-        x.next = y;
-        y.next = z;
-      }
-      if(current != null) {
-        z.prior = y;
-        y.prior = x;
-      }
+      if (d.compareTo(current.data) == 0) return true;
     }
-    current = y;
-    if(last == current.prior) last = current;
-    if(size() == 0) first = current;
-    
-    size++;
-    System.out.println("inserted :" + current.data);
+    return false;
+  }
 
+
+  public List<E> insert(E d) {
+    if (!find(d)) {
+      Node<E> node = new Node<E>(d);
+
+      if (!setFirst()) {
+        first = last = node;
+      } else {
+        if (d.compareTo(last.data) < 0) {
+          node.next = first;
+          first.prior = first = node;
+        } else if (d.compareTo(last.data) > 0) {
+          node.prior = last;
+          last.next = last = node;
+        } else {
+          while (d.compareTo(current.next.data) > 0) {
+            goToNext();
+          }
+
+          node.next = current.next;
+          current.next.prior = current.next = node;
+          node.prior = current;
+        }
+      }
+
+      current = node;
+      size++;
+    }
     return this;
   }
 
@@ -54,63 +71,40 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public List<E> remove() {
-    if(current != null) {
-      Node x = current.prior;
-      Node y = current.next;
-
-
-      if(y != null) {
-        y.prior = x;
-        if(current == first) first = y;
-        current = y;
-      }
-      if(x != null) {
-        x.next = y;
-        if(current == last) last = x;
-        current = x;
-      }
-      size--;
+    if (size() == 1) {
+      last = first = current = null;
+    } else if (current = first) {
+      first = current = current.next;
+      current.prior = null;
+    } else if (current = last) {
+      last = current = current.prior;
+      current.next = null;
     } else {
-      current = null;
+      current.next.prior = current.prior;
+      current.prior.next = current.next;
+      current = current.next;
     }
     
+    size--;
     return this;
   }
 
-  public boolean find(E d) {
-    if(goToFirst()) {
-      do {
-        System.out.println("find , current: " + current);
-        if(current.data.equals(d)) return true;
-      } while(goToNext());
-    }
-    return false;
-  }
-
   public boolean goToFirst() {
-    if(isEmpty()) return false;
-    current = first;
-    return true;
+    return (current = first) != null;
   }
 
   public boolean goToLast() {
-    if(isEmpty()) return false;
-    current = last;
-    return true;
+    return (current = last) != null;
   }
 
   public boolean goToNext() {
-    if(current.next == null) return false;
     System.out.println("current : " + current.data + " next : " + current.next.data);
-    current = current.next;
-    return true;
+    return (current = current.next) != null;
   }
 
   public boolean goToPrevious() {
-    if(current.prior == null) return false;
     System.out.println("current : " + current.data + " previous : " + current.prior.data);
-    current = current.prior;
-    return true;
+    return (current = current.prior) != null;
   }
 
   public List<E> clone() {
