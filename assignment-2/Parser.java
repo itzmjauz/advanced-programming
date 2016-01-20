@@ -44,7 +44,7 @@ public class Parser {
       in.nextLine(); //TODO doublecheck this
     } else {
       in.nextLine(); // needed ? TODO
-      throw New VPException("ERROR : No correct statement given, { assignment | print_statement | comment }");
+      throw new VPException("ERROR : No correct statement given, { assignment | print_statement | comment }");
     }
   }
   
