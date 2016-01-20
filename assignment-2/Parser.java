@@ -44,7 +44,7 @@ public class Parser {
       in.nextLine(); //TODO doublecheck this
     } else {
       in.nextLine(); // needed ? TODO
-      throw new VPException("ERROR : No correct statement given, { assignment | print_statement | comment }");
+      throw new APException("ERROR : No correct statement given, { assignment | print_statement | comment }");
     }
   }
   
@@ -65,7 +65,7 @@ public class Parser {
     map.addKVPair(identifier, set); //TODO check it this works correctly
   }
 
-  private processPrintStatement() throws APException {
+  private void processPrintStatement() throws APException {
     in.next(); //skip past ?
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
@@ -109,7 +109,7 @@ public class Parser {
     return factor;
   }
 
-  private Set<NaturalNumber> readFactor(Scanner parser) throws APException {
+  private Set<NaturalNumber> readFactor() throws APException {
     skipSpaces(); //redundant but just in case
     Set<NaturalNumber> set = new Set<NaturalNumber>();
 
@@ -132,17 +132,15 @@ public class Parser {
     return set;
   }
 
-  private Set<NaturalNumber> readSet(Scanner parser) throws APException {
+  private Set<NaturalNumber> readSet() throws APException {
     in.next(); // the { character
     skipSpaces();
-    String number = "";
     Set<NaturalNumber> set = new Set<>();
 
     if (!nextCharIs('}')) {
       do {
         if (nextCharIs(',')) in.next(); //TODO does this work?
-        NaturalNumber number = readNaturalNumber();
-        set.add(NaturalNumber);
+        set.add(readNaturalNumber());
         skipSpaces(); //skip spaces after number, before comma  -> , 3[ ],
       } while (nextCharIs(','));
     }
