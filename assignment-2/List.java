@@ -30,6 +30,7 @@ public class List<E extends Data> implements ListInterface<E> {
         goToNext();     
       }
 
+      if (current == null) return false;
       if (d.compareTo(current.data) == 0) return true;
     }
     return false;
@@ -98,7 +99,6 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public boolean goToNext() {
-    System.out.println("current : " + current.data + " next : " + current.next.data);
     return (current = current.next) != null;
   }
 
@@ -109,6 +109,7 @@ public class List<E extends Data> implements ListInterface<E> {
 
   public List<E> clone() {
     List<E> newList = new List<E>();
+    newList.init();
     
     if(goToFirst()) {
       do {

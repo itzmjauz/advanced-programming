@@ -170,7 +170,8 @@ public class Parser {
       throw new APException("ERROR : non-naturalnumber in set");
     }
 
-    if (nextCharIs(',') || nextCharIs('}')) { //TODO extend with nextCharIs('\n') ??
+    skipSpaces();
+    if (nextCharIs(',') || nextCharIs('}') || nextCharIs('\n')) { //TODO extend with nextCharIs('\n') ??
       return new NaturalNumber(number);
     } else {
       throw new APException("ERROR : Invalid naturalnumber in set");
