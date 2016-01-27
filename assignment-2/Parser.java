@@ -24,18 +24,15 @@ public class Parser {
     while(in.hasNextLine()) {
       try {
         parse();
-        out.print("$:");
-        in.nextLine();
-        out.print("$:");
       } catch (APException e) {
-        out.println(e.getMessage());
-        out.print("$:");
+        System.out.println(e);
         in.nextLine();
       }
     }
   }
 
   private void parse() throws APException { //process statement
+    System.out.println("parse()");
     skipSpaces();
     // the input should be split in relevant elements/pieces
     if (nextCharIsLetter()) {
@@ -52,8 +49,9 @@ public class Parser {
       throw new APException("ERROR : No correct statement given, { assignment | print_statement | comment }");
     }
   }
-  
+
   private void processAssignment() throws APException {
+    System.out.println("assignment()");
     Identifier identifier = readIdentifier();
 
     //while(!nextCharIs(parser, '=')) { // we got an identifier , the next char should be a '='
@@ -71,6 +69,7 @@ public class Parser {
   }
 
   private void processPrintStatement() throws APException {
+    System.out.println("printStatement()");
     in.next(); //skip past ?
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
@@ -78,6 +77,7 @@ public class Parser {
   }
 
   private Set<NaturalNumber> processExpression() throws APException {
+    System.out.println("expression()");
     //expression :
     // term { additive-operator term }
     // so a term, with zero or more additive operators, followed by a term.
@@ -102,6 +102,7 @@ public class Parser {
   }
 
   private Set<NaturalNumber> readTerm() throws APException {
+    System.out.println("readTerm()");
     //TODO retrieve identifier from key storage
     Set<NaturalNumber> factor = readFactor();
 
@@ -115,6 +116,7 @@ public class Parser {
   }
 
   private Set<NaturalNumber> readFactor() throws APException {
+    System.out.println("readFactor");
     skipSpaces(); //redundant but just in case
     Set<NaturalNumber> set = new Set<NaturalNumber>();
 
@@ -138,6 +140,7 @@ public class Parser {
   }
 
   private Set<NaturalNumber> readSet() throws APException {
+    System.out.println("readSet()");
     in.next(); // the { character
     skipSpaces();
     Set<NaturalNumber> set = new Set<>();
@@ -159,9 +162,10 @@ public class Parser {
   }
 
   private NaturalNumber readNaturalNumber() throws APException {
+    System.out.println("naturalNumber()");
     String number = "";
     skipSpaces(); //skip preceding spaces
-    
+
     while (nextCharIsDigit()) {
       number = number + in.nextInt();
     }
@@ -179,6 +183,7 @@ public class Parser {
   }
 
   private Set<NaturalNumber> readComplexFactor() throws APException {
+    System.out.println("complexFacter()");
     // '(' [expression] ')'
     // we read the expression and pass a new scanner with the expression as its string to processExpression
 
@@ -195,6 +200,7 @@ public class Parser {
   }
 
   private Identifier readIdentifier() {
+    System.out.println("readIdentifier()");
     String identifier = "";
 
     while(nextCharIsAlphaNum()) {
@@ -205,22 +211,16 @@ public class Parser {
   }
 
   private String setToString(Set<NaturalNumber> source) {
+    System.out.println("setToString()");
+    String string = "{ ";
+
     if(source == null) {
       return "{ }";
     }
 
-    Set<NaturalNumber> copy = source.clone();
+    int count = 0;
 
-    String string = "{ ";
-    NaturalNumber number;
-
-    while(!copy.isEmpty()) {
-      if(!(copy.get() == null)) {
-        string = string + copy.get().number() + " ";
-        copy.remove();
-      }
-      copy.remove();
-    }
+    System.out.println(source.size());
 
     return string + "}";
   }
