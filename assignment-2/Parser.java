@@ -170,7 +170,7 @@ public class Parser {
       number = number + in.nextInt();
     }
 
-    if (number.length() == 0) {
+    if (number == "") {
       throw new APException("ERROR : non-naturalnumber in set");
     }
 
@@ -214,11 +214,12 @@ public class Parser {
     System.out.println("setToString()");
     String string = "{ ";
 
-    if(source == null) {
-      return "{ }";
-    }
+    Set<NaturalNumber> clone = source.clone();
 
-    int count = 0;
+    while(!clone.isEmpty()) {
+      string += clone.get().number();
+      clone.remove();
+    }
 
     System.out.println(source.size());
 
@@ -230,7 +231,7 @@ public class Parser {
   }
 
   private boolean nextCharIs(char c) {
-    return in.hasNext(Pattern.quote(c+""));
+    return in.hasNext(Pattern.quote(Character.toString(c)));
   }
 
   private boolean nextCharIsAlphaNum() {
