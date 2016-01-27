@@ -62,7 +62,7 @@ public class Set<E extends Data > implements SetInterface<E> {
 
   public Set<E> intersection(Set<E> source) {
     Set<E> result = new Set<E>();
-    Set<E> copy = new Set<E>(source);
+    Set<E> copy = source.clone();
 
     while(!copy.isEmpty()) {
       E d = copy.get();
@@ -77,7 +77,7 @@ public class Set<E extends Data > implements SetInterface<E> {
 
   public Set<E> union(Set<E> source) {
     Set<E> result = new Set<E>();
-    Set<E> copy = new Set<E>(source);
+    Set<E> copy = source.clone();
 
     if(set.goToFirst()) {
       do {
@@ -96,7 +96,7 @@ public class Set<E extends Data > implements SetInterface<E> {
 
   public Set<E> symmetricDifference(Set<E> source) {
     Set<E> result = new Set<E>();
-    Set<E> copy = new Set<E>(source);
+    Set<E> copy = source.clone();
 
     if(set.goToFirst()) {
       do {

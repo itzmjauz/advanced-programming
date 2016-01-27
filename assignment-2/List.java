@@ -27,7 +27,7 @@ public class List<E extends Data> implements ListInterface<E> {
   public boolean find(E d) {
     if (goToFirst()) {
       while (current != null && (d.compareTo(current.data) > 0)) {
-        goToNext();     
+        goToNext();
       }
 
       if (current == null) return false;
@@ -85,7 +85,7 @@ public class List<E extends Data> implements ListInterface<E> {
       current.prior.next = current.next;
       current = current.next;
     }
-    
+
     size--;
     return this;
   }
@@ -103,14 +103,13 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public boolean goToPrevious() {
-    System.out.println("current : " + current.data + " previous : " + current.prior.data);
     return (current = current.prior) != null;
   }
 
   public List<E> clone() {
     List<E> newList = new List<E>();
     newList.init();
-    
+
     if(goToFirst()) {
       do {
         newList.insert((E) current.data.clone());
