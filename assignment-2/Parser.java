@@ -212,18 +212,18 @@ public class Parser {
 
   private String setToString(Set<NaturalNumber> source) {
     System.out.println("setToString()");
-    String string = "{ ";
+    String string = " }";
 
     Set<NaturalNumber> clone = source.clone();
 
     while(!clone.isEmpty()) {
-      string += clone.get().number();
+      string = " " + clone.get().number() + string;
       clone.remove();
     }
 
     System.out.println(source.size());
 
-    return string + "}";
+    return "{" + string;
   }
 
   private void skipSpaces() {
