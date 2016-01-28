@@ -49,12 +49,12 @@ public class Set<E extends Data > implements SetInterface<E> {
   public Set<E> difference(Set<E> source) {
     Set<E> result = new Set<E>();
 
-    if(set.goToLast()) {
+    if(set.goToFirst()) {
       do {
         if(!source.contains(set.retrieve())) {
           result.add(set.retrieve());
         }
-      } while(set.goToPrevious());
+      } while(set.goToNext());
     }
 
     return result;
@@ -64,6 +64,7 @@ public class Set<E extends Data > implements SetInterface<E> {
     Set<E> result = new Set<E>();
     Set<E> copy = source.clone();
 
+    copy.set.goToFirst();
     while(!copy.isEmpty()) {
       E d = copy.get();
       if(contains(d)) {
@@ -76,19 +77,12 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> union(Set<E> source) {
-    Set<E> result = new Set<E>();
-    Set<E> copy = source.clone();
+    Set<E> result = source.clone();
 
     if(set.goToFirst()) {
       do {
         result.add(set.retrieve());
       } while(set.goToNext());
-    }
-
-
-    while(!copy.isEmpty()) {
-      result.add(copy.get());
-      copy.remove();
     }
 
     return result;
