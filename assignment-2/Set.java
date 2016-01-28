@@ -89,23 +89,20 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> symmetricDifference(Set<E> source) {
-    Set<E> result = new Set<E>();
+    Set<E> result = source.clone();
     Set<E> copy = source.clone();
 
     if(set.goToFirst()) {
       do {
-        if(!source.contains(set.retrieve())) {
-          result.add(set.retrieve());
-        }
+        result.add(set.retrieve());
       } while(set.goToNext());
     }
 
-    E d;
-
     while(!copy.isEmpty()) {
-      d = copy.get();
-      if(!contains(d)) {
-        result.add(d);
+      E d = copy.get();
+      if(set.find(d)) {
+        result.contains(d);
+        result.remove();
       }
       copy.remove();
     }
