@@ -19,7 +19,6 @@ public class Parser {
 
   void Start() {
     in.useDelimiter("");
-    out.print("$:");
 
     while(in.hasNextLine()) {
       try {
@@ -61,7 +60,6 @@ public class Parser {
     in.next(); // skip past the '='
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
-    out.println(setToString(set)); //TODO remove this print
     // eol
     map.addKVPair(identifier, set); //TODO check it this works correctly
   }
@@ -201,18 +199,21 @@ public class Parser {
   }
 
   private String setToString(Set<NaturalNumber> source) {
-    String string = " }";
+    String string = "";
 
     Set<NaturalNumber> clone = source.clone();
 
     while(!clone.isEmpty()) {
-      string = " " + clone.get().number() + string;
-      clone.remove();
+      if(clone.size() == 1) {
+        string = clone.get().number() + string;
+        clone.remove();
+      } else {
+        string = " " + clone.get().number() + string;
+        clone.remove();
+      }
     }
 
-    System.out.println(source.size());
-
-    return "{" + string;
+    return "" + string;
   }
 
   private void skipSpaces() {
