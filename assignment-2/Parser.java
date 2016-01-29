@@ -73,7 +73,7 @@ public class Parser {
     in.next(); //skip past ?
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
-    out.println(setToString(set));
+    System.out.println(setToString(set));
   }
 
   private Set<NaturalNumber> processExpression() throws APException {
@@ -82,7 +82,7 @@ public class Parser {
     // so a term, with zero or more additive operators, followed by a term.
     Set<NaturalNumber> term = readTerm();
     skipSpaces(); // jic if complex factor
-    
+
     while (nextCharIsAditiveOperator()) {
       if (nextCharIs('+')) {
         in.next(); //skip past the +
@@ -107,7 +107,7 @@ public class Parser {
   private Set<NaturalNumber> readTerm() throws APException {
     //TODO retrieve identifier from key storage
     Set<NaturalNumber> factor = readFactor();
-
+    skipSpaces();
     while(nextCharIsMultOperator()) {
       in.next(); // for consistency, this should always be *
       skipSpaces();
@@ -149,7 +149,9 @@ public class Parser {
     if (!nextCharIs('}')) {
       do {
         if (nextCharIs(',')) in.next(); //TODO does this work?
-        set.add(readNaturalNumber());
+        NaturalNumber number = readNaturalNumber();
+        System.out.println("number: " + number.number());
+        set.add(number);
         skipSpaces(); //skip spaces after number, before comma  -> , 3[ ],
       } while (nextCharIs(','));
     }
@@ -175,7 +177,7 @@ public class Parser {
     }
 
     skipSpaces();
-    if (nextCharIs(',') || nextCharIs('}') || nextCharIs('\n')) { //TODO extend with nextCharIs('\n') ??
+    if (nextCharIs(',') || nextCharIs('}') || nextCharIs('\n') || nextCharIs(')')) { //TODO extend with nextCharIs('\n') ??
       return new NaturalNumber(number);
     } else {
       throw new APException("ERROR : Invalid naturalnumber in set");
