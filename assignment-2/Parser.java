@@ -143,11 +143,14 @@ public class Parser {
     Set<NaturalNumber> set = new Set<>();
 
     if (!nextCharIs('}')) {
-      do {
-        if (nextCharIs(',')) in.next(); //TODO does this work?
+      set.add(readNaturalNumber());
+      skipSpaces();
+      while (nextCharIs(',')) {
+        in.next();
+        skipSpaces(); //skip spaces after comma, before number 
         set.add(readNaturalNumber());
         skipSpaces(); //skip spaces after number, before comma  -> , 3[ ],
-      } while (nextCharIs(','));
+      }
     }
 
     if (nextCharIs('}')) {
