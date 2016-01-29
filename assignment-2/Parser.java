@@ -84,15 +84,12 @@ public class Parser {
       if (nextCharIs('+')) {
         in.next(); //skip past the +
         term = term.union(readTerm());
-        System.out.println(setToString(term));
       } else if (nextCharIs('-')) {
         in.next(); //skip past the -
         term = term.difference(readTerm());
-        System.out.println(setToString(term));
       } else if (nextCharIs('|')) {
         in.next(); //skip past the |
         term = term.symmetricDifference(readTerm());
-        System.out.println(setToString(term));
       } else {
         throw new APException("ERROR : Invalid expression");
       }
@@ -109,7 +106,6 @@ public class Parser {
       in.next(); // for consistency, this should always be *
       skipSpaces();
       factor = factor.intersection(readFactor()); //consistency
-      System.out.println(setToString(factor));
     }
 
     return factor;
@@ -146,9 +142,7 @@ public class Parser {
     if (!nextCharIs('}')) {
       do {
         if (nextCharIs(',')) in.next(); //TODO does this work?
-        NaturalNumber number = readNaturalNumber();
-        System.out.println("number: " + number.number());
-        set.add(number);
+        set.add(readNaturalNumber());
         skipSpaces(); //skip spaces after number, before comma  -> , 3[ ],
       } while (nextCharIs(','));
     }
