@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.math.BigInteger;
+
 public class NaturalNumber implements NaturalNumberInterface {
 
   private String number;
@@ -34,7 +36,7 @@ public class NaturalNumber implements NaturalNumberInterface {
 
   public int compareTo(Object source) {
     NaturalNumber source2 = (NaturalNumber) source;
-    return number.compareTo(source2.number());
+    return new BigInteger(source2.number()).compareTo(new BigInteger(number()));
   }
 
   private String parse(String number) {

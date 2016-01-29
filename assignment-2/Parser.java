@@ -23,6 +23,7 @@ public class Parser {
     while(in.hasNextLine()) {
       try {
         parse();
+        in.nextLine();
       } catch (APException e) {
         System.out.println(e);
         in.nextLine();
@@ -39,7 +40,6 @@ public class Parser {
       processPrintStatement();
     } else if (nextCharIs('/')) {
       //comment, so nothing to do
-      in.nextLine(); //TODO doublecheck this
     } else {
       throw new APException("ERROR : No correct statement given, { assignment | print_statement | comment }");
     }
@@ -213,16 +213,11 @@ public class Parser {
     Set<NaturalNumber> clone = source.clone();
 
     while(!clone.isEmpty()) {
-      if(clone.size() == 1) {
-        string = clone.get().number() + string;
-        clone.remove();
-      } else {
-        string = " " + clone.get().number() + string;
-        clone.remove();
-      }
+      string += clone.get().number() + " ";
+      clone.remove();
     }
 
-    return "" + string;
+    return string;
   }
 
   private void skipSpaces() {
