@@ -70,6 +70,10 @@ public class Parser {
     in.next(); //skip past ?
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
+    skipSpaces();
+    if(!nextCharIs('\n')) {
+      throw new APException("ERROR : print statement not ending correctly");
+    }
     System.out.println(setToString(set));
   }
 
