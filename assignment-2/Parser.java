@@ -103,7 +103,6 @@ public class Parser {
   }
 
   private Set<NaturalNumber> readTerm() throws APException {
-    //TODO retrieve identifier from key storage
     Set<NaturalNumber> factor = readFactor();
     skipSpaces();
     while(nextCharIsMultOperator()) {

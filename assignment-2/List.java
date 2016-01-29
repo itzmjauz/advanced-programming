@@ -25,14 +25,12 @@ public class List<E extends Data> implements ListInterface<E> {
   }
 
   public boolean find(E d) {
-    if (goToFirst()) {
-      while (current != null && (d.compareTo(current.data) > 0)) {
-        goToNext();
-      }
-
-      if (current == null) return false;
-      if (d.compareTo(current.data) == 0) return true;
+    goToFirst();
+    for (int x = 0 ; x < size() ; x++) {
+      if (d.compareTo(current.data)== 0) return true;
+      goToNext();
     }
+
     return false;
   }
 
