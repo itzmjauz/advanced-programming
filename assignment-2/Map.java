@@ -20,6 +20,7 @@ public class Map <K extends Data, V extends Clonable> implements MapInterface<K,
   }
 
   public boolean containsKey(K key) {
+    keyValuePairs.goToFirst(); // find also does this but it still seems to fix some reassignments
     return keyValuePairs.find(new Wrapper<K, V>(key, null));
   }
 
