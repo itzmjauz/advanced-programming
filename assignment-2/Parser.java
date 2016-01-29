@@ -35,15 +35,12 @@ public class Parser {
     // the input should be split in relevant elements/pieces
     if (nextCharIsLetter()) {
       processAssignment();
-      in.nextLine(); //TODO doublecheck this
     } else if (nextCharIs('?')) {
       processPrintStatement();
-      in.nextLine(); //TODO doublecheck this
     } else if (nextCharIs('/')) {
       //comment, so nothing to do
       in.nextLine(); //TODO doublecheck this
     } else {
-      in.nextLine(); // needed ? TODO
       throw new APException("ERROR : No correct statement given, { assignment | print_statement | comment }");
     }
   }
