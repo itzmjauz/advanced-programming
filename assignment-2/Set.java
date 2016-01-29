@@ -47,6 +47,7 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> difference(Set<E> source) {
+    System.out.println("difference() (-)");
     Set<E> result = new Set<E>();
 
     if(set.goToFirst()) {
@@ -61,6 +62,7 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> intersection(Set<E> source) {
+    System.out.println("intersection() (*)");
     Set<E> result = new Set<E>();
     Set<E> copy = source.clone();
 
@@ -77,6 +79,7 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> union(Set<E> source) {
+    System.out.println("union() (+)");
     Set<E> result = source.clone();
 
     if(set.goToFirst()) {
@@ -89,6 +92,7 @@ public class Set<E extends Data > implements SetInterface<E> {
   }
 
   public Set<E> symmetricDifference(Set<E> source) {
+    System.out.println("symmetricdiff (|)");
     Set<E> result = source.clone();
     Set<E> copy = source.clone();
 

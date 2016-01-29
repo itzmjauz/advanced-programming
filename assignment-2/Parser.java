@@ -81,17 +81,21 @@ public class Parser {
     // term { additive-operator term }
     // so a term, with zero or more additive operators, followed by a term.
     Set<NaturalNumber> term = readTerm();
-
+    skipSpaces(); // jic if complex factor
+    
     while (nextCharIsAditiveOperator()) {
       if (nextCharIs('+')) {
         in.next(); //skip past the +
         term = term.union(readTerm());
+        System.out.println(setToString(term));
       } else if (nextCharIs('-')) {
         in.next(); //skip past the -
         term = term.difference(readTerm());
+        System.out.println(setToString(term));
       } else if (nextCharIs('|')) {
         in.next(); //skip past the |
         term = term.symmetricDifference(readTerm());
+        System.out.println(setToString(term));
       } else {
         throw new APException("ERROR : Invalid expression");
       }
@@ -108,6 +112,7 @@ public class Parser {
       in.next(); // for consistency, this should always be *
       skipSpaces();
       factor = factor.intersection(readFactor()); //consistency
+      System.out.println(setToString(factor));
     }
 
     return factor;
