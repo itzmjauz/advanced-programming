@@ -5,7 +5,7 @@ public class NaturalNumber implements NaturalNumberInterface {
   private String number;
 
   NaturalNumber (String number) {
-    this.number = number;
+    this.number = parse(number);
   }
 
   NaturalNumber (NaturalNumber source) {
@@ -13,7 +13,7 @@ public class NaturalNumber implements NaturalNumberInterface {
   }
 
   public void init(String number) {
-    this.number = number;
+    this.number = parse(number);
   }
 
   public String number() {
@@ -35,5 +35,9 @@ public class NaturalNumber implements NaturalNumberInterface {
   public int compareTo(Object source) {
     NaturalNumber source2 = (NaturalNumber) source;
     return number.compareTo(source2.number());
+  }
+
+  private String parse(String number) {
+    return number.replaceFirst("^0+(?!$)", "");
   }
 }
