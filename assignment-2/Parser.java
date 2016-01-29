@@ -173,6 +173,9 @@ public class Parser {
       throw new APException("ERROR : non-naturalnumber in set");
     }
 
+    if (number.matches("[0]+[0-9]")) {
+      throw new APException("ERROR : Invalid number, no preceding zeroes allowed");
+    }
     skipSpaces();
     if (nextCharIs(',') || nextCharIs('}') || nextCharIs('\n') || nextCharIs(')')) { //TODO extend with nextCharIs('\n') ??
       return new NaturalNumber(number);
