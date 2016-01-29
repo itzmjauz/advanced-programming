@@ -60,8 +60,13 @@ public class Parser {
     in.next(); // skip past the '='
     skipSpaces();
     Set<NaturalNumber> set = processExpression();
-    // eol
-    map.addKVPair(identifier, set); //TODO check it this works correctly
+
+    skipSpaces();
+    if(!nextCharIs('\n')) {
+      throw new APException("ERROR : assignment not ending with eoln");
+    } else {
+      map.addKVPair(identifier, set);
+    }
   }
 
   private void processPrintStatement() throws APException {
